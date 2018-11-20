@@ -11,7 +11,7 @@ buildscript {
 }
 
 version "0.1"
-group "grails"
+group "vsjoueur"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -58,10 +58,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
-
-    compile 'org.grails.plugins:postgresql-extensions:4.8.0'
 }
-
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')

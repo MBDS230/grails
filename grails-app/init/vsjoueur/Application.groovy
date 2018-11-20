@@ -1,4 +1,4 @@
-package grails
+package vsjoueur
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

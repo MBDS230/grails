@@ -5,6 +5,13 @@
     <title>Welcome to Grails</title>
 </head>
 <body>
-    <h1>MANDEHA NY INDEX</h1>
+<div>
+        TEST MANDEHA
+        <form action="test/lista" method="POST">
+            <input type="text" name="textko">
+            <input type="submit" value="ANDRANA ARY E">
+        </form>
+
+</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package grails
+package vsjoueur
 
 class BootStrap {
 
