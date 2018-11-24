@@ -5,6 +5,8 @@ import mapping.Joueur
 
 class JoueurDao {
 
+
+
     def joueurFindAll(){
 
         List<Joueur> ljoueur = new ArrayList<>()
@@ -116,5 +118,14 @@ class JoueurDao {
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
+    }
+
+    def joueurFindByStatus(int joueurConnecte, boolean  status)
+    {
+
+    }
+
+    def joueurFindByLoginAndPassword(String login, String password) {
+
     }
 }

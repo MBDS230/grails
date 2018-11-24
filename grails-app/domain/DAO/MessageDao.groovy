@@ -5,6 +5,11 @@ import mapping.Message
 
 class MessageDao {
 
+    def messageFindByEnvoyeurAndRecepteur(int envoyeur, int recepteur)
+    {
+
+    }
+
     def messageAll(){
 
         List<Message> lmessage = new ArrayList<>()

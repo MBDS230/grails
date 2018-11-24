@@ -1,4 +1,4 @@
-package vsjoueur
+
 
 class UrlMappings {
 
