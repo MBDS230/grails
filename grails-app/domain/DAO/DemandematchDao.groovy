@@ -6,99 +6,107 @@ import mapping.Demandematch
 class DemandematchDao {
 
     def demandematchFindAll(){
-
-        Demandematch admin = new Demandematch()
+        List<Demandematch> ldemandeMatch = new ArrayList<>()
+        Demandematch demandeMatch = new Demandematch()
 
         def sql = Connecting.getConnection()
-
         if(sql != null){
             sql.query('SELECT * FROM demandematch where 1 > 0')
                     { resultSet ->
                         while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
+                            demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
+                            demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
+                            demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
+                            demandeMatch.setDuree(resultSet.getInt('duree'))
+                            demandeMatch.setDatedemande(resultSet.getDate("datedemande"))
+                            demandeMatch.setDateexpiration(resultSet.getDate("dateexpiration"))
+                            demandeMatch.setAprouvee(resultSet.getInt('aprouvee'))
+                            ldemandeMatch.add(demandeMatch)
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
+        return ldemandeMatch
     }
 
+    def demandeMatchFindByRecepteurAndAprouve(int idRecepteur, boolean aprouve)    {
+        List<Demandematch> ldemandeMatch = new ArrayList<>()
+        Demandematch demandeMatch = new Demandematch()
+
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query("SELECT * FROM demandematch where idrecepteur = "+id+" and aprouve = "+aprouve)
+                    { resultSet ->
+                        while (resultSet.next()) {
+                            demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
+                            demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
+                            demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
+                            demandeMatch.setDuree(resultSet.getInt('duree'))
+                            demandeMatch.setDatedemande(resultSet.getDate("datedemande"))
+                            demandeMatch.setDateexpiration(resultSet.getDate("dateexpiration"))
+                            demandeMatch.setAprouvee(resultSet.getInt('aprouvee'))
+                            ldemandeMatch.add(demandeMatch)
+                        }
+                    }
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return ldemandeMatch
+    }
 
     def demandematchdByID(int id){
-        Demandematch admin = new Demandematch()
+        List<Demandematch> ldemandeMatch = new ArrayList<>()
+        Demandematch demandeMatch = new Demandematch()
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
+            sql.query("SELECT * FROM demandematch where iddemandematch = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
+                            demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
+                            demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
+                            demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
+                            demandeMatch.setDuree(resultSet.getInt('duree'))
+                            demandeMatch.setDatedemande(resultSet.getDate("datedemande"))
+                            demandeMatch.setDateexpiration(resultSet.getDate("dateexpiration"))
+                            demandeMatch.setAprouvee(resultSet.getInt('aprouvee'))
+                            ldemandeMatch.add(demandeMatch)
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
+        return ldemandeMatch
     }
 
-    def demandematchUpdate(Demandematch admin){
+    def demandematchUpdate(Demandematch demandeMatch){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("update demandematch set iddemandeur = ? , idrecepteur = ?, duree = ?, datedemande = ?, dateexpiration = ?,aprouvee = ? where iddemandematch = ?", [demandeMatch.getIddemandematch(),demandeMatch.getIddemandeur(),demandeMatch.getIdrecepteur(),demandeMatch.getDuree(),demandeMatch.getDatedemande(),demandeMatch.getDateexpiration(),demandeMatch.getAprouvee()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 
-    def demandematchDelete(Demandematch admin){
+    def demandematchDelete(int id){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("delete FROM demandematch where idadmin = "+id)
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 
 
@@ -107,21 +115,11 @@ class DemandematchDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
+            sql.query("insert into demandematch values (?,?,?,?,?,?,?)", [demandeMatch.getIddemandematch(),demandeMatch.getIddemandeur(),demandeMatch.getIdrecepteur(),demandeMatch.getDuree(),demandeMatch.getDatedemande(),demandeMatch.getDateexpiration(),demandeMatch.getAprouvee()])
 
-                        }
-                    }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 }

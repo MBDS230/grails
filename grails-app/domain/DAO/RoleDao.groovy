@@ -5,24 +5,47 @@ import mapping.Role
 
 class RoleDao {
 
-    def roleAll(){
+    def roleFindAll(){
 
+        List<Role> lrole = new ArrayList<>()
+        Role role = new Role()
+
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query('SELECT * FROM role where 1 > 0')
+                    { resultSet ->
+                        while (resultSet.next()) {
+                            role.getIdrole(resultSet.getInt("idrole"))
+                            role.surnom = resultSet.getString("nom")
+                            role.idrole = resultSet.getInt('degre')
+                            lrole.add(role)
+                        }
+                    }
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return lrole
+    }
+
+
+    def roleFindByID(int id){
         Role admin = new Role()
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query('SELECT * FROM demandematch where 1 > 0')
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
+            sql.query("SELECT * FROM role where idrole = "+id)
 
-                        }
+                { resultSet ->
+                    while (resultSet.next()) {
+                        role.getIdrole(resultSet.getInt("idrole"))
+                        role.surnom = resultSet.getString("nom")
+                        role.idrole = resultSet.getInt('degre')
+                        lrole.add(role)
                     }
+                }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
@@ -30,98 +53,40 @@ class RoleDao {
         return admin
     }
 
-
-    def roleByID(int id){
-        Role admin = new Role()
+    def roleUpdate(Role role){
 
         def sql = Connecting.getConnection()
-
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("update message set nom = ?, degre = ? where idrole = ?",[role.getNom(),role.getDegre(),role.getIdrole()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 
-    def roleUpdate(Role admin){
+    def roleDelete(int id){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("delete FROM role where idrole = "+id)
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
-    }
-
-    def roleDelete(Role admin){
-
-        def sql = Connecting.getConnection()
-
-        if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
-        }else{
-            throw new Exception("Error when trying to connect to the database")
-        }
-        sql.close()
-        return admin
     }
 
 
-    def roleInsert(Role admin){
+    def roleInsert(Role role){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("insert into message values (?,?,?)",
+                    [role.getIdrole(),role.getNom(),role.getDegre()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 }

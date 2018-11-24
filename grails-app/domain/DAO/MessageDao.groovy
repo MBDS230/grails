@@ -7,121 +7,126 @@ class MessageDao {
 
     def messageAll(){
 
-        Message admin = new Message()
+        List<Message> lmessage = new ArrayList<>()
+        Message message = new Message()
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query('SELECT * FROM demandematch where 1 > 0')
+            sql.query('SELECT * FROM message where 1 > 0')
                     { resultSet ->
                         while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
+                            message.getIdmessage(resultSet.getInt("idmessage"))
+                            message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
+                            message.getIdrecepteur(resultSet.getInt("idrecepteur"))
+                            message.getCorps(resultSet.getString("corps"))
+                            message.getAprouve(resultSet.getString("aprouve"))
+                            message.isAffichage(resultSet.getBoolean("affichage"))
+                            message.getDateenvoye(resultSet.getDate("dateenvoye"))
+                            message.isStatus(resultSet.getBoolean("status"))
+                            lmessage.add(message)
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
+        return lmessage
     }
 
+    def messageFindByEnvoyeurAndRecepteur(int envoyeur, int recepteur){
+        List<Message> lmessage = new ArrayList<>()
+        Message message = new Message()
+
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query("SELECT * FROM message where WHERE envoyeur ="+envoyeur+"AND recepteur = "+recepteur+"AND affichage = TRUE ORDER by dateenvoye ASC")
+                    { resultSet ->
+                        while (resultSet.next()) {
+                            message.getIdmessage(resultSet.getInt("idmessage"))
+                            message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
+                            message.getIdrecepteur(resultSet.getInt("idrecepteur"))
+                            message.getCorps(resultSet.getString("corps"))
+                            message.getAprouve(resultSet.getString("aprouve"))
+                            message.isAffichage(resultSet.getBoolean("affichage"))
+                            message.getDateenvoye(resultSet.getDate("dateenvoye"))
+                            message.isStatus(resultSet.getBoolean("status"))
+                            lmessage.add(message)
+                        }
+                    }
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return lmessage
+    }
 
     def messageByID(int id){
-        Message admin = new Message()
+        List<Message> lmessage = new ArrayList<>()
+        Message message = new Message()
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
+            sql.query("SELECT * FROM message where idmessage = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
+                            message.getIdmessage(resultSet.getInt("idmessage"))
+                            message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
+                            message.getIdrecepteur(resultSet.getInt("idrecepteur"))
+                            message.getCorps(resultSet.getString("corps"))
+                            message.getAprouve(resultSet.getString("aprouve"))
+                            message.isAffichage(resultSet.getBoolean("affichage"))
+                            message.getDateenvoye(resultSet.getDate("dateenvoye"))
+                            message.isStatus(resultSet.getBoolean("status"))
+                            lmessage.add(message)
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
+        return lmessage
     }
 
-    def messageUpdate(Message admin){
+    def messageUpdate(Message message){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("update message set idenvoyeur = ?, idrecepteur = ?, corps = ?, aprouve = ?, affichage = ?, dateenvoye = ?, status = ? where idmessage = ?",
+                    [message.getIdenvoyeur(),message.getIdrecepteur(),message.getCorps(),message.getAprouve(),message.isAffichage(),message.getDateenvoye(),message.isStatus(),message.getIdmessage()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 
-    def messageDelete(Message admin){
+    def messageDelete(int id){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("delete FROM message where idmessage = "+id)
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
     }
 
 
-    def messageInsert(Message admin){
+    def messageInsert(Message message){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM admin where idadmin = "+id)
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
-                        }
-                    }
+            sql.executeUpdate("insert into message values (?,?,?,?,?,?,?,?)",
+                    [message.getIdenvoyeur(),message.getIdrecepteur(),message.getCorps(),message.getAprouve(),message.isAffichage(),message.getDateenvoye(),message.isStatus(),message.getIdmessage()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return admin
+
     }
 }
