@@ -32,33 +32,32 @@ class AdminDao {
     }
 
     def findByLoginAndPassword(String login, String motdepasse) {
-        List<Admin> ladmin = new ArrayList<>()
-        Admin admin = new Admin()
+        Admin admin = null
 
         def sql = Connecting.getConnection()
         if(sql != null){
             sql.query("SELECT * FROM admin where login = "+id+" and motdepasse = "+motdepasse)
                     { resultSet ->
                         while (resultSet.next()) {
+                            admin = new Admin()
                             admin.idadmin = resultSet.getInt("idadmin")
                             admin.idrole = resultSet.getInt('idrole')
                             admin.surnom = resultSet.getString("surnom")
                             admin.login = resultSet.getString("login")
                             admin.motdepasse = resultSet.getString("motdepasse")
-                            ladmin.add(admin)
+
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return ladmin
+        return admin
     }
 
     def findByID(int id){
 
-        List<Admin> ladmin = new ArrayList<>()
-        Admin admin = new Admin()
+        Admin admin = null
 
         def sql = Connecting.getConnection()
 
@@ -66,19 +65,20 @@ class AdminDao {
             sql.query("SELECT * FROM admin where idadmin = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
+                            admin = new Admin()
                             admin.idadmin = resultSet.getInt("idadmin")
                             admin.idrole = resultSet.getInt('idrole')
                             admin.surnom = resultSet.getString("surnom")
                             admin.login = resultSet.getString("login")
                             admin.motdepasse = resultSet.getString("motdepasse")
-                            ladmin.add(admin)
+
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return ladmin
+        return admin
     }
 
     def update(Admin admin){

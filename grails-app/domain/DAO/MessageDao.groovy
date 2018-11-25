@@ -35,8 +35,7 @@ class MessageDao {
     }
 
     def findByEnvoyeurAndRecepteur(int envoyeur, int recepteur){
-        List<Message> lmessage = new ArrayList<>()
-        Message message = new Message()
+        Message message = null
 
         def sql = Connecting.getConnection()
 
@@ -44,6 +43,7 @@ class MessageDao {
             sql.query("SELECT * FROM message where WHERE envoyeur ="+envoyeur+" AND recepteur = "+recepteur+" AND affichage = TRUE ORDER by dateenvoye ASC")
                     { resultSet ->
                         while (resultSet.next()) {
+                            message = new Message()
                             message.getIdmessage(resultSet.getInt("idmessage"))
                             message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
                             message.getIdrecepteur(resultSet.getInt("idrecepteur"))
@@ -59,12 +59,11 @@ class MessageDao {
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return lmessage
+        return message
     }
 
     def findByID(int id){
-        List<Message> lmessage = new ArrayList<>()
-        Message message = new Message()
+        Message message = null
 
         def sql = Connecting.getConnection()
 
@@ -72,6 +71,7 @@ class MessageDao {
             sql.query("SELECT * FROM message where idmessage = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
+                            message = new Message()
                             message.getIdmessage(resultSet.getInt("idmessage"))
                             message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
                             message.getIdrecepteur(resultSet.getInt("idrecepteur"))
@@ -87,7 +87,7 @@ class MessageDao {
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return lmessage
+        return message
     }
 
     def update(Message message){

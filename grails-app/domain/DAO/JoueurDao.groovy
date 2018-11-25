@@ -59,13 +59,14 @@ class JoueurDao {
 
 
     def findByLoginAndPassword(String username, String motDePasseHash){
-        Joueur joueur = new Joueur()
+        Joueur joueur = null
         def sql = Connecting.getConnection()
 
         if(sql != null){
             sql.query("SELECT * FROM joueur where login = '"+username+ "' and motdepasse = '"+motDePasseHash+"'")
                     { resultSet ->
                         while (resultSet.next()) {
+                            joueur = new Joueur()
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))
                             joueur.setLogin(resultSet.getString("login"))
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
@@ -80,27 +81,27 @@ class JoueurDao {
         return joueur
     }
     def findByStatus(int joueurConnecte, boolean  status) {
-        List<Joueur> ljoueur = new ArrayList<>()
-        Joueur joueur = new Joueur()
+        Joueur joueur = null
         def sql = Connecting.getConnection()
 
         if(sql != null){
             sql.query("SELECT * FROM joueur where idjoueur != "+joueurConnecte+ "and status = "+status)
                     { resultSet ->
                         while (resultSet.next()) {
+                            joueur = new Joueur()
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))
                             joueur.setLogin(resultSet.getString("login"))
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
-                            ljoueur.add(joueur)
+
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return ljoueur
+        return joueur
     }
 
     def findByID(int id){

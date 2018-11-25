@@ -59,8 +59,7 @@ class DemandematchDao {
     }
 
     def findByID(int id){
-        List<Demandematch> ldemandeMatch = new ArrayList<>()
-        Demandematch demandeMatch = new Demandematch()
+        Demandematch demandeMatch = null
 
         def sql = Connecting.getConnection()
 
@@ -68,6 +67,7 @@ class DemandematchDao {
             sql.query("SELECT * FROM demandematch where iddemandematch = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
+                            demandeMatch = new Demandematch()
                             demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
                             demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
                             demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
@@ -75,14 +75,14 @@ class DemandematchDao {
                             demandeMatch.setDatedemande(resultSet.getDate("datedemande"))
                             demandeMatch.setDateexpiration(resultSet.getDate("dateexpiration"))
                             demandeMatch.setAprouvee(resultSet.getInt('aprouvee'))
-                            ldemandeMatch.add(demandeMatch)
+
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return ldemandeMatch
+        return demandeMatch
     }
 
     def update(Demandematch demandeMatch){

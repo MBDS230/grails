@@ -35,8 +35,7 @@ class MatchDao {
 
 
     def findByID(int id){
-        List<Match> lmatch = new ArrayList<>()
-        Match admin = new Match()
+        Match match = null
 
         def sql = Connecting.getConnection()
 
@@ -44,6 +43,7 @@ class MatchDao {
             sql.query("SELECT * FROM match where idmatch = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
+                            match = new Match()
                             match.getIdmatch(resultSet.getInt("idmatch"))
                             match.getIddemandematch(resultSet.getInt('iddemandematch'))
                             match.getDatematch(resultSet.getDate("datematch"))
@@ -51,14 +51,14 @@ class MatchDao {
                             match.getScorerecepteur(resultSet.getInt("scorerecepteur"))
                             match.getDatedebut(resultSet.getDate("datedebut"))
                             match.getDatefin(resultSet.getDate("datefin"))
-                            lmatch.add(match)
+
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return lmatch
+        return match
     }
 
     def update(Match match){

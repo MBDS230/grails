@@ -31,7 +31,7 @@ class RoleDao {
 
 
     def findByID(int id){
-        Role admin = new Role()
+        Role role = null
 
         def sql = Connecting.getConnection()
 
@@ -40,10 +40,11 @@ class RoleDao {
 
                 { resultSet ->
                     while (resultSet.next()) {
+                        role = new Role()
                         role.getIdrole(resultSet.getInt("idrole"))
                         role.surnom = resultSet.getString("nom")
                         role.idrole = resultSet.getInt('degre')
-                        lrole.add(role)
+
                     }
                 }
         }else{
