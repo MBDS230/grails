@@ -41,43 +41,38 @@ class UserController
             String motDePasse = params.getProperty("motDePasse")
             joueur = new UserService().inscription(username, motDePasse)
             StatusHttp statu = new StatusHttp(500, null, "/game/login");
-            /*ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu);
-            ret.setObjet(joueur);*/
             def responseData = [
                     'results': joueur,
                     'status': statu
             ]
             render responseData as JSON
+            return;
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            /*ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON*/
             def responseData = [
                     'results': joueur,
                     'status': statu
             ]
             render responseData as JSON
+            return;
         }
         StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        /*ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON*/
         def responseData = [
                 'results': joueur,
                 'status': statu
         ]
         render responseData as JSON
+        return;
     }
 
     def login()
     {
+        Joueur valiny = new Joueur();
         try
         {
             String username = params.getProperty("username");
             String motDePasse = params.getProperty("motDePasse");
-            Joueur valiny = new UserService().login(username, motDePasse);
+            valiny = new UserService().login(username, motDePasse);
             if(valiny != null)
             {
                 valiny.setStatus(true);
@@ -85,20 +80,28 @@ class UserController
                 session.setAttribute("SESSION_JOUEUR", valiny);
             }
             StatusHttp statu = new StatusHttp(200, null, "/game/accueil");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            ret.setObjet(valiny);
-            render ret as JSON
+            def responseData = [
+                    'results': valiny,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         } catch (Exception exc ) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
+            def responseData = [
+                    'results': valiny,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
         StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
+        def responseData = [
+                'results': valiny,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 
     def logout()
@@ -123,15 +126,12 @@ class UserController
             {
                 val = new UserService().listeJoueurConnecte(joueurSession.getIdjoueur());
                 StatusHttp statu = new StatusHttp(200, null, null);
-                /*ReturnObject ret = new ReturnObject();
-                ret.setStatus(statu)
-                ret.setObjet(val)*/
-
-                /*def responseData = [
+                def responseData = [
                         'results': val,
                         'status': statu
-                ]*/
-                render val as JSON
+                ]
+                render responseData as JSON
+                return;
                 return;
             }
             else
@@ -140,23 +140,19 @@ class UserController
             }
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            /*ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON*/
             def responseData = [
                     'results': null,
                     'status': statu
             ]
             render responseData as JSON
+            return;
         }
         StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        /*ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON*/
         def responseData = [
                 'results': null,
                 'status': statu
         ]
         render responseData as JSON
+        return;
     }
 }
