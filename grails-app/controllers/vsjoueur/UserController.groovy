@@ -21,7 +21,7 @@ class UserController
         if(valiny != null)
         {
             valiny.setStatus(true);
-            new JoueurDao().joueurUpdate(valiny);
+            new JoueurDao().update(valiny);
             //add Joueur SESSION
         }
     }
