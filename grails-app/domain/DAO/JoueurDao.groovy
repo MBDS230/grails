@@ -81,7 +81,8 @@ class JoueurDao {
         return joueur
     }
     def findByStatus(int joueurConnecte, boolean  status) {
-        Joueur joueur = null
+        List<Joueur> ljoueur = new ArrayList<>()
+        Joueur joueur = new Joueur()
         def sql = Connecting.getConnection()
 
         if(sql != null){
@@ -94,14 +95,14 @@ class JoueurDao {
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
-
+                            ljoueur.add(joueur);
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return joueur
+        return ljoueur
     }
 
     def findByID(int id){

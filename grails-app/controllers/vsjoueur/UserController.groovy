@@ -3,7 +3,6 @@ package vsjoueur
 import DAO.JoueurDao
 import grails.converters.JSON
 import mapping.Joueur
-import utilitaire.ReturnObject
 import utilitaire.StatusHttp
 
 
@@ -131,7 +130,6 @@ class UserController
                         'status': statu
                 ]
                 render responseData as JSON
-                return;
                 return;
             }
             else
