@@ -31,14 +31,14 @@ class DemandematchDao {
         return ldemandeMatch
     }
 
-    def matchFindByRecepteurAndAprouve(int idRecepteur, boolean aprouve)    {
+    def findByRecepteurAndAprouve(int idRecepteur, boolean aprouve)    {
         List<Demandematch> ldemandeMatch = new ArrayList<>()
         Demandematch demandeMatch = new Demandematch()
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM demandematch where idrecepteur = "+id+" and aprouve = "+aprouve)
+            sql.query("SELECT * FROM demandematch where idrecepteur = "+idRecepteur+" and aprouve = "+aprouve)
                     { resultSet ->
                         while (resultSet.next()) {
                             demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))

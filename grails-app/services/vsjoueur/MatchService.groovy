@@ -40,7 +40,7 @@ class MatchService {
     def listeDemandeRencontre(int idJoueurConnecte)
     {
         ArrayList <Demandematch> listDem = new ArrayList<>();
-        if(joueurConnecte>0)
+        if(idJoueurConnecte>0)
         {
             listDem = new DemandematchDao().findByRecepteurAndAprouve(idJoueurConnecte, false);
         }
