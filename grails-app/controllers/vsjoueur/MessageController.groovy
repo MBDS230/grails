@@ -14,6 +14,7 @@ class MessageController {
             int idAutreJoueur = Integer.parseInt(params.getProperty("idAutreJoueur"));
             int joueurConnecte = joueurSession.getIdjoueur();
             val = new MessageService().listeMessage(joueurConnecte, idAutreJoueur);
+
         }
         return val;
     }

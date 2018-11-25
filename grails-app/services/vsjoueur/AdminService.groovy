@@ -14,11 +14,11 @@ class AdminService {
         if(idJoueur>0)
         {
             JoueurDao joueurDao = new JoueurDao();
-            Joueur joueur = joueurDao.joueurByID(idJoueur);
+            Joueur joueur = joueurDao.findByID(idJoueur);
             if(joueur!=null)
             {
                 joueur.setAprouve(1);
-                joueurDao.joueurUpdate(joueur);
+                joueurDao.update(joueur);
             }
         }
     }
@@ -28,11 +28,11 @@ class AdminService {
         if(idJoueur>0)
         {
             JoueurDao joueurDao = new JoueurDao();
-            Joueur joueur = joueurDao.joueurByID(idJoueur);
+            Joueur joueur = joueurDao.findByID(idJoueur);
             if(joueur!=null)
             {
                 joueur.setAprouve(0);
-                joueurDao.joueurUpdate(joueur);
+                joueurDao.update(joueur);
             }
         }
     }

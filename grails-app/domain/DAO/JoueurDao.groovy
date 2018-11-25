@@ -7,7 +7,7 @@ class JoueurDao {
 
 
 
-    def joueurFindAll(){
+    def findAll(){
 
         List<Joueur> ljoueur = new ArrayList<>()
         Joueur joueur = new Joueur()
@@ -33,7 +33,7 @@ class JoueurDao {
         return ljoueur
     }
 
-    def joueurFindByStatus(int joueurConnecte, boolean  status) {
+    def findByStatus(int joueurConnecte, boolean  status) {
         List<Joueur> ljoueur = new ArrayList<>()
         Joueur joueur = new Joueur()
         def sql = Connecting.getConnection()
@@ -57,7 +57,7 @@ class JoueurDao {
         return ljoueur
     }
 
-    def joueurByID(int id){
+    def findByID(int id){
         List<Joueur> ljoueur = new ArrayList<>()
         Joueur joueur = new Joueur()
         def sql = Connecting.getConnection()
@@ -81,7 +81,7 @@ class JoueurDao {
         return ljoueur
     }
 
-    def joueurUpdate(Joueur joueur){
+    def update(Joueur joueur){
 
         def sql = Connecting.getConnection()
 
@@ -94,7 +94,7 @@ class JoueurDao {
         sql.close()
     }
 
-    def joueurDelete(int id){
+    def delete(int id){
 
         def sql = Connecting.getConnection()
 
@@ -107,7 +107,7 @@ class JoueurDao {
     }
 
 
-    def joueurInsert(Joueur joueur){
+    def insert(Joueur joueur){
 
         def sql = Connecting.getConnection()
 

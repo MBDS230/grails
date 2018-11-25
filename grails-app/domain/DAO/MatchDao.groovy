@@ -5,7 +5,7 @@ import mapping.Match
 
 class MatchDao {
 
-    def matchAll(){
+    def findAll(){
 
         List<Match> lmatch = new ArrayList<>()
         Match match = new Match()
@@ -34,7 +34,7 @@ class MatchDao {
     }
 
 
-    def matchByID(int id){
+    def findByID(int id){
         List<Match> lmatch = new ArrayList<>()
         Match admin = new Match()
 
@@ -61,7 +61,7 @@ class MatchDao {
         return lmatch
     }
 
-    def matchUpdate(Match match){
+    def update(Match match){
 
         def sql = Connecting.getConnection()
 
@@ -74,7 +74,7 @@ class MatchDao {
         sql.close()
     }
 
-    def matchDelete(int id){
+    def delete(int id){
 
         def sql = Connecting.getConnection()
 
@@ -87,7 +87,7 @@ class MatchDao {
     }
 
 
-    def matchInsert(Match match){
+    def insert(Match match){
 
         def sql = Connecting.getConnection()
 

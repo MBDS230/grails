@@ -5,7 +5,7 @@ import mapping.Role
 
 class RoleDao {
 
-    def roleFindAll(){
+    def findAll(){
 
         List<Role> lrole = new ArrayList<>()
         Role role = new Role()
@@ -30,7 +30,7 @@ class RoleDao {
     }
 
 
-    def roleFindByID(int id){
+    def findByID(int id){
         Role admin = new Role()
 
         def sql = Connecting.getConnection()
@@ -53,7 +53,7 @@ class RoleDao {
         return admin
     }
 
-    def roleUpdate(Role role){
+    def update(Role role){
 
         def sql = Connecting.getConnection()
         if(sql != null){
@@ -64,7 +64,7 @@ class RoleDao {
         sql.close()
     }
 
-    def roleDelete(int id){
+    def delete(int id){
 
         def sql = Connecting.getConnection()
 
@@ -77,7 +77,7 @@ class RoleDao {
     }
 
 
-    def roleInsert(Role role){
+    def insert(Role role){
 
         def sql = Connecting.getConnection()
 

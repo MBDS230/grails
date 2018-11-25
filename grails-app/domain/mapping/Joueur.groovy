@@ -2,64 +2,64 @@ package mapping
 
 class Joueur {
 
-    private int idjoueur;
-    private String login;
-    private String motdepasse;
-    private boolean status;
-    private int aprouve;
+    private int idjoueur
+    private String login
+    private String motdepasse
+    private boolean status
+    private int aprouve
 
     static constraints = {
     }
     
     
-    public Joueur(int idjoueur, String login, String motdepasse, boolean status, int aprouve) {
-        this.idjoueur = idjoueur;
-        this.login = login;
-        this.motdepasse = motdepasse;
-        this.status = status;
-        this.aprouve = aprouve;
+    Joueur(int idjoueur, String login, String motdepasse, boolean status, int aprouve) {
+        this.setIdjoueur(idjoueur)
+        this.setLogin(login)
+        this.setMotdepasse(motdepasse)
+        this.setStatus(status)
+        this.setAprouve(aprouve)
     }
 
-    public Joueur() {
+    Joueur() {
     }
 
-    public int getIdjoueur() {
+    int getIdjoueur() {
         return idjoueur;
     }
 
-    public void setIdjoueur(int idjoueur) {
+    void setIdjoueur(int idjoueur) {
         this.idjoueur = idjoueur;
     }
 
-    public String getLogin() {
+    String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
+    void setLogin(String login) {
         this.login = login;
     }
 
-    public String getMotdepasse() {
+    String getMotdepasse() {
         return motdepasse;
     }
 
-    public void setMotdepasse(String motdepasse) {
+    void setMotdepasse(String motdepasse) {
         this.motdepasse = motdepasse;
     }
 
-    public boolean isStatus() {
+    boolean isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    void setStatus(boolean status) {
         this.status = status;
     }
 
-    public int getAprouve() {
+    int getAprouve() {
         return aprouve;
     }
 
-    public void setAprouve(int aprouve) {
+    void setAprouve(int aprouve) {
         this.aprouve = aprouve;
     }
 }

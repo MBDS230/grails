@@ -7,7 +7,7 @@ class AdminDao {
 
 
 
-    def adminFindAll(){
+    def findAll(){
 
         List<Admin> ladmin = new ArrayList<>()
         Admin admin = new Admin()
@@ -33,7 +33,7 @@ class AdminDao {
         return ladmin
     }
 
-    def adminFindByLoginAndPassword(String login, String motdepasse) {
+    def findByLoginAndPassword(String login, String motdepasse) {
         List<Admin> ladmin = new ArrayList<>()
         Admin admin = new Admin()
 
@@ -57,7 +57,7 @@ class AdminDao {
         return ladmin
     }
 
-    def adminFindByID(int id){
+    def findByID(int id){
 
         List<Admin> ladmin = new ArrayList<>()
         Admin admin = new Admin()
@@ -83,7 +83,7 @@ class AdminDao {
         return ladmin
     }
 
-    def adminUpdate(Admin admin){
+    def update(Admin admin){
 
         def sql = Connecting.getConnection()
 
@@ -95,7 +95,7 @@ class AdminDao {
         sql.close()
     }
 
-    def adminDelete(int id){
+    def delete(int id){
 
         def sql = Connecting.getConnection()
 
@@ -109,7 +109,7 @@ class AdminDao {
     }
 
 
-    def adminInsert(Admin admin){
+    def insert(Admin admin){
 
         def sql = Connecting.getConnection()
 

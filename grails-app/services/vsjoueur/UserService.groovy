@@ -34,31 +34,31 @@ class UserService {
         idMaxJoueur++;
         JoueurDao jDao = new JoueurDao();
         joueur.setMotdepasse(getPasswordHash(motDePasse));
-        jDao.joueurInsert(joueur);
+        jDao.insert(joueur);
     }
 
     def login(String username, String motDePasse)
     {
         String motDePasseHash = getPasswordHash(motDePasse);
         JoueurDao jDao = new JoueurDao();
-        Joueur valiny = jDao.joueurFindByLoginAndPassword(username, motDePasseHash);
+        Joueur valiny = jDao.findByLoginAndPassword(username, motDePasseHash);
         return valiny;
     }
 
     def logout(int idjoueur)
     {
         JoueurDao jDao = new JoueurDao();
-        Joueur joueur = jDao.joueurByID(idjoueur);
+        Joueur joueur = jDao.findByID(idjoueur);
         if(joueur != null)
         {
             joueur.setStatus(0);
-            jDao.joueurUpdate(joueur);
+            jDao.update(joueur);
         }
     }
 
     def listeJoueurConnecte(int joueurConnecte)
     {
-        ArrayList<Joueur> val = new JoueurDao().joueurFindByStatus(joueurConnecte, true);
+        ArrayList<Joueur> val = new JoueurDao().findByStatus(joueurConnecte, true);
         return val;
     }
 }

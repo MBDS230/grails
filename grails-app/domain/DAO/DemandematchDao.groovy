@@ -5,7 +5,7 @@ import mapping.Demandematch
 
 class DemandematchDao {
 
-      def demandematchFindAll(){
+      def findAll(){
         List<Demandematch> ldemandeMatch = new ArrayList<>()
         Demandematch demandeMatch = new Demandematch()
 
@@ -31,7 +31,7 @@ class DemandematchDao {
         return ldemandeMatch
     }
 
-    def demandeMatchFindByRecepteurAndAprouve(int idRecepteur, boolean aprouve)    {
+    def matchFindByRecepteurAndAprouve(int idRecepteur, boolean aprouve)    {
         List<Demandematch> ldemandeMatch = new ArrayList<>()
         Demandematch demandeMatch = new Demandematch()
 
@@ -58,7 +58,7 @@ class DemandematchDao {
         return ldemandeMatch
     }
 
-    def demandematchdByID(int id){
+    def findByID(int id){
         List<Demandematch> ldemandeMatch = new ArrayList<>()
         Demandematch demandeMatch = new Demandematch()
 
@@ -85,7 +85,7 @@ class DemandematchDao {
         return ldemandeMatch
     }
 
-    def demandematchUpdate(Demandematch demandeMatch){
+    def update(Demandematch demandeMatch){
 
         def sql = Connecting.getConnection()
 
@@ -97,7 +97,7 @@ class DemandematchDao {
         sql.close()
     }
 
-    def demandematchDelete(int id){
+    def delete(int id){
 
         def sql = Connecting.getConnection()
 
@@ -110,7 +110,7 @@ class DemandematchDao {
     }
 
 
-    def demandematchInsert(Demandematch admin){
+    def insert(Demandematch admin){
 
         def sql = Connecting.getConnection()
 

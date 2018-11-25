@@ -1,86 +1,84 @@
 package mapping
 
 class Demandematch {
-
-   
     
-    private int iddemandematch;
-    private int iddemandeur;
-    private int idrecepteur;
-    private int duree;
-    private Date datedemande;
-    private Date dateexpiration;
-    private int aprouvee;
+    private int iddemandematch
+    private int iddemandeur
+    private int idrecepteur
+    private int duree
+    private Date datedemande
+    private Date dateexpiration
+    private int aprouvee
 
     static constraints = {
     }
     
-    public Demandematch() {
+    Demandematch() {
     }
 
-    public Demandematch(int iddemandematch, int iddemandeur, int idrecepteur, int duree, Date datedemande, Date dateexpiration, int aprouvee) {
-        this.iddemandematch = iddemandematch;
-        this.iddemandeur = iddemandeur;
-        this.idrecepteur = idrecepteur;
-        this.duree = duree;
-        this.datedemande = datedemande;
-        this.dateexpiration = dateexpiration;
-        this.aprouvee = aprouvee;
+    Demandematch(int iddemandematch, int iddemandeur, int idrecepteur, int duree, Date datedemande, Date dateexpiration, int aprouvee) {
+        this.setIddemandematch(iddemandematch)
+        this.setIddemandeur(iddemandeur)
+        this.setIdrecepteur(idrecepteur)
+        this.setDuree(duree)
+        this.setDatedemande(datedemande)
+        this.setDateexpiration(dateexpiration)
+        this.setAprouvee(aprouvee)
     }
 
     public int getIddemandematch() {
-        return iddemandematch;
+        return iddemandematch
     }
 
-    public void setIddemandematch(int iddemandematch) {
-        this.iddemandematch = iddemandematch;
+    void setIddemandematch(int iddemandematch) {
+        this.iddemandematch = iddemandematch
     }
 
-    public int getIddemandeur() {
-        return iddemandeur;
+    int getIddemandeur() {
+        return iddemandeur
     }
 
-    public void setIddemandeur(int iddemandeur) {
-        this.iddemandeur = iddemandeur;
+    void setIddemandeur(int iddemandeur) {
+        this.iddemandeur = iddemandeur
     }
 
-    public int getIdrecepteur() {
-        return idrecepteur;
+    int getIdrecepteur() {
+        return idrecepteur
     }
 
-    public void setIdrecepteur(int idrecepteur) {
-        this.idrecepteur = idrecepteur;
+    void setIdrecepteur(int idrecepteur) {
+        this.idrecepteur = idrecepteur
     }
 
-    public int getDuree() {
-        return duree;
+    int getDuree() {
+        return duree
     }
 
-    public void setDuree(int duree) {
-        this.duree = duree;
+    void setDuree(int duree) {
+        this.duree = duree
     }
 
-    public Date getDatedemande() {
-        return datedemande;
+    Date getDatedemande() {
+        return datedemande
     }
 
-    public void setDatedemande(Date datedemande) {
-        this.datedemande = datedemande;
+    void setDatedemande(Date datedemande) {
+        this.datedemande = datedemande
     }
 
-    public Date getDateexpiration() {
-        return dateexpiration;
+    Date getDateexpiration() {
+        return dateexpiration
     }
 
-    public void setDateexpiration(Date dateexpiration) {
-        this.dateexpiration = dateexpiration;
+    void setDateexpiration(Date dateexpiration) {
+        this.dateexpiration = dateexpiration
     }
 
-    public int getAprouvee() {
-        return aprouvee;
+    int getAprouvee() {
+        return aprouvee
     }
 
-    public void setAprouvee(int aprouvee) {
-        this.aprouvee = aprouvee;
+    void setAprouvee(int aprouvee) {
+        this.aprouvee = aprouvee
     }
 }

@@ -2,63 +2,63 @@ package mapping
 
 class Admin {
     
-    private int idadmin;
-    private int idrole;
-    private String surnom;
-    private String login;
-    private String motdepasse;
+    private int idadmin
+    private int idrole
+    private String surnom
+    private String login
+    private String motdepasse
 
     static constraints = {
     }
     
-    public Admin() {
+    Admin() {
     }
 
-    public Admin(int idadmin, int idrole, String surnom, String login, String motdepasse) {
-        this.idadmin = idadmin;
-        this.idrole = idrole;
-        this.surnom = surnom;
-        this.login = login;
-        this.motdepasse = motdepasse;
+    Admin(int idadmin, int idrole, String surnom, String login, String motdepasse) {
+        this.setIdadmin(idadmin)
+        this.setIdrole(idrole)
+        this.setSurnom(surnom)
+        this.setLogin(login)
+        this.setMotdepasse(motdepasse)
     }
 
-    public int getIdadmin() {
-        return idadmin;
+    int getIdadmin() {
+        return idadmin
     }
 
-    public void setIdadmin(int idadmin) {
-        this.idadmin = idadmin;
+    void setIdadmin(int idadmin) {
+        this.idadmin = idadmin
     }
 
-    public int getIdrole() {
-        return idrole;
+    int getIdrole() {
+        return idrole
     }
 
-    public void setIdrole(int idrole) {
-        this.idrole = idrole;
+    void setIdrole(int idrole) {
+        this.idrole = idrole
     }
 
-    public String getSurnom() {
-        return surnom;
+    String getSurnom() {
+        return surnom
     }
 
-    public void setSurnom(String surnom) {
-        this.surnom = surnom;
+    void setSurnom(String surnom) {
+        this.surnom = surnom
     }
 
-    public String getLogin() {
-        return login;
+    String getLogin() {
+        return login
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    void setLogin(String login) {
+        this.login = login
     }
 
-    public String getMotdepasse() {
-        return motdepasse;
+    String getMotdepasse() {
+        return motdepasse
     }
 
-    public void setMotdepasse(String motdepasse) {
-        this.motdepasse = motdepasse;
+    void setMotdepasse(String motdepasse) {
+        this.motdepasse = motdepasse
     }
 }

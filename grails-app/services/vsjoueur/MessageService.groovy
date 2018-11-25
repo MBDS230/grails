@@ -14,7 +14,7 @@ class MessageService {
         if(joueurConnecte>0 && idAutreJoueur>0)
         {
             MessageDao mDao = new MessageDao();
-            val = mDao.messageFindByEnvoyeurAndRecepteur(joueurConnecte, idAutreJoueur);
+            val = mDao.findByEnvoyeurAndRecepteur(joueurConnecte, idAutreJoueur);
         }
         return val;
     }
@@ -31,7 +31,7 @@ class MessageService {
                 idMessage++;
                 java.sql.Date jourCourant = new java.sql.Date(System.currentTimeMillis());
                 Message messageObj = new Message(idMessage, idEnvoyeur, idAutreJoueur, message, 2, true,jourCourant, false);
-                messageDao.messageInsert(messageObj);
+                messageDao.insert(messageObj);
             }
         }
     }
@@ -40,12 +40,12 @@ class MessageService {
     {
         if(idMessage>0)
         {
-            Message messageObj = new MessageDao().messageByID(idMessage);
+            Message messageObj = new MessageDao().findByID(idMessage);
             if(messageObj!=null)
             {
                 messageObj.setStatus(true);
                 MessageDao messageDao = new MessageDao();
-                messageDao.messageUpdate(messageObj);
+                messageDao.update(messageObj);
             }
         }
     }

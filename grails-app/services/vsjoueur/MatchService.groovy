@@ -18,8 +18,8 @@ class MatchService {
         if(joueurConnecte>0 && idAutreJoueur>0 && duree>0)
         {
             JoueurDao jDao = new JoueurDao();
-            Joueur demandeur = jDao.joueurByID(joueurConnecte);
-            Joueur autreJoueur = jDao.joueurByID(idAutreJoueur);
+            Joueur demandeur = jDao.findByID(joueurConnecte);
+            Joueur autreJoueur = jDao.findByID(idAutreJoueur);
             if(demandeur!= null && autreJoueur!=null)
             {
                 java.sql.Date jourCourant = new java.sql.Date(System.currentTimeMillis());
@@ -28,7 +28,7 @@ class MatchService {
                 int iddemande = Connecting.getMaxId("demandematch");
                 iddemande++;
                 Demandematch dem = new Demandematch(iddemande, joueurConnecte, idAutreJoueur, duree, jourCourant, demain, 0);
-                dmDao.demandematchInsert(dem);
+                dmDao.insert(dem);
             }
             else
             {
@@ -42,7 +42,7 @@ class MatchService {
         ArrayList <Demandematch> listDem = new ArrayList<>();
         if(joueurConnecte>0)
         {
-            listDem = new DemandematchDao().demandeMatchFindByRecepteurAndAprouve(idJoueurConnecte, false);
+            listDem = new DemandematchDao().findByRecepteurAndAprouve(idJoueurConnecte, false);
         }
         return listDem;
     }

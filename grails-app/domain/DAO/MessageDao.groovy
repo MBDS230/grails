@@ -5,7 +5,7 @@ import mapping.Message
 
 class MessageDao {
 
-    def messageAll(){
+    def findAll(){
 
         List<Message> lmessage = new ArrayList<>()
         Message message = new Message()
@@ -34,7 +34,7 @@ class MessageDao {
         return lmessage
     }
 
-    def messageFindByEnvoyeurAndRecepteur(int envoyeur, int recepteur){
+    def findByEnvoyeurAndRecepteur(int envoyeur, int recepteur){
         List<Message> lmessage = new ArrayList<>()
         Message message = new Message()
 
@@ -62,7 +62,7 @@ class MessageDao {
         return lmessage
     }
 
-    def messageByID(int id){
+    def findByID(int id){
         List<Message> lmessage = new ArrayList<>()
         Message message = new Message()
 
@@ -90,7 +90,7 @@ class MessageDao {
         return lmessage
     }
 
-    def messageUpdate(Message message){
+    def update(Message message){
 
         def sql = Connecting.getConnection()
 
@@ -103,7 +103,7 @@ class MessageDao {
         sql.close()
     }
 
-    def messageDelete(int id){
+    def delete(int id){
 
         def sql = Connecting.getConnection()
 
@@ -116,7 +116,7 @@ class MessageDao {
     }
 
 
-    def messageInsert(Message message){
+    def insert(Message message){
 
         def sql = Connecting.getConnection()
 

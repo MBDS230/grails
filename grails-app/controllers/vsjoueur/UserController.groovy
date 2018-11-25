@@ -8,9 +8,9 @@ class UserController
 {
     def inscription()
     {
-        String username = params.getProperty("username");
-        String motDePasse = params.getProperty("motDePasse");
-        new UserService().inscription(username, motDePasse);
+        String username = params.getProperty("username")
+        String motDePasse = params.getProperty("motDePasse")
+        new UserSer().inscription(username, motDePasse)
     }
 
     def login()
