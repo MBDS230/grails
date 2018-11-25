@@ -67,4 +67,31 @@ $(function() {
             processData: false
         });
     });
+
+    $(".boutonJouer").click(function(){
+
+        $(".contact.active").removeClass("active");
+        $(this).parents('.contact').addClass("active");
+        var idAdversaire = $(this).attr("data-id");
+        $(".contentJouer").removeClass("hide");
+        $(".contentJouer").addClass("show");
+
+        $(".contentMessage").removeClass("show");
+        $(".contentMessage").addClass("hide");
+
+
+    });
+
+    $(".boutonMessage").click(function(){
+
+        $(".contact.active").removeClass("active");
+        $(this).parents('.contact').addClass("active");
+        var idAdversaire = $(this).attr("data-id");
+        $(".contentMessage").removeClass("hide");
+        $(".contentMessage").addClass("show");
+
+        $(".contentJouer").removeClass("show");
+        $(".contentJouer").addClass("hide");
+
+    });
 });

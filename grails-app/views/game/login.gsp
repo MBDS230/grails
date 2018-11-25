@@ -14,6 +14,7 @@
 	<asset:stylesheet src="front/main.css"/>
 	<asset:stylesheet src="front/responsive.css"/>
 	<asset:stylesheet src="front/custom.css"/>
+	<asset:stylesheet src="front/pen.css"/>
     <!--[if lt IE 9]>
 	<asset:javascript src="admin/html5shiv.js"/>
 	<asset:javascript src="admin/respond.min.js"/>
@@ -290,5 +291,6 @@
 	<asset:javascript src="front/jquery.prettyPhoto.js"/>
 	<asset:javascript src="front/main.js"/>
 	<asset:javascript src="front/custom.js"/>
+	<asset:javascript src="front/pen.js"/>
 </body>
 </html>

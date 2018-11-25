@@ -1,3 +1,7 @@
 .red{
     color:red;
 }
+.btn.btn-success{
+    border: 0 none;
+    border-radius: 0;
+}
