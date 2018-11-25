@@ -38,14 +38,14 @@
                 </a>
             </div>
             <div class="login-form">
-                <form>
+                <form action="/admin/login" method="POST">
                     <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label>Login</label>
+                        <input name="username" type="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input name="motDePasse" type="password" class="form-control" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
                 </form>

@@ -13,6 +13,7 @@
 	<asset:stylesheet src="front/animate.css"/>
 	<asset:stylesheet src="front/main.css"/>
 	<asset:stylesheet src="front/responsive.css"/>
+    <asset:stylesheet src="front/custom.css"/>
 	<!--[if lt IE 9]>
 	<asset:javascript src="admin/html5shiv.js"/>
 	<asset:javascript src="admin/respond.min.js"/>
