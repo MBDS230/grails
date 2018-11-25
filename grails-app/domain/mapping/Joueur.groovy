@@ -36,7 +36,11 @@ class Joueur {
     }
 
     void setLogin(String login) {
-        this.login = login;
+        if(login.length() >= 6){
+            this.login = login
+        }else{
+            throw new Exception("the Username must contain at least 6 characters")
+        }
     }
 
     String getMotdepasse() {
@@ -44,7 +48,13 @@ class Joueur {
     }
 
     void setMotdepasse(String motdepasse) {
-        this.motdepasse = motdepasse;
+
+        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$"
+        if(motdepasse.matches(pattern)){
+            this.motdepasse = motdepasse
+        }else{
+            throw new Exception("the password must contain at least 1 character 1 number and 1 special character")
+        }
     }
 
     boolean isStatus() {
