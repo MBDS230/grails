@@ -12,7 +12,7 @@
         </tr>
     <g:each var="joueur" in="${testVar}" status="i">
         <tr>
-            <td> ${joueur.id}</td>
+            <td> ${joueur.id} ${testa}</td>
             <td> ${joueur.nom}</td>
         </tr>
     </g:each>

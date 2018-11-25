@@ -1,6 +1,7 @@
 package vsjoueur
 
 import mapping.Admin
+import org.springframework.web.servlet.ModelAndView
 
 class AdminController {
 
@@ -30,5 +31,12 @@ class AdminController {
         {
 
         }
+    }
+
+    def dashboard(){
+        return new ModelAndView("/admin/dashboard")
+    }
+    def login(){
+        return new ModelAndView("/admin/login")
     }
 }
