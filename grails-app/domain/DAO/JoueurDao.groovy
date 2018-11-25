@@ -37,7 +37,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM joueur where login = "+username+ "and motdepasse = "+motDePasseHash)
+            sql.query("SELECT * FROM joueur where login = '"+username+ "' and motdepasse = '"+motDePasseHash+"'")
                     { resultSet ->
                         while (resultSet.next()) {
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))
@@ -104,7 +104,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("update joueur set login = ?, motdepasse = ?, status = ?,aprouvee = ? where idjoueur = ?",
+            sql.executeUpdate("update joueur set login = ?, motdepasse = ?, status = ?, aprouve = ? where idjoueur = ?",
                     [joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve(),joueur.getIdjoueur()])
         }else{
             throw new Exception("Error when trying to connect to the database")

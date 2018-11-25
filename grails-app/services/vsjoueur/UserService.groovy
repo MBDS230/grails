@@ -5,9 +5,7 @@ import DAO.JoueurDao
 import grails.gorm.transactions.Transactional
 import mapping.Joueur
 
-import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
-import java.security.SecureRandom
 
 @Transactional
 class UserService {
@@ -37,11 +35,19 @@ class UserService {
         jDao.insert(joueur);
     }
 
-    def login(String username, String motDePasse)
+    def login(String username, String motDePasse) throws Exception
     {
         String motDePasseHash = getPasswordHash(motDePasse);
         JoueurDao jDao = new JoueurDao();
         Joueur valiny = jDao.findByLoginAndPassword(username, motDePasseHash);
+        if(valiny!=null && valiny.getAprouve()==0)
+        {
+            throw new Exception("Joueur Bloqué");
+        }
+        else if(valiny!=null && valiny.getAprouve()==2)
+        {
+            throw new Exception("Joueur en attente d'approbation");
+        }
         return valiny;
     }
 
