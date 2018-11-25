@@ -27,7 +27,7 @@ class UserService {
 
     def inscription(String username, String motDePasse) throws Exception
     {
-        Joueur joueur = new Joueur(0, username, motDePasse, false, 2);
+        Joueur joueur = new Joueur(0, username, motDePasse, false, 1);
         ArrayList<Joueur> arrJoueur = new JoueurDao().findByUsername(username);
         if(arrJoueur == null || arrJoueur.size() == 0)
         {

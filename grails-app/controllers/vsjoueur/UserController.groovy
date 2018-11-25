@@ -123,15 +123,16 @@ class UserController
             {
                 val = new UserService().listeJoueurConnecte(joueurSession.getIdjoueur());
                 StatusHttp statu = new StatusHttp(200, null, null);
-                ReturnObject ret = new ReturnObject();
+                /*ReturnObject ret = new ReturnObject();
                 ret.setStatus(statu)
-                ret.setObjet(val)
+                ret.setObjet(val)*/
 
-                def responseData = [
+                /*def responseData = [
                         'results': val,
                         'status': statu
-                ]
-                render responseData as JSON
+                ]*/
+                render val as JSON
+                return;
             }
             else
             {
@@ -139,13 +140,23 @@ class UserController
             }
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
+            /*ReturnObject ret = new ReturnObject();
             ret.setStatus(statu)
-            render ret as JSON
+            render ret as JSON*/
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
         }
         StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
+        /*ReturnObject ret = new ReturnObject();
         ret.setStatus(statu)
-        render ret as JSON
+        render ret as JSON*/
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
     }
 }
