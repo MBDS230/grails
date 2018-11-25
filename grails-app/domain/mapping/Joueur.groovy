@@ -39,7 +39,7 @@ class Joueur {
         if(login != null && login.length() >= 6){
             this.login = login
         }else{
-            throw new Exception("the Username must contain at least 6 characters")
+            throw new Exception("L'identifiant doit comporter au moins 6 caractères")
         }
     }
 
@@ -53,7 +53,7 @@ class Joueur {
         if(motdepasse.matches(pattern)){
             this.motdepasse = motdepasse
         }else{
-            throw new Exception("the password must contain at least 1 character 1 number and 1 special character")
+            throw new Exception("Le mot de passe doit comporter au moins 8 caractères et doit comporter au moins une majuscule et un caractère numérique ou de ponctuation. ")
         }
     }
 
