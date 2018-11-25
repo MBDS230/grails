@@ -4,13 +4,15 @@ class StatusHttp
 {
     public int status;
     public String messageErreur;
+    public redirectUrl;
 
     static constraints = {
     }
 
-    StatusHttp(int status, String messageErreur) {
+    StatusHttp(int status, String messageErreur, String redirectUrl) {
         this.setStatus(status)
         this.setMessageErreur(messageErreur)
+        this.setRedirectUrl(redirectUrl)
     }
 
     int getStatus() {
@@ -27,5 +29,13 @@ class StatusHttp
 
     void setMessageErreur(String messageErreur) {
         this.messageErreur = messageErreur
+    }
+
+    def getRedirectUrl() {
+        return redirectUrl
+    }
+
+    void setRedirectUrl(redirectUrl) {
+        this.redirectUrl = redirectUrl
     }
 }
