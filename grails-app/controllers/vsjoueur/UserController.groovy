@@ -10,7 +10,7 @@ class UserController
     {
         String username = params.getProperty("username")
         String motDePasse = params.getProperty("motDePasse")
-        new UserSer().inscription(username, motDePasse)
+        new UserService().inscription(username, motDePasse)
     }
 
     def login()
