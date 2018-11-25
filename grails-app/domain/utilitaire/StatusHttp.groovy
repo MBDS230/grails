@@ -4,7 +4,7 @@ class StatusHttp
 {
     public int status;
     public String messageErreur;
-    public redirectUrl;
+    public String redirectUrl;
 
     static constraints = {
     }
@@ -31,11 +31,11 @@ class StatusHttp
         this.messageErreur = messageErreur
     }
 
-    def getRedirectUrl() {
+    String getRedirectUrl() {
         return redirectUrl
     }
 
-    void setRedirectUrl(redirectUrl) {
+    void setRedirectUrl(String redirectUrl) {
         this.redirectUrl = redirectUrl
     }
 }

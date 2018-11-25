@@ -25,20 +25,32 @@ class UserService {
         return signature;
     }
 
-    def inscription(String username, String motDePasse)
+    def inscription(String username, String motDePasse) throws Exception
     {
-        Joueur joueur = new Joueur(0, username, motDePasse, 0, 2);
-        int idMaxJoueur = Connecting.getMaxId("joueur");
-        idMaxJoueur++;
-        JoueurDao jDao = new JoueurDao();
-        joueur.setMotdepasse(getPasswordHash(motDePasse));
-        jDao.insert(joueur);
+        Joueur joueur = new Joueur(0, username, motDePasse, false, 2);
+        ArrayList<Joueur> arrJoueur = new JoueurDao().findByUsername(username);
+        if(arrJoueur == null || arrJoueur.size() == 0)
+        {
+            int idMaxJoueur = Connecting.getMaxId("joueur");
+            idMaxJoueur++;
+            JoueurDao jDao = new JoueurDao();
+            joueur.setIdjoueur(idMaxJoueur);
+            joueur.setMotdepasse(getPasswordHash(motDePasse));
+            jDao.insert(joueur);
+        }
+        else
+        {
+            throw new Exception("Pseudo éxistant");
+        }
     }
 
     def login(String username, String motDePasse) throws Exception
     {
         String motDePasseHash = getPasswordHash(motDePasse);
         JoueurDao jDao = new JoueurDao();
+        Joueur verif = new Joueur();
+        verif.setLogin(username);
+        verif.setMotdepasse(motDePasse);
         Joueur valiny = jDao.findByLoginAndPassword(username, motDePasseHash);
         if(valiny!=null && valiny.getAprouve()==0)
         {

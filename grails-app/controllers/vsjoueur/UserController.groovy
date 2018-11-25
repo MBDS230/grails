@@ -3,6 +3,8 @@ package vsjoueur
 import DAO.JoueurDao
 import grails.converters.JSON
 import mapping.Joueur
+import utilitaire.ReturnObject
+import utilitaire.StatusHttp
 
 
 class UserController
@@ -32,26 +34,51 @@ class UserController
 
     def inscription()
     {
-        String username = params.getProperty("username")
-        String motDePasse = params.getProperty("motDePasse")
-        new UserService().inscription(username, motDePasse)
+        try
+        {
+            String username = params.getProperty("username")
+            String motDePasse = params.getProperty("motDePasse")
+            new UserService().inscription(username, motDePasse)
+            StatusHttp statu = new StatusHttp(200, null, "/game/login");
+            render statu as JSON
+        } catch (Exception exc) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            render statu as JSON
+        }
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        render statu as JSON
     }
 
     def login()
     {
-        String username = params.getProperty("username");
-        String motDePasse = params.getProperty("motDePasse");
-        Joueur valiny = new UserService().login(username, motDePasse);
-        if(valiny != null)
+        try
         {
-            valiny.setStatus(true);
-            new JoueurDao().update(valiny);
-            session.setAttribute("SESSION_JOUEUR", valiny);
+            String username = params.getProperty("username");
+            String motDePasse = params.getProperty("motDePasse");
+            Joueur valiny = new UserService().login(username, motDePasse);
+            if(valiny != null)
+            {
+                valiny.setStatus(true);
+                new JoueurDao().update(valiny);
+                session.setAttribute("SESSION_JOUEUR", valiny);
+            }
+            StatusHttp statu = new StatusHttp(200, null, "/game/accueil");
+            ReturnObject ret = new ReturnObject();
+            ret.setStatus(statu)
+            render ret as JSON
+        } catch (Exception exc ) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            ReturnObject ret = new ReturnObject();
+            ret.setStatus(statu)
+            render ret as JSON
         }
-        render valiny as JSON
+        StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+        ReturnObject ret = new ReturnObject();
+        ret.setStatus(statu)
+        render ret as JSON
     }
 
-    def logout(int idjoueur)
+    def logout()
     {
         Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
         if(joueurSession != null)
@@ -60,16 +87,33 @@ class UserController
         }
         session.removeAttribute("SESSION_JOUEUR");
         session.invalidate();
+        redirect(controller: "game", action: "login")
     }
 
     def listeJoueurConnecte()
     {
-        ArrayList<Joueur> val = null;
-        Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
-        if(joueurSession != null)
+        try
         {
-            new UserService().listeJoueurConnecte(joueurSession.getIdjoueur());
+            ArrayList<Joueur> val = null;
+            Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
+            if(joueurSession != null)
+            {
+                val = new UserService().listeJoueurConnecte(joueurSession.getIdjoueur());
+                render val as JSON;
+            }
+            else
+            {
+                redirect(controller: "game", action: "login")
+            }
+        } catch (Exception exc) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            ReturnObject ret = new ReturnObject();
+            ret.setStatus(statu)
+            render ret as JSON
         }
-        return val;
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        ReturnObject ret = new ReturnObject();
+        ret.setStatus(statu)
+        render ret as JSON
     }
 }
