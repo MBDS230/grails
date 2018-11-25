@@ -50,14 +50,24 @@ class UserController
             render responseData as JSON
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
+            /*ReturnObject ret = new ReturnObject();
             ret.setStatus(statu)
-            render ret as JSON
+            render ret as JSON*/
+            def responseData = [
+                    'results': joueur,
+                    'status': statu
+            ]
+            render responseData as JSON
         }
         StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
+        /*ReturnObject ret = new ReturnObject();
         ret.setStatus(statu)
-        render ret as JSON
+        render ret as JSON*/
+        def responseData = [
+                'results': joueur,
+                'status': statu
+        ]
+        render responseData as JSON
     }
 
     def login()

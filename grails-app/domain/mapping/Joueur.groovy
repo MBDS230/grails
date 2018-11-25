@@ -49,11 +49,11 @@ class Joueur {
 
     void setMotdepasse(String motdepasse) {
 
-        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$"
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z])\$"
         if(motdepasse.matches(pattern)){
             this.motdepasse = motdepasse
         }else{
-            throw new Exception("Le mot de passe doit comporter au moins 8 caractères et doit comporter au moins une majuscule et un caractère numérique ou de ponctuation. ")
+            throw new Exception("Le mot de passe doit comporter au moins 8 caractères et doit comporter au moins une majuscule")
         }
     }
 
