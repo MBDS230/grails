@@ -23,9 +23,15 @@ $(function() {
             },
             success:function(response){
                 console.log(response);
-                alert("tafiditra");
-                window.location.href = "/game/index";
-                //alert("Data: " + data + "\nStatus: " + status);
+                if(response.status === 200)
+                {
+                    window.location.href = "/game/index";
+                }
+                else if(response.status === 500)
+                {
+                    $("#errorConnexion").empty();
+                    $("#errorConnexion").append(response.messageErreur);
+                }
             },
             error:function(xhr, textStatus, errorThrown ){
                 $("#errorConnexion").empty();
@@ -41,12 +47,20 @@ $(function() {
         console.log(formData);
         //fd.append("CustomField", "This is some extra data");
         $.ajax({
-            url: 'upload.php',
+            url: '/user/inscription',
             type: 'POST',
             data: formData,
-            success:function(data){
-                //$('#output').html(data);
-                alert("Data: " + data + "\nStatus: " + status);
+            success:function(response){
+                console.log(response);
+                if(response.status === 200)
+                {
+                    window.location.href = "/game/index";
+                }
+                else if(response.status === 500)
+                {
+                    $("#errorConnexion").empty();
+                    $("#errorConnexion").append(response.messageErreur);
+                }
             },
             cache: false,
             contentType: false,
