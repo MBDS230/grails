@@ -31,7 +31,7 @@ class MatchController {
                 redirect(controller: "game", action: "login")
             }
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, null, null);
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
             def responseData = [
                     'results': null,
                     'status': statu
