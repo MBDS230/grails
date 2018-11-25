@@ -70,7 +70,7 @@ class UserService {
         Joueur joueur = jDao.findByID(idjoueur);
         if(joueur != null)
         {
-            joueur.setStatus(0);
+            joueur.setStatus(false);
             jDao.update(joueur);
         }
     }
