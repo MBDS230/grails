@@ -37,7 +37,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM joueur where login != "+username+ "and motdepasse = "+motDePasseHash)
+            sql.query("SELECT * FROM joueur where login = "+username+ "and motdepasse = "+motDePasseHash)
                     { resultSet ->
                         while (resultSet.next()) {
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))

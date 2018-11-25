@@ -5,8 +5,6 @@ import mapping.Admin
 
 class AdminDao {
 
-
-
     def findAll(){
 
         List<Admin> ladmin = new ArrayList<>()
