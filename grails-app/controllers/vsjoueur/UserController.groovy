@@ -40,10 +40,14 @@ class UserController
             String motDePasse = params.getProperty("motDePasse")
             mapping.Joueur joueur = new UserService().inscription(username, motDePasse)
             StatusHttp statu = new StatusHttp(500, null, "/game/login");
-            ReturnObject ret = new ReturnObject();
+            /*ReturnObject ret = new ReturnObject();
             ret.setStatus(statu);
-            ret.setObjet(joueur);
-            render ret as JSON
+            ret.setObjet(joueur);*/
+            def responseData = [
+                    'results': joueur,
+                    'status': statu
+            ]
+            render responseData as JSON
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
             ReturnObject ret = new ReturnObject();
