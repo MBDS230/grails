@@ -82,7 +82,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM joueur where idadmin = "+id)
+            sql.query("SELECT * FROM joueur where idjoueur = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))
