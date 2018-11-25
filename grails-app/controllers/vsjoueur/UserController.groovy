@@ -34,11 +34,12 @@ class UserController
 
     def inscription()
     {
+        mapping.Joueur joueur = new Joueur();
         try
         {
             String username = params.getProperty("username")
             String motDePasse = params.getProperty("motDePasse")
-            mapping.Joueur joueur = new UserService().inscription(username, motDePasse)
+            joueur = new UserService().inscription(username, motDePasse)
             StatusHttp statu = new StatusHttp(500, null, "/game/login");
             /*ReturnObject ret = new ReturnObject();
             ret.setStatus(statu);
