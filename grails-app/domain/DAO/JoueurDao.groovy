@@ -104,13 +104,14 @@ class JoueurDao {
     }
 
     def findByID(int id){
-        Joueur joueur = new Joueur()
+        Joueur joueur = null
         def sql = Connecting.getConnection()
 
         if(sql != null){
             sql.query("SELECT * FROM joueur where idjoueur = "+id)
                     { resultSet ->
                         while (resultSet.next()) {
+                            joueur = new Joueur()
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))
                             joueur.setLogin(resultSet.getString("login"))
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
