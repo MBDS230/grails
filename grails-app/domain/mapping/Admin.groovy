@@ -52,7 +52,7 @@ class Admin {
 
     void setLogin(String login) {
 
-        if(login.length() >= 6 && login.length() > 0){
+        if(login != null && login.length() >= 6){
             this.login = login
         }else{
             throw new Exception("the Username must contain at least 6 characters")
