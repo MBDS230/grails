@@ -112,20 +112,12 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("insert into joueur values(?,?,?,?,?)",
-                    [joueur.getIdjoueur(),joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve()])
+            sql.executeUpdate("insert into joueur values(?,?,?,?,?)", [joueur.getIdjoueur(),joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
     }
 
-    def joueurFindByStatus(int joueurConnecte, boolean  status)
-    {
-
-    }
-
-    def joueurFindByLoginAndPassword(String login, String password) {
-
-    }
+    
 }
