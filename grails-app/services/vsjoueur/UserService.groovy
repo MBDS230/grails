@@ -42,6 +42,7 @@ class UserService {
         {
             throw new Exception("Pseudo éxistant");
         }
+        return joueur;
     }
 
     def login(String username, String motDePasse) throws Exception

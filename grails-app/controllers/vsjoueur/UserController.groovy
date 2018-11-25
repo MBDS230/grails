@@ -38,12 +38,17 @@ class UserController
         {
             String username = params.getProperty("username")
             String motDePasse = params.getProperty("motDePasse")
-            new UserService().inscription(username, motDePasse)
-            StatusHttp statu = new StatusHttp(200, null, "/game/login");
-            render statu as JSON
+            mapping.Joueur joueur = new UserService().inscription(username, motDePasse)
+            StatusHttp statu = new StatusHttp(500, null, "/game/login");
+            ReturnObject ret = new ReturnObject();
+            ret.setStatus(statu);
+            ret.setObjet(joueur);
+            render ret as JSON
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            render statu as JSON
+            ReturnObject ret = new ReturnObject();
+            ret.setStatus(statu)
+            render ret as JSON
         }
         StatusHttp statu = new StatusHttp(500, null, "/game/login");
         ReturnObject ret = new ReturnObject();
@@ -75,7 +80,7 @@ class UserController
             ret.setStatus(statu)
             render ret as JSON
         }
-        StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
         ReturnObject ret = new ReturnObject();
         ret.setStatus(statu)
         render ret as JSON
@@ -106,7 +111,12 @@ class UserController
                 ReturnObject ret = new ReturnObject();
                 ret.setStatus(statu)
                 ret.setObjet(val)
-                render ret as JSON
+
+                def responseData = [
+                        'results': val,
+                        'status': statu
+                ]
+                render responseData as JSON
             }
             else
             {
