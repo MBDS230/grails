@@ -110,12 +110,12 @@ class DemandematchDao {
     }
 
 
-    def insert(Demandematch admin){
+    def insert(Demandematch demandeMatch){
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("insert into demandematch values (?,?,?,?,?,?,?)", [demandeMatch.getIddemandematch(),demandeMatch.getIddemandeur(),demandeMatch.getIdrecepteur(),demandeMatch.getDuree(),demandeMatch.getDatedemande(),demandeMatch.getDateexpiration(),demandeMatch.getAprouvee()])
+            sql.executeUpdate("insert into demandematch values (?,?,?,?,?,?,?)", [demandeMatch.getIddemandematch(),demandeMatch.getIddemandeur(),demandeMatch.getIdrecepteur(),demandeMatch.getDuree(),demandeMatch.getDatedemande(),demandeMatch.getDateexpiration(),demandeMatch.getAprouvee()])
 
         }else{
             throw new Exception("Error when trying to connect to the database")

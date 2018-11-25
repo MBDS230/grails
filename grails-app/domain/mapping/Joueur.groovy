@@ -49,11 +49,11 @@ class Joueur {
 
     void setMotdepasse(String motdepasse) {
 
-        String pattern = "^(?=.*[a-z])(?=.*[A-Z])\$"
-        if(motdepasse.matches(pattern)){
+
+        if(motdepasse.length() >= 6){
             this.motdepasse = motdepasse
         }else{
-            throw new Exception("Le mot de passe doit comporter au moins 8 caractères et doit comporter au moins une majuscule")
+            throw new Exception("Le mot de passe doit comporter comporter au moins 6 caractères")
         }
     }
 
