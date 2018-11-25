@@ -119,5 +119,5 @@ class JoueurDao {
         sql.close()
     }
 
-    
+
 }

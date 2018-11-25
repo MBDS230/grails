@@ -5,12 +5,7 @@ import mapping.Demandematch
 
 class DemandematchDao {
 
-    def demandeMatchFindByRecepteurAndAprouve(int idRecepteur, boolean aprouve)
-    {
-
-    }
-
-    def demandematchFindAll(){
+      def demandematchFindAll(){
         List<Demandematch> ldemandeMatch = new ArrayList<>()
         Demandematch demandeMatch = new Demandematch()
 

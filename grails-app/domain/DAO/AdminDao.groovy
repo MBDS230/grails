@@ -1,7 +1,6 @@
 package DAO
 
 import Connecting.Connecting
-import groovy.sql.Sql
 import mapping.Admin
 
 class AdminDao {
