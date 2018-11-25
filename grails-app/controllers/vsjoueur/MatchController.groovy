@@ -21,24 +21,33 @@ class MatchController {
                 int joueurConnecte = joueurSession.getIdjoueur();
                 new MatchService().demandeMatch(joueurConnecte, idAutreJoueur, duree);
                 StatusHttp statu = new StatusHttp(200, null, null);
-                ReturnObject ret = new ReturnObject();
-                ret.setStatus(statu)
-                render ret as JSON
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
             else
             {
                 redirect(controller: "game", action: "login")
             }
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
+            StatusHttp statu = new StatusHttp(500, null, null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
 
     }
 
@@ -53,20 +62,28 @@ class MatchController {
                 int idJoueurConnecte = joueurSession.getIdjoueur();
                 listDem = new MatchService().listeDemandeRencontre(idJoueurConnecte);
                 StatusHttp statu = new StatusHttp(200, null, null);
-                ReturnObject ret = new ReturnObject();
-                ret.setStatus(statu)
-                ret.setObjet(listDem);
-                render ret as JSON
+                def responseData = [
+                        'results': listDem,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
         }catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': listDem,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 }
