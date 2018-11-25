@@ -41,7 +41,7 @@ class MessageDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM message where WHERE envoyeur ="+envoyeur+"AND recepteur = "+recepteur+"AND affichage = TRUE ORDER by dateenvoye ASC")
+            sql.query("SELECT * FROM message where WHERE envoyeur ="+envoyeur+" AND recepteur = "+recepteur+" AND affichage = TRUE ORDER by dateenvoye ASC")
                     { resultSet ->
                         while (resultSet.next()) {
                             message.getIdmessage(resultSet.getInt("idmessage"))
