@@ -70,7 +70,7 @@ class MatchController {
         }catch (Exception exc ) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
             def responseData = [
-                    'results': listDem,
+                    'results': null,
                     'status': statu
             ]
             render responseData as JSON
