@@ -16,6 +16,16 @@ import java.sql.Date
 class MatchService
 {
 
+    def resultatMatch(int idJoueurConnecte, int idAutreJoueur)
+    {
+        List<Match> val = new ArrayList<>();
+        if(idJoueurConnecte >0 && idAutreJoueur>0)
+        {
+            val = new MatchDao().findMatchByIdDemandeurAndRecepteur(idJoueurConnecte, idAutreJoueur);
+        }
+        return val;
+    }
+
     def jouer(int idDemandeMatch)
     {
         if(idDemandeMatch >0)

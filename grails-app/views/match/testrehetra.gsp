@@ -81,10 +81,10 @@
     <br><br><br><br><br><br>
 
 
-    Joueur --------------------
-    <form action="http://localhost:8080/match/jouer" method="POST">
-        ID Demande <input type="text" name="idDemandeMatch" /><br><br>
-        <input type="submit" value="Jouer"/>
+    Resultat match --------------------
+    <form action="http://localhost:8080/match/resultatMatch" method="POST">
+        ID Autre joueur <input type="text" name="idAutreJoueur" /><br><br>
+        <input type="submit" value="Voir résultat"/>
     </form>
 
 

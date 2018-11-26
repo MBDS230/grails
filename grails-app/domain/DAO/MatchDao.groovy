@@ -5,6 +5,37 @@ import mapping.Match
 
 class MatchDao {
 
+
+    def findMatchByIdDemandeurAndRecepteur(int idDemandeur, int idRecepteur)
+    {
+        List<Match> lmatch = new ArrayList<>()
+        Match match = new Match()
+
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query("SELECT match.* FROM match JOIN demandematch ON demandematch.iddemandematch = match.iddemandematch " +
+                    "WHERE (demandematch.iddemandeur = "+idDemandeur+" AND demandematch.idrecepteur = "+idRecepteur+")  OR (demandematch.iddemandeur = "+idRecepteur+"  AND demandematch.idrecepteur = "+idDemandeur+")")
+                    { resultSet ->
+                        while (resultSet.next()) {
+                            match.setIdmatch(resultSet.getInt("idmatch"))
+                            match.setIddemandematch(resultSet.getInt('iddemandematch'))
+                            match.setDatematch(resultSet.getDate("datematch"))
+                            match.setScoredemandeur(resultSet.getInt("scoredemandeur"))
+                            match.setScorerecepteur(resultSet.getInt("scorerecepteur"))
+                            match.setDatedebut(resultSet.getDate("datedebut"))
+                            match.setDatefin(resultSet.getDate("datefin"))
+                            lmatch.add(match)
+                        }
+                    }
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return lmatch
+    }
+
+
     def findMatchByIdDemandematch(int idDemandeMatch){
 
         List<Match> lmatch = new ArrayList<>()
