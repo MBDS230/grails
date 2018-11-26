@@ -99,8 +99,8 @@
 					<div class="login-form"><!--login form-->
 						<h2>Connectez-vous à votre compte</h2>
 						<form id="formConnexion" action="/user/login" method="POST">
-							<input name="usernameConnexion" type="text" placeholder="Surnom" />
-							<input name="motDePasseConnexion" type="password" placeholder="Mot de passe" />
+							<input name="username" type="text" placeholder="Surnom" />
+							<input name="motDePasse" type="password" placeholder="Mot de passe" />
 							<div id="errorConnexion" class="red">
 
 							</div>
@@ -115,8 +115,8 @@
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
 						<form id="formInscription" action="user/inscription" enctype="multipart/form-data">
-							<input name="usernameInscription" type="text" placeholder="Surnom"/>
-							<input name="umotDePasseInscription" type="password" placeholder="Mot de passe"/>
+							<input name="username" type="text" placeholder="Surnom"/>
+							<input name="motDePasse" type="password" placeholder="Mot de passe"/>
 							<input type="file" name="file"/>
 							<button type="submit" class="btn btn-default">S'inscrire</button>
 						</form>
