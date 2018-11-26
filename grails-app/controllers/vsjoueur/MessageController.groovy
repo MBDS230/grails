@@ -1,44 +1,12 @@
 package vsjoueur
 
-import DAO.JoueurDao
 import grails.converters.JSON
 import mapping.Joueur
 import mapping.Message
-import utilitaire.ReturnObject
 import utilitaire.StatusHttp
 
-class MessageController {
-
-    def login()
-    {
-        try
-        {
-            String username = params.getProperty("username");
-            String motDePasse = params.getProperty("motDePasse");
-            Joueur valiny = new UserService().login(username, motDePasse);
-            if(valiny != null)
-            {
-                valiny.setStatus(true);
-                new JoueurDao().update(valiny);
-                session.setAttribute("SESSION_JOUEUR", valiny);
-            }
-            StatusHttp statu = new StatusHttp(200, null, "/game/accueil");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            ret.setObjet(valiny);
-            render ret as JSON
-        } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
-        }
-        StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
-    }
-
+class MessageController
+{
     def listeMessage()
     {
         try
@@ -51,26 +19,33 @@ class MessageController {
                 int joueurConnecte = joueurSession.getIdjoueur();
                 val = new MessageService().listeMessage(joueurConnecte, idAutreJoueur);
                 StatusHttp statu = new StatusHttp(200, null, null);
-                ReturnObject ret = new ReturnObject();
-                ret.setStatus(statu)
-                ret.setObjet(val)
-                render ret as JSON
+                def responseData = [
+                        'results': val,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
             else
             {
                 redirect(controller: "game", action: "login")
             }
-            return val;
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 
     def envoyerMessage()
@@ -85,9 +60,12 @@ class MessageController {
                 int idAutreJoueur = Integer.parseInt(params.getProperty("idAutreJoueur"));
                 new MessageService().envoyerMessage(message,idEnvoyeur, idAutreJoueur)
                 StatusHttp statu = new StatusHttp(200, null, null);
-                ReturnObject ret = new ReturnObject();
-                ret.setStatus(statu)
-                render ret as JSON
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
             else
             {
@@ -95,15 +73,21 @@ class MessageController {
             }
 
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 
     def vueMessage()
@@ -116,17 +100,30 @@ class MessageController {
             {
                 int idMessage = Integer.parseInt(params.getProperty("idMessage"));
                 new MessageService().vueMessage(idMessage);
+                StatusHttp statu = new StatusHttp(200, null, null);
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
 
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
-            ReturnObject ret = new ReturnObject();
-            ret.setStatus(statu)
-            render ret as JSON
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        ReturnObject ret = new ReturnObject();
-        ret.setStatus(statu)
-        render ret as JSON
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 }

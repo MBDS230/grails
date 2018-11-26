@@ -35,31 +35,32 @@ class MessageDao {
     }
 
     def findByEnvoyeurAndRecepteur(int envoyeur, int recepteur){
+        List<Message> valiny = new ArrayList<>();
         Message message = null
 
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM message where WHERE envoyeur ="+envoyeur+" AND recepteur = "+recepteur+" AND affichage = TRUE ORDER by dateenvoye ASC")
+            sql.query("SELECT * FROM message WHERE ( idenvoyeur = "+envoyeur+" AND idrecepteur = "+recepteur+" ) OR ( idrecepteur = "+envoyeur+" AND idenvoyeur = "+recepteur+" ) AND affichage = TRUE ORDER by dateenvoye ASC")
                     { resultSet ->
                         while (resultSet.next()) {
                             message = new Message()
-                            message.getIdmessage(resultSet.getInt("idmessage"))
-                            message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
-                            message.getIdrecepteur(resultSet.getInt("idrecepteur"))
-                            message.getCorps(resultSet.getString("corps"))
-                            message.getAprouve(resultSet.getString("aprouve"))
-                            message.isAffichage(resultSet.getBoolean("affichage"))
-                            message.getDateenvoye(resultSet.getDate("dateenvoye"))
-                            message.isStatus(resultSet.getBoolean("status"))
-                            lmessage.add(message)
+                            message.setIdmessage(resultSet.getInt("idmessage"))
+                            message.setIdenvoyeur(resultSet.getInt('idenvoyeur'))
+                            message.setIdrecepteur(resultSet.getInt("idrecepteur"))
+                            message.setCorps(resultSet.getString("corps"))
+                            message.setAprouve(resultSet.getInt("aprouve"))
+                            message.setAffichage(resultSet.getBoolean("affichage"))
+                            message.setDateenvoye(resultSet.getDate("dateenvoye"))
+                            message.setStatus(resultSet.getBoolean("status"))
+                            valiny.add(message)
                         }
                     }
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()
-        return message
+        return valiny;
     }
 
     def findByID(int id){
@@ -72,15 +73,14 @@ class MessageDao {
                     { resultSet ->
                         while (resultSet.next()) {
                             message = new Message()
-                            message.getIdmessage(resultSet.getInt("idmessage"))
-                            message.getIdenvoyeur(resultSet.getInt('idenvoyeur'))
-                            message.getIdrecepteur(resultSet.getInt("idrecepteur"))
-                            message.getCorps(resultSet.getString("corps"))
-                            message.getAprouve(resultSet.getString("aprouve"))
-                            message.isAffichage(resultSet.getBoolean("affichage"))
-                            message.getDateenvoye(resultSet.getDate("dateenvoye"))
-                            message.isStatus(resultSet.getBoolean("status"))
-                            lmessage.add(message)
+                            message.setIdmessage(resultSet.getInt("idmessage"))
+                            message.setIdenvoyeur(resultSet.getInt('idenvoyeur'))
+                            message.setIdrecepteur(resultSet.getInt("idrecepteur"))
+                            message.setCorps(resultSet.getString("corps"))
+                            message.setAprouve(resultSet.getInt("aprouve"))
+                            message.setAffichage(resultSet.getBoolean("affichage"))
+                            message.setDateenvoye(resultSet.getDate("dateenvoye"))
+                            message.setStatus(resultSet.getBoolean("status"))
                         }
                     }
         }else{
@@ -121,8 +121,15 @@ class MessageDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("insert into message values (?,?,?,?,?,?,?,?)",
-                    [message.getIdenvoyeur(),message.getIdrecepteur(),message.getCorps(),message.getAprouve(),message.isAffichage(),message.getDateenvoye(),message.isStatus(),message.getIdmessage()])
+            sql.executeUpdate("insert into message values (?, ?, ?, ?, ?, ?, ?, ?)",
+                    [ message.getIdmessage(),
+                     message.getIdenvoyeur(),
+                     message.getIdrecepteur(),
+                     message.getCorps(),
+                     message.getAprouve(),
+                     message.isAffichage(),
+                     message.getDateenvoye(),
+                     message.isStatus()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }

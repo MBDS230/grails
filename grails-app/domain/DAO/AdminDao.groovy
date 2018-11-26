@@ -36,16 +36,15 @@ class AdminDao {
 
         def sql = Connecting.getConnection()
         if(sql != null){
-            sql.query("SELECT * FROM admin where login = "+id+" and motdepasse = "+motdepasse)
+            sql.query("SELECT * FROM admin where login = '"+login+"' and motdepasse = '"+motdepasse+"'")
                     { resultSet ->
                         while (resultSet.next()) {
                             admin = new Admin()
-                            admin.idadmin = resultSet.getInt("idadmin")
-                            admin.idrole = resultSet.getInt('idrole')
-                            admin.surnom = resultSet.getString("surnom")
-                            admin.login = resultSet.getString("login")
-                            admin.motdepasse = resultSet.getString("motdepasse")
-
+                            admin.setIdadmin(resultSet.getInt("idadmin"));
+                            admin.setIdrole(resultSet.getInt('idrole'));
+                            admin.setSurnom(resultSet.getString("surnom"));
+                            admin.setLogin(resultSet.getString("login"));
+                            admin.setMotdepasse(resultSet.getString("motdepasse"));
                         }
                     }
         }else{

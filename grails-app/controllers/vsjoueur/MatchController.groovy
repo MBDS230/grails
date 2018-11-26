@@ -3,6 +3,7 @@ package vsjoueur
 import grails.converters.JSON
 import mapping.Demandematch
 import mapping.Joueur
+import org.springframework.web.servlet.ModelAndView
 import utilitaire.StatusHttp
 
 class MatchController {
@@ -83,5 +84,11 @@ class MatchController {
         ]
         render responseData as JSON
         return;
+    }
+
+    def renderTest()
+    {
+        //redirect(controller: "match", action: "testrehetra")
+        return new ModelAndView("/match/testrehetra");
     }
 }

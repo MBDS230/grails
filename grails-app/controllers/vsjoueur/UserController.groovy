@@ -12,7 +12,7 @@ class UserController
     {
         session.removeAttribute("SESSION_JOUEUR");
         session.invalidate();
-        Joueur j = new Joueur(1, "", "", false, 1, 1);
+        Joueur j = new Joueur(1, "", "ergergergere", false, 1);
         render j as JSON
     }
 
@@ -21,7 +21,7 @@ class UserController
         Joueur val = (Joueur) session.getAttribute("SESSION_JOUEUR");
         if(val == null)
         {
-            val = new Joueur(1, "TSIS ANATY SESSION", "", false, 1, 1);
+            val = new Joueur(1, "TSIS ANATY SESSION", "ergergergerer", false, 1);
         }
         render val as JSON;
     }
@@ -153,4 +153,7 @@ class UserController
         render responseData as JSON
         return;
     }
+
+
+
 }
