@@ -54,6 +54,7 @@ $(function() {
                 console.log(response);
                 if(response.status === 200)
                 {
+                    // Asia messsage hoe success inscription
                     window.location.href = "/game/index";
                 }
                 else if(response.status === 500)
