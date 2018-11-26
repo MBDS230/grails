@@ -158,4 +158,8 @@ class AdminController
     def login(){
         return new ModelAndView("/admin/login")
     }
+    def insert(){
+        return new ModelAndView("/admin/insert")
+    }
+
 }
