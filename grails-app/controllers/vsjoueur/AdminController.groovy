@@ -1,10 +1,9 @@
-package vsAdmin
+package vsjoueur
 
 import grails.converters.JSON
 import mapping.Admin
 import org.springframework.web.servlet.ModelAndView
 import utilitaire.StatusHttp
-import vsjoueur.AdminService
 
 class AdminController
 {
@@ -76,30 +75,81 @@ class AdminController
 
     def approuve()
     {
-        Admin adminSession = null; // Admin SESSION
-        if(adminSession!=null)
+        try
         {
-            int idAdmin = Integer.parseInt(params.getProperty("idAdmin"));
-            new AdminService().approuve(idAdmin);
+            Admin adminSession = (Admin) session.getAttribute("SESSION_ADMIN");
+            if(adminSession!=null)
+            {
+                int idJoueur = Integer.parseInt(params.getProperty("idJoueur"));
+                new AdminService().approuve(idJoueur);
+                StatusHttp statu = new StatusHttp(200, null, null);
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+            else
+            {
+                redirect(controller: "admin", action: "login")
+            }
+        } catch (Exception exc ) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        else
-        {
-            redirect(controller: "admin", action: "login")
-        }
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 
     def rejete()
     {
-        Admin adminSession = (Admin) session.getAttribute("SESSION_ADMIN");
-        if(adminSession!=null)
+        try
         {
-            int idAdmin = Integer.parseInt(params.getProperty("idAdmin"));
-            new AdminService().rejete(idAdmin);
+            Admin adminSession = (Admin) session.getAttribute("SESSION_ADMIN");
+            if(adminSession!=null)
+            {
+                int idJoueur = Integer.parseInt(params.getProperty("idJoueur"));
+                new AdminService().rejete(idJoueur);
+                StatusHttp statu = new StatusHttp(200, null, null);
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+            else
+            {
+                redirect(controller: "admin", action: "login")
+            }
+
+        } catch (Exception exc ) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         }
-        else
-        {
-            redirect(controller: "admin", action: "login")
-        }
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
     }
 
     def dashboard(){

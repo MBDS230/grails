@@ -64,13 +64,13 @@ class Admin {
         return motdepasse
     }
 
-    void setMotdepasse(String motdepasse) {
-
-        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$"
-        if(motdepasse.matches(pattern)){
+    void setMotdepasse(String motdepasse)
+    {
+        if(motdepasse != null && motdepasse.length() >= 6)
+        {
             this.motdepasse = motdepasse
         }else{
-            throw new Exception("Le mot de passe doit comporter au moins 8 caractères et doit comporter au moins une majuscule et un caractère numérique ou de ponctuation. ")
+            throw new Exception("Le mot de passe doit comporter au moins 6 caractères")
         }
     }
 }

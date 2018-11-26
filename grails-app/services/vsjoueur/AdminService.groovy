@@ -35,10 +35,6 @@ class AdminService {
         verif.setLogin(username);
         verif.setMotdepasse(motDePasse);
         Admin valiny = jDao.findByLoginAndPassword(username, motDePasseHash);
-        if(valiny!=null)
-        {
-            throw new Exception("Admin Bloqué");
-        }
         return valiny;
     }
 

@@ -46,6 +46,28 @@
         <input type="submit" value="Liste"/>
     </form>
 
+    <br><br><br><br><br><br>
+
+    Logout Admin --------------------
+    <form action="http://localhost:8080/admin/logout" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+    <br><br><br><br><br><br>
+
+    Approve  Joueur --------------------
+    <form action="http://localhost:8080/admin/approuve" method="POST">
+        ID JOUEUR <input type="text" name="idJoueur" /><br><br>
+        <input type="submit" value="Approuve"/>
+    </form>
+    <br><br><br><br><br><br>
+
+
+
+    Rejeté  Joueur --------------------
+    <form action="http://localhost:8080/admin/rejete" method="POST">
+        ID JOUEUR <input type="text" name="idJoueur" /><br><br>
+        <input type="submit" value="Rejete"/>
+    </form>
 </section><!--/form-->
 
 
