@@ -5,6 +5,34 @@ import mapping.Match
 
 class MatchDao {
 
+    def findMatchByIdDemandematch(int idDemandeMatch){
+
+        List<Match> lmatch = new ArrayList<>()
+        Match match = new Match()
+
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query("SELECT * FROM match where 1 > 0 AND iddemandematch = "+idDemandeMatch)
+                    { resultSet ->
+                        while (resultSet.next()) {
+                            match.setIdmatch(resultSet.getInt("idmatch"))
+                            match.setIddemandematch(resultSet.getInt('iddemandematch'))
+                            match.setDatematch(resultSet.getDate("datematch"))
+                            match.setScoredemandeur(resultSet.getInt("scoredemandeur"))
+                            match.setScorerecepteur(resultSet.getInt("scorerecepteur"))
+                            match.setDatedebut(resultSet.getDate("datedebut"))
+                            match.setDatefin(resultSet.getDate("datefin"))
+                            lmatch.add(match)
+                        }
+                    }
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return lmatch
+    }
+
     def findAll(){
 
         List<Match> lmatch = new ArrayList<>()
@@ -93,7 +121,13 @@ class MatchDao {
 
         if(sql != null){
             sql.executeUpdate("insert into match values (?,?,?,?,?,?,?)",
-                    [match.getIdmatch(),match.getIddemandematch(),match.getDatematch(),match.getScoredemandeur(),match.getScorerecepteur(),match.getDatedebut(),match.getDatefin()])
+                    [match.getIdmatch(),
+                     match.getIddemandematch(),
+                     match.getDatematch(),
+                     match.getScoredemandeur(),
+                     match.getScorerecepteur(),
+                     match.getDatedebut(),
+                     match.getDatefin()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }

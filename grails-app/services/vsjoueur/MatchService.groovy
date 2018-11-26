@@ -3,15 +3,55 @@ package vsjoueur
 import Connecting.Connecting
 import DAO.DemandematchDao
 import DAO.JoueurDao
+import DAO.MatchDao
 import grails.gorm.transactions.Transactional
 import mapping.Demandematch
 import mapping.Joueur
+import mapping.Match
 
 import java.sql.Date
 
 
 @Transactional
-class MatchService {
+class MatchService
+{
+
+    def jouer(int idDemandeMatch)
+    {
+        if(idDemandeMatch >0)
+        {
+            Demandematch demande = new DemandematchDao().findByID(idDemandeMatch);
+            if(demande!=null && demande.getAprouvee()==1)
+            {
+                List<Match> findMatch = new MatchDao().findMatchByIdDemandematch(idDemandeMatch);
+                if(findMatch==null || findMatch.size()==0)
+                {
+                    int idMatch = Connecting.getMaxId("match");
+                    idMatch++;
+                    java.sql.Date jourCourant = new java.sql.Date(System.currentTimeMillis());
+
+                    Match mInsert = new Match(idMatch, idDemandeMatch, jourCourant, 1, 0, jourCourant, jourCourant);
+                    new MatchDao().insert(mInsert);
+                }
+                else
+                {
+                    throw new Exception("Match déja términé");
+                }
+            }
+            else if(demande==null)
+            {
+                throw new Exception("Vous devez faire une demande de match");
+            }
+            else if(demande!=null && demande.getAprouvee()==0)
+            {
+                throw new Exception("Demande de match déja rejété");
+            }
+            else if(demande!=null && demande.getAprouvee()==2)
+            {
+                throw new Exception("Demande de match pas encore aprouvé pas l'autre joueur");
+            }
+        }
+    }
 
     def demandeMatch(int joueurConnecte, int idAutreJoueur, int duree)
     {

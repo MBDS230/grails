@@ -68,6 +68,26 @@
         ID JOUEUR <input type="text" name="idJoueur" /><br><br>
         <input type="submit" value="Rejete"/>
     </form>
+
+    <br><br><br><br><br><br>
+
+
+     Joueur --------------------
+    <form action="http://localhost:8080/match/jouer" method="POST">
+        ID Demande <input type="text" name="idDemandeMatch" /><br><br>
+        <input type="submit" value="Jouer"/>
+    </form>
+
+    <br><br><br><br><br><br>
+
+
+    Joueur --------------------
+    <form action="http://localhost:8080/match/jouer" method="POST">
+        ID Demande <input type="text" name="idDemandeMatch" /><br><br>
+        <input type="submit" value="Jouer"/>
+    </form>
+
+
 </section><!--/form-->
 
 

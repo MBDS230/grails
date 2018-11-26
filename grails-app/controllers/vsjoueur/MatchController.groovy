@@ -8,6 +8,47 @@ import utilitaire.StatusHttp
 
 class MatchController {
 
+    def jouer()
+    {
+        try
+        {
+            ArrayList<Joueur> val = null;
+            Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
+            if (joueurSession != null)
+            {
+                int idDemandeMatch = Integer.parseInt(params.getProperty("idDemandeMatch"));
+                new MatchService().jouer(idDemandeMatch);
+                StatusHttp statu = new StatusHttp(200, null, "/game/login");
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+            else
+            {
+                redirect(controller: "game", action: "login")
+            }
+
+        } catch (Exception exc) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
+        }
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
+    }
+
     def demandeMatch()
     {
         try
