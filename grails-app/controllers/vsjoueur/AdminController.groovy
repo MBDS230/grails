@@ -84,7 +84,7 @@ class AdminController
         }
         else
         {
-            redirect(admin: "admin", action: "login")
+            redirect(controller: "admin", action: "login")
         }
     }
 
@@ -98,7 +98,7 @@ class AdminController
         }
         else
         {
-            redirect(admin: "admin", action: "login")
+            redirect(controller: "admin", action: "login")
         }
     }
 

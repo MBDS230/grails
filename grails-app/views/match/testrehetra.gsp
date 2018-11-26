@@ -40,7 +40,7 @@
     <br><br><br><br><br><br>
 
     Login Admin --------------------
-    <form action="/admin/authentification" method="POST">
+    <form action="http://localhost:8080/admin/authentification" method="POST">
         username <input type="text" name="username" /><br><br>
         Mot de passe <input type="text" name="motDePasse" /><br><br>
         <input type="submit" value="Liste"/>
