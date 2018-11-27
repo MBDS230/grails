@@ -19,7 +19,7 @@
 	<asset:javascript src="admin/html5shiv.js"/>
 	<asset:javascript src="admin/respond.min.js"/>
 	<![endif]-->
-	<asset:link rel="shortcut icon" href="front/ico/favicon.ico" />
+	<asset:link rel="shortcut icon" href="/front/icone.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -34,7 +34,7 @@
 				<div class="col-sm-4">
 					<div class="logo pull-left">
 						<a href="index.html">
-							<asset:image class="logo" src="front/home/logo.png" alt="Logo"/>
+							<asset:image class="logo" src="front/logo.png" alt="Logo"/>
 						</a>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
 							<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-							<li><a href="login.html" class="active"><i class="fa fa-lock"></i> Login</a></li>
+							<li><a href="/user/logout"><i class="fa fa-unlock"></i> Logout</a></li>
 						</ul>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 					</div>
 					<div class="mainmenu pull-left">
 						<ul class="nav navbar-nav collapse navbar-collapse">
-							<li><a href="index.html">Home</a></li>
+							<li><a class="active" href="index.html">Home</a></li>
 						</ul>
 					</div>
 				</div>
@@ -75,6 +75,11 @@
 
 <section>
 	<div class="container">
+		<g:if test="${inscrit==true}">
+			<div class="row">
+				<p class="text-primary">Vous êtes inscrit avec succès ! Vous pouvez jouer tout de suite.</p>
+			</div>
+		</g:if>
 		<div class="row">
 			<div class="col-sm-9">
 				<div id="frame" class="frameChat" >
@@ -286,6 +291,102 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-sm-3">
+				<section id="cart_items">
+					<div class="table-responsive cart_info">
+						<table class="table table-condensed">
+							<thead>
+							<tr class="cart_menu">
+								<td class="image">Item</td>
+								<td class="description"></td>
+								<td class="price">Price</td>
+								<td class="quantity">Quantity</td>
+								<td class="total">Total</td>
+								<td></td>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td class="cart_product">
+									<a href=""><img src="images/cart/one.png" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">Colorblock Scuba</a></h4>
+									<p>Web ID: 1089772</p>
+								</td>
+								<td class="cart_price">
+									<p>$59</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" href=""> + </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+										<a class="cart_quantity_down" href=""> - </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">$59</p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="cart_product">
+									<a href=""><img src="images/cart/two.png" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">Colorblock Scuba</a></h4>
+									<p>Web ID: 1089772</p>
+								</td>
+								<td class="cart_price">
+									<p>$59</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" href=""> + </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+										<a class="cart_quantity_down" href=""> - </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">$59</p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+							<tr>
+								<td class="cart_product">
+									<a href=""><img src="images/cart/three.png" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">Colorblock Scuba</a></h4>
+									<p>Web ID: 1089772</p>
+								</td>
+								<td class="cart_price">
+									<p>$59</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" href=""> + </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+										<a class="cart_quantity_down" href=""> - </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">$59</p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
 			</div>
 		</div>
 	</div>

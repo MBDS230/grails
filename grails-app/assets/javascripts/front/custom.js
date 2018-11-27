@@ -15,7 +15,7 @@ $(function() {
             return;
         }
         $.ajax({
-            url: "/user/login",
+            url: formAction,
             type: 'POST',
             data: {
                 username : username,
@@ -42,32 +42,46 @@ $(function() {
         });
     });
 
-    $("#buttonInscription").click(function(){
-        var username = $('input[name="usernameInscription"]').val();
-        var password = $('input[name="motDePasseInscription"]').val();
-        var formData = new FormData($("#formInscription"));
-        console.log(formData);
-        //fd.append("CustomField", "This is some extra data");
+
+    $('#formInscription').submit(function(e) {
+        e.preventDefault();
+
+        var username = $('input[name="username"]').val();
+        var motDePasse = $('input[name="motDePasse"]').val();
+        var formAction = $(this).attr("action");
+
+        var file = $('#file').val();
+        var jForm = new FormData();
+       //jForm.append("file", $('#file').get(0).files[0],file);
+        jForm.append("username", username);
+        jForm.append("motDePasse",motDePasse);
         $.ajax({
-            url: '/user/inscription',
-            type: 'POST',
-            data: formData,
-            success:function(response){
+            url: formAction,
+            type: "POST",
+            data: jForm,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                alert("200");
                 console.log(response);
-                if(response.status === 200)
+                if(response.status.status === 200)
                 {
-                    // Asia messsage hoe success inscription
-                    window.location.href = "/game/index";
+                    alert("mistofoka 200");
+                    window.location.href = response.status.redirectUrl;
                 }
-                else if(response.status === 500)
+                else if(response.status.status === 500)
                 {
+                    alert("mitsofoka 500");
                     $("#errorConnexion").empty();
-                    $("#errorConnexion").append(response.messageErreur);
+                    $("#errorConnexion").append(response.status.messageErreur);
                 }
             },
-            cache: false,
-            contentType: false,
-            processData: false
+            error:function(error){
+                console.log(error);
+                alert("error");
+            }
         });
     });
 

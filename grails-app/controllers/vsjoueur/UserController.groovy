@@ -39,7 +39,14 @@ class UserController
             String username = params.getProperty("username")
             String motDePasse = params.getProperty("motDePasse")
             joueur = new UserService().inscription(username, motDePasse)
-            StatusHttp statu = new StatusHttp(500, null, "/game/login");
+            StatusHttp statu = new StatusHttp(200, null, "/game/index?inscription=success");
+            joueur = new UserService().login(username, motDePasse);
+            if(joueur != null)
+            {
+                joueur.setStatus(true);
+                new JoueurDao().update(joueur);
+                session.setAttribute("SESSION_JOUEUR", joueur);
+            }
             def responseData = [
                     'results': joueur,
                     'status': statu
@@ -77,8 +84,15 @@ class UserController
                 valiny.setStatus(true);
                 new JoueurDao().update(valiny);
                 session.setAttribute("SESSION_JOUEUR", valiny);
+                StatusHttp statu = new StatusHttp(200, null, "/game/index");
+                def responseData = [
+                        'results': valiny,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
-            StatusHttp statu = new StatusHttp(200, null, "/game/accueil");
+            StatusHttp statu = new StatusHttp(500, "L'utilisateur n'existe pas", "/game/login");
             def responseData = [
                     'results': valiny,
                     'status': statu
