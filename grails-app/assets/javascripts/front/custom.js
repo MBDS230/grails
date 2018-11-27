@@ -23,14 +23,16 @@ $(function() {
             },
             success:function(response){
                 console.log(response);
-                if(response.status === 200)
+                if(response.status.status === 200)
                 {
+                    alert("mistofoka 200");
                     window.location.href = "/game/index";
                 }
-                else if(response.status === 500)
+                else if(response.status.status === 500)
                 {
+                    alert("mitsofoka 500");
                     $("#errorConnexion").empty();
-                    $("#errorConnexion").append(response.messageErreur);
+                    $("#errorConnexion").append(response.status.messageErreur);
                 }
             },
             error:function(xhr, textStatus, errorThrown ){

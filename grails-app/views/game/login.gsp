@@ -99,8 +99,8 @@
 					<div class="login-form"><!--login form-->
 						<h2>Connectez-vous à votre compte</h2>
 						<form id="formConnexion" action="/user/login" method="POST">
-							<input name="username" type="text" placeholder="Surnom" />
-							<input name="motDePasse" type="password" placeholder="Mot de passe" />
+							<input name="usernameConnexion" type="text" placeholder="Surnom" />
+							<input name="motDePasseConnexion" type="password" placeholder="Mot de passe" />
 							<div id="errorConnexion" class="red">
 
 							</div>
