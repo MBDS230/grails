@@ -2,7 +2,6 @@ package vsjoueur
 
 import grails.converters.JSON
 import mapping.Joueur
-import mapping.Message
 import utilitaire.StatusHttp
 
 class MessageController
@@ -11,16 +10,16 @@ class MessageController
     {
         try
         {
-            ArrayList<Message> val = new ArrayList<>();
+            String htmlVal = "";
             Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
             if(joueurSession != null)
             {
                 int idAutreJoueur = Integer.parseInt(params.getProperty("idAutreJoueur"));
                 int joueurConnecte = joueurSession.getIdjoueur();
-                val = new MessageService().listeMessage(joueurConnecte, idAutreJoueur);
+                htmlVal = new MessageService().listeMessageToHtml(joueurConnecte, idAutreJoueur);
                 StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
-                        'results': val,
+                        'results': htmlVal,
                         'status': statu
                 ]
                 render responseData as JSON

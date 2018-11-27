@@ -119,14 +119,14 @@ class UserController
     {
         try
         {
-            ArrayList<Joueur> val = null;
+            String htmlVal = null;
             Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
             if(joueurSession != null)
             {
-                val = new UserService().listeJoueurConnecte(joueurSession.getIdjoueur());
+                htmlVal = new UserService().listeJoueurConnecteToHtml(joueurSession.getIdjoueur());
                 StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
-                        'results': val,
+                        'results': htmlVal,
                         'status': statu
                 ]
                 render responseData as JSON
