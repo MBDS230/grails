@@ -92,7 +92,7 @@ class MatchService
         ArrayList <Demandematch> listDem = new ArrayList<>();
         if(idJoueurConnecte>0)
         {
-            listDem = new DemandematchDao().findByRecepteurAndAprouve(idJoueurConnecte, false);
+            listDem = new DemandematchDao().findByRecepteurAndAprouve(idJoueurConnecte, 2);
         }
         return listDem;
     }

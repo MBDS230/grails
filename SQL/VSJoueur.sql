@@ -69,6 +69,7 @@ create table JOUEUR (
    MOTDEPASSE           VARCHAR(100)         not null,
    STATUS               BOOL                 not null,
    APROUVE              INT4                 not null,
+   PHOTO           		VARCHAR(200)         not null,
    constraint PK_JOUEUR primary key (IDJOUEUR)
 );
 
