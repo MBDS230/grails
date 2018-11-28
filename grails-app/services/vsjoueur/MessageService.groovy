@@ -27,13 +27,14 @@ class MessageService {
         if(joueurConnecte>0 && idAutreJoueur>0)
         {
             Joueur autreJ = new JoueurDao().findByID(idAutreJoueur);
+            Joueur jSession = new JoueurDao().findByID(joueurConnecte);
 
             MessageDao mDao = new MessageDao();
             ArrayList<Message> val = mDao.findByEnvoyeurAndRecepteur(joueurConnecte, idAutreJoueur);
 
             htmlVal += "<div class='content contentMessage show'>";
             htmlVal +=  "<div class='contact-profile'>";
-            htmlVal += "<img src='http://emilcarlsson.se/assets/harveyspecter.png' alt=''>";
+            htmlVal += "<img src='"+autreJ.getPhoto()+"' alt=''>";
             htmlVal += "<p>"+autreJ.getLogin()+"</p>";
             htmlVal += "<div class='social-media'>";
             htmlVal += "<i class='fa fa-facebook' aria-hidden='true'></i>";
@@ -50,14 +51,14 @@ class MessageService {
                 if(val.get(i).getIdenvoyeur()==joueurConnecte)
                 {
                     htmlVal += "<li class='sent'>";
-                    htmlVal += "<img src='http://emilcarlsson.se/assets/mikeross.png' alt=''>";
+                    htmlVal += "<img src='"+jSession.getPhoto()+"' alt=''>";
                     htmlVal += "<p>"+val.get(i).getCorps()+"</p>";
                     htmlVal += "</li>";
                 }
                 else
                 {
                     htmlVal += "<li class='replies'>";
-                    htmlVal += "<img src='http://emilcarlsson.se/assets/mikeross.png' alt=''>";
+                    htmlVal += "<img src='"+autreJ.getPhoto()+"' alt=''>";
                     htmlVal += "<p>"+val.get(i).getCorps()+"</p>";
                     htmlVal += "</li>";
                 }

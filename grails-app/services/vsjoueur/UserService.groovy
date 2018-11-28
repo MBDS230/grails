@@ -92,7 +92,7 @@ class UserService {
             htmlVal += "<li class='contact'>";
             htmlVal += "<div class='wrap'>";
             htmlVal += "<span class='contact-status online'></span>";
-            htmlVal += "<img src='http://emilcarlsson.se/assets/louislitt.png' alt='' />";
+            htmlVal += "<img src='"+val.get(i).getPhoto()+"' alt='' />";
             htmlVal += "<div class='meta'>";
             htmlVal += "<p class='name'>"+val.get(i).getLogin()+"</p>";
             htmlVal += "<button class='btn btn-success boutonJouer' data-id='"+val.get(i).getIdjoueur()+"'>Jouer</button>";
