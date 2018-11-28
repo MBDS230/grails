@@ -70,12 +70,13 @@ class UserController
             }
             else
             {
-                joueur = new UserService().inscription(username, motDePasse, CHEMIN_PDP+username+getPasswordHash(motDePasse)+".PNG");
+                long currentMillis = System.currentTimeMillis();
+                joueur = new UserService().inscription(username, motDePasse, CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG");
                 statu = new StatusHttp(200, null, "/game/index?inscription=success");
                 joueur = new UserService().login(username, motDePasse);
                 if(joueur != null)
                 {
-                    file.transferTo(new File(CHEMIN_PDP+joueur.getLogin()+joueur.getMotdepasse()+".PNG"))
+                    file.transferTo(new File(CHEMIN_PDP+joueur.getLogin()+Long.toString(currentMillis)+".PNG"))
                     joueur.setStatus(true);
                     new JoueurDao().update(joueur);
                     session.setAttribute("SESSION_JOUEUR", joueur);

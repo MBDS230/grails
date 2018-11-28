@@ -46,6 +46,27 @@ class UserService {
         return joueur;
     }
 
+    def modifierJoueur(int idJoueur, String username, String photo)
+    {
+        Joueur joueur = new JoueurDao().findByID(idJoueur);
+        if(joueur!=null)
+        {
+            ArrayList<Joueur> arrJoueur = new JoueurDao().findByUsername(username);
+            if(arrJoueur == null || arrJoueur.size() == 0)
+            {
+                joueur.setPhoto(photo);
+                joueur.setLogin(username);
+                JoueurDao jDao = new JoueurDao();
+                jDao.update(joueur);
+            }
+            else
+            {
+                throw new Exception("Pseudo éxistant");
+            }
+        }
+        return joueur;
+    }
+
     def login(String username, String motDePasse) throws Exception
     {
         String motDePasseHash = getPasswordHash(motDePasse);
