@@ -26,7 +26,7 @@ $(function() {
                 if(response.status.status === 200)
                 {
                     alert("mistofoka 200");
-                    window.location.href = "/game/index";
+                    window.location.href = response.status.redirectUrl;
                 }
                 else if(response.status.status === 500)
                 {

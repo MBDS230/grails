@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <asset:stylesheet src="admin/cs-skin-elastic.css"/>
     <asset:stylesheet src="admin/style.css"/>
+    <asset:stylesheet src="admin/custom.css"/>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -38,14 +39,17 @@
                 </a>
             </div>
             <div class="login-form">
-                <form action="/admin/login" method="POST">
+                <form id="formConnexion" action="/admin/authentification" method="POST">
                     <div class="form-group">
                         <label>Login</label>
-                        <input name="username" type="email" class="form-control" placeholder="Email">
+                        <input name="username" type="text" class="form-control" placeholder="Login">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input name="motDePasse" type="password" class="form-control" placeholder="Password">
+                        <input name="motDePasse" type="password" class="form-control" placeholder="Mot De Passe">
+                    </div>
+                    <div id="errorFormLogin" class="text-danger">
+
                     </div>
                     <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
                 </form>
@@ -54,11 +58,12 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<asset:javascript src="jquery.js"/>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <asset:javascript src="admin/main.js"/>
+<asset:javascript src="admin/custom.js"/>
 
 </body>
 </html>

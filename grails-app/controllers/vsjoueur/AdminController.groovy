@@ -56,7 +56,7 @@ class AdminController
             if(valiny != null)
             {
                 session.setAttribute("SESSION_ADMIN", valiny);
-                StatusHttp statu = new StatusHttp(200, null, "/game/dashboard");
+                StatusHttp statu = new StatusHttp(200, null, "/admin/dashboard");
                 def responseData = [
                         'results': valiny,
                         'status': statu
@@ -64,12 +64,15 @@ class AdminController
                 render responseData as JSON
                 return;
             }
-            else
-            {
-                redirect(admin: "admin", action: "login")
-            }
+            StatusHttp statu = new StatusHttp(500, "Utilisateur inexistant", "/admin/login");
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/admin/login");
             def responseData = [
                     'results': null,
                     'status': statu
@@ -77,13 +80,6 @@ class AdminController
             render responseData as JSON
             return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
-        def responseData = [
-                'results': null,
-                'status': statu
-        ]
-        render responseData as JSON
-        return;
     }
 
     def logout()
@@ -120,7 +116,7 @@ class AdminController
                 redirect(controller: "admin", action: "login")
             }
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/admin/login");
             def responseData = [
                     'results': null,
                     'status': statu
@@ -128,7 +124,7 @@ class AdminController
             render responseData as JSON
             return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        StatusHttp statu = new StatusHttp(500, null, "/admin/login");
         def responseData = [
                 'results': null,
                 'status': statu
@@ -160,7 +156,7 @@ class AdminController
             }
 
         } catch (Exception exc ) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/admin/login");
             def responseData = [
                     'results': null,
                     'status': statu
@@ -168,7 +164,7 @@ class AdminController
             render responseData as JSON
             return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        StatusHttp statu = new StatusHttp(500, null, "/admin/login");
         def responseData = [
                 'results': null,
                 'status': statu
@@ -210,7 +206,7 @@ class AdminController
                 return;
             }
         } catch (Exception exc) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/admin/login");
             def responseData = [
                     'results': joueur,
                     'status': statu
@@ -218,7 +214,7 @@ class AdminController
             render responseData as JSON
             return;
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        StatusHttp statu = new StatusHttp(500, null, "/admin/login");
         def responseData = [
                 'results': joueur,
                 'status': statu
@@ -357,9 +353,17 @@ class AdminController
     }
 
     def dashboard(){
+        if(session.getAttribute("SESSION_ADMIN") == null)
+        {
+            redirect(controller: "admin",action: "login");
+        }
         return new ModelAndView("/admin/dashboard")
     }
     def login(){
+        if(session.getAttribute("SESSION_ADMIN") != null)
+        {
+            redirect(controller: "admin",action: "dashboard");
+        }
         return new ModelAndView("/admin/login")
     }
     def insert(){
