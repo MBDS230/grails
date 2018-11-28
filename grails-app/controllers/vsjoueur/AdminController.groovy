@@ -35,14 +35,18 @@ class AdminController
             if(valiny != null)
             {
                 session.setAttribute("SESSION_ADMIN", valiny);
+                StatusHttp statu = new StatusHttp(200, null, "/game/dashboard");
+                def responseData = [
+                        'results': valiny,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
-            StatusHttp statu = new StatusHttp(200, null, "/game/accueil");
-            def responseData = [
-                    'results': valiny,
-                    'status': statu
-            ]
-            render responseData as JSON
-            return;
+            else
+            {
+                redirect(admin: "admin", action: "login")
+            }
         } catch (Exception exc ) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
             def responseData = [
