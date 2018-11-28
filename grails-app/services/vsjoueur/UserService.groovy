@@ -25,12 +25,13 @@ class UserService {
         return signature;
     }
 
-    def inscription(String username, String motDePasse) throws Exception
+    def inscription(String username, String motDePasse, String photo) throws Exception
     {
         Joueur joueur = new Joueur(0, username, motDePasse, false, 1);
         ArrayList<Joueur> arrJoueur = new JoueurDao().findByUsername(username);
         if(arrJoueur == null || arrJoueur.size() == 0)
         {
+            joueur.setPhoto(photo);
             int idMaxJoueur = Connecting.getMaxId("joueur");
             idMaxJoueur++;
             JoueurDao jDao = new JoueurDao();

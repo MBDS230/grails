@@ -7,6 +7,7 @@ class Joueur {
     private String motdepasse
     private boolean status
     private int aprouve
+    private String photo
 
     static constraints = {
     }
@@ -71,5 +72,13 @@ class Joueur {
 
     void setAprouve(int aprouve) {
         this.aprouve = aprouve;
+    }
+
+    String getPhoto() {
+        return photo
+    }
+
+    void setPhoto(String photo) {
+        this.photo = photo
     }
 }

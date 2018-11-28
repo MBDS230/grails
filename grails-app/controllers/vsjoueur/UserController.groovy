@@ -5,9 +5,28 @@ import grails.converters.JSON
 import mapping.Joueur
 import utilitaire.StatusHttp
 
+import java.security.MessageDigest
+
 
 class UserController
 {
+    private static String CHEMIN_PDP = "C:\\Users\\hjhonata\\Documents\\Kevine\\MBDS\\Greg\\";
+
+    def getPasswordHash(String data) throws  Exception
+    {
+        String signature = "";
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(data.getBytes("UTF-8"));
+        byte[] bytes = md.digest(data.getBytes("UTF-8"));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++)
+        {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        signature = sb.toString();
+        return signature;
+    }
+
     def testLogoutJoueur()
     {
         session.removeAttribute("SESSION_JOUEUR");
@@ -38,21 +57,36 @@ class UserController
         {
             String username = params.getProperty("username")
             String motDePasse = params.getProperty("motDePasse")
-            joueur = new UserService().inscription(username, motDePasse)
-            StatusHttp statu = new StatusHttp(200, null, "/game/index?inscription=success");
-            joueur = new UserService().login(username, motDePasse);
-            if(joueur != null)
+            StatusHttp statu = new StatusHttp(500, "Vous devez importer un fichier pour votre Profil", "/game/login");
+            def file = request.getFile('uploadPhoto');
+            if(file.empty)
             {
-                joueur.setStatus(true);
-                new JoueurDao().update(joueur);
-                session.setAttribute("SESSION_JOUEUR", joueur);
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
             }
-            def responseData = [
-                    'results': joueur,
-                    'status': statu
-            ]
-            render responseData as JSON
-            return;
+            else
+            {
+                joueur = new UserService().inscription(username, motDePasse, CHEMIN_PDP+username+getPasswordHash(motDePasse)+".PNG");
+                statu = new StatusHttp(200, null, "/game/index?inscription=success");
+                joueur = new UserService().login(username, motDePasse);
+                if(joueur != null)
+                {
+                    file.transferTo(new File(CHEMIN_PDP+joueur.getLogin()+joueur.getMotdepasse()+".PNG"))
+                    joueur.setStatus(true);
+                    new JoueurDao().update(joueur);
+                    session.setAttribute("SESSION_JOUEUR", joueur);
+                }
+                def responseData = [
+                        'results': joueur,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
             def responseData = [

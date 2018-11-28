@@ -23,6 +23,7 @@ class JoueurDao {
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
+                            joueur.setPhoto(resultSet.getString("photo"))
                             ljoueur.add(joueur)
                         }
                     }
@@ -47,6 +48,7 @@ class JoueurDao {
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
+                            joueur.setPhoto(resultSet.getString("photo"))
                             ljoueur.add(joueur)
                         }
                     }
@@ -72,6 +74,7 @@ class JoueurDao {
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
+                            joueur.setPhoto(resultSet.getString("photo"))
                         }
                     }
         }else{
@@ -95,6 +98,7 @@ class JoueurDao {
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
+                            joueur.setPhoto(resultSet.getString("photo"))
                             ljoueur.add(joueur);
                         }
                     }
@@ -119,6 +123,7 @@ class JoueurDao {
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))
                             joueur.setStatus(resultSet.getBoolean('status'))
                             joueur.setAprouve(resultSet.getInt("aprouve"))
+                            joueur.setPhoto(resultSet.getString("photo"))
                         }
                     }
         }else{
@@ -133,8 +138,8 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("update joueur set login = ?, motdepasse = ?, status = ?, aprouve = ? where idjoueur = ?",
-                    [joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve(),joueur.getIdjoueur()])
+            sql.executeUpdate("update joueur set login = ?, motdepasse = ?, status = ?, aprouve = ?, photo = ? where idjoueur = ?",
+                    [joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve(),joueur.getPhoto(), joueur.getIdjoueur()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
@@ -159,7 +164,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("insert into joueur values(?,?,?,?,?)", [joueur.getIdjoueur(),joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve()])
+            sql.executeUpdate("insert into joueur values(?,?,?,?,?,?)", [joueur.getIdjoueur(),joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve(),joueur.getPhoto()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
