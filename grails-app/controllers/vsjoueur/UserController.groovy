@@ -50,6 +50,64 @@ class UserController
         session.setAttribute("SESSION_JOUEUR", joueur);
     }
 
+    def modifJoueur()
+    {
+        mapping.Joueur joueur = new Joueur();
+        try
+        {
+            String username = params.getProperty("username")
+            String motDePasseAncien = params.getProperty("motDePasseAncien")
+            String motDePasseNouveau = params.getProperty("motDePasseNouveau")
+            String motDePasseConfirmation = params.getProperty("motDePasseConfirmation")
+            StatusHttp statu = new StatusHttp(500, "Vous devez importer un fichier pour votre Profil", "/game/login");
+            def file = request.getFile('uploadPhoto');
+            if(file.empty)
+            {
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+            else
+            {
+                long currentMillis = System.currentTimeMillis();
+                joueur = new UserService().modifJoueur(username, motDePasseAncien,motDePasseNouveau ,motDePasseConfirmation,CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG");
+                if(joueur != null)
+                {
+                    File f = new File(new File(CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG"));
+                    if(f.exists())
+                    {
+                        f.delete();
+                    }
+                    file.transferTo(f)
+                }
+                def responseData = [
+                        'results': joueur,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+        } catch (Exception exc) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            def responseData = [
+                    'results': joueur,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
+        }
+        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        def responseData = [
+                'results': joueur,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
+    }
+
     def inscription()
     {
         mapping.Joueur joueur = new Joueur();

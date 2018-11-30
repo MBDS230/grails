@@ -126,7 +126,30 @@ class UserService {
         return htmlVal;
     }
 
-
+    def modifJoueur(String username, String motDePasseAncien, String motDePasseNouveau, String motDePasseConfirmation, String photo) throws Exception
+    {
+        Joueur joueur = new JoueurDao().findByLoginAndPassword(username, motDePasseAncien);
+        if(joueur!=null && motDePasseAncien!=null && motDePasseNouveau.length()>6 && motDePasseConfirmation!=null && motDePasseNouveau.compareTo(motDePasseConfirmation)==0)
+        {
+            joueur.setMotdepasse(getPasswordHash(motDePasseNouveau));
+            joueur.setLogin(username);
+            joueur.setPhoto(photo);
+            new JoueurDao().update(joueur);
+        }
+        else if(joueur==null)
+        {
+            throw new Exception("Joueur inéxistant");
+        }
+        else if(motDePasseAncien==null || motDePasseNouveau.length()<6)
+        {
+            throw new Exception("Le nouveau mot de passe doit comporter comporter au moins 6 caractères");
+        }
+        else if(motDePasseNouveau.compareTo(motDePasseConfirmation)!=0)
+        {
+            throw new Exception("La confirmation de mot de passe est fausse");
+        }
+        return joueur;
+    }
 
 
 
