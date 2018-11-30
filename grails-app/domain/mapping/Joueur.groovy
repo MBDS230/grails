@@ -58,8 +58,24 @@ class Joueur {
         }
     }
 
-    boolean isStatus() {
+    boolean getStatus() {
         return status;
+    }
+    String getStatusAffichage(){
+        switch (status){
+            case true:
+                return "connecté";
+            case false:
+                return "déconnecté";
+        }
+    }
+    String getStatusClass(){
+        switch (status){
+            case true:
+                return "badge-success";
+            case false:
+                return "badge-warning";
+        }
     }
 
     void setStatus(boolean status) {
@@ -68,6 +84,32 @@ class Joueur {
 
     int getAprouve() {
         return aprouve;
+    }
+    String getAprouveAffichage(){
+        switch(aprouve)
+        {
+            case 0:
+                return "rejeté";
+            case 1:
+                return "approuvé";
+            case 2:
+                return "en attente";
+            default:
+                return "état non disponible";
+        }
+    }
+    String getAprouveClass(){
+        switch(aprouve)
+        {
+            case 0:
+                return "badge-danger";
+            case 1:
+                return "badge-success";
+            case 2:
+                return "badge-warning";
+            default:
+                return "badge-light";
+        }
     }
 
     void setAprouve(int aprouve) {

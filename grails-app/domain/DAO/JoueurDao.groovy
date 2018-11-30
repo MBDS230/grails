@@ -10,7 +10,6 @@ class JoueurDao {
     def findAll(){
 
         List<Joueur> ljoueur = new ArrayList<>()
-        Joueur joueur = new Joueur()
 
         def sql = Connecting.getConnection()
 
@@ -18,6 +17,7 @@ class JoueurDao {
             sql.query('SELECT * FROM joueur where 1 > 0')
                     { resultSet ->
                         while (resultSet.next()) {
+                            Joueur joueur = new Joueur()
                             joueur.setIdjoueur(resultSet.getInt("idjoueur"))
                             joueur.setLogin(resultSet.getString("login"))
                             joueur.setMotdepasse(resultSet.getString("motdepasse"))

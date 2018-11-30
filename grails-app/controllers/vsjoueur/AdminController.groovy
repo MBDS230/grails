@@ -357,7 +357,8 @@ class AdminController
         {
             redirect(controller: "admin",action: "login");
         }
-        return new ModelAndView("/admin/dashboard")
+        ArrayList<Joueur> joueursList = new JoueurDao().findAll();
+        return new ModelAndView("/admin/dashboard",[joueurs:joueursList])
     }
     def login(){
         if(session.getAttribute("SESSION_ADMIN") != null)
