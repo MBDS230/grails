@@ -126,9 +126,9 @@ class UserService {
         return htmlVal;
     }
 
-    def modifJoueur(String username, String motDePasseAncien, String motDePasseNouveau, String motDePasseConfirmation, String photo) throws Exception
+    def modifJoueur(int idJoueur, String username, String motDePasseAncien, String motDePasseNouveau, String motDePasseConfirmation, String photo) throws Exception
     {
-        Joueur joueur = new JoueurDao().findByLoginAndPassword(username, motDePasseAncien);
+        Joueur joueur = new JoueurDao().findByID(idJoueur);
         if(joueur!=null && motDePasseAncien!=null && motDePasseNouveau.length()>6 && motDePasseConfirmation!=null && motDePasseNouveau.compareTo(motDePasseConfirmation)==0)
         {
             joueur.setMotdepasse(getPasswordHash(motDePasseNouveau));

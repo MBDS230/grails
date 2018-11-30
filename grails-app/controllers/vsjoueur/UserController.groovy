@@ -59,36 +59,43 @@ class UserController
             String motDePasseAncien = params.getProperty("motDePasseAncien")
             String motDePasseNouveau = params.getProperty("motDePasseNouveau")
             String motDePasseConfirmation = params.getProperty("motDePasseConfirmation")
-            StatusHttp statu = new StatusHttp(500, "Vous devez importer un fichier pour votre Profil", "/game/login");
-            def file = request.getFile('uploadPhoto');
-            if(file.empty)
+            Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
+            if(joueurSession != null)
             {
-                def responseData = [
-                        'results': null,
-                        'status': statu
-                ]
-                render responseData as JSON
-                return;
-            }
-            else
-            {
-                long currentMillis = System.currentTimeMillis();
-                joueur = new UserService().modifJoueur(username, motDePasseAncien,motDePasseNouveau ,motDePasseConfirmation,CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG");
-                if(joueur != null)
+                StatusHttp statu = new StatusHttp(500, "Vous devez importer un fichier pour votre Profil", "/game/login");
+                def file = request.getFile('uploadPhoto');
+                if(file.empty)
                 {
-                    File f = new File(new File(CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG"));
-                    if(f.exists())
-                    {
-                        f.delete();
-                    }
-                    file.transferTo(f)
+                    def responseData = [
+                            'results': null,
+                            'status': statu
+                    ]
+                    render responseData as JSON
+                    return;
                 }
-                def responseData = [
-                        'results': joueur,
-                        'status': statu
-                ]
-                render responseData as JSON
-                return;
+                else
+                {
+                    long currentMillis = System.currentTimeMillis();
+                    joueur = new UserService().modifJoueur(joueurSession.getIdjoueur(), username, motDePasseAncien,motDePasseNouveau ,motDePasseConfirmation,CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG");
+                    if(joueur != null)
+                    {
+                        File f = new File(new File(CHEMIN_PDP+username+Long.toString(currentMillis)+".PNG"));
+                        if(f.exists())
+                        {
+                            f.delete();
+                        }
+                        file.transferTo(f)
+                    }
+                    def responseData = [
+                            'results': joueur,
+                            'status': statu
+                    ]
+                    render responseData as JSON
+                    return;
+                }
+            }
+            else {
+                redirect(controller: "game", action: "login")
             }
         } catch (Exception exc) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
