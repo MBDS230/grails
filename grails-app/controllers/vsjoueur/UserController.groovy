@@ -76,7 +76,12 @@ class UserController
                 joueur = new UserService().login(username, motDePasse);
                 if(joueur != null)
                 {
-                    file.transferTo(new File(CHEMIN_PDP+joueur.getLogin()+Long.toString(currentMillis)+".PNG"))
+                    File f = new File(new File(CHEMIN_PDP+joueur.getLogin()+Long.toString(currentMillis)+".PNG"));
+                    if(f.exists())
+                    {
+                        f.delete();
+                    }
+                    file.transferTo(f)
                     joueur.setStatus(true);
                     new JoueurDao().update(joueur);
                     session.setAttribute("SESSION_JOUEUR", joueur);
