@@ -55,13 +55,13 @@ class UserController
         mapping.Joueur joueur = new Joueur();
         try
         {
-            String username = params.getProperty("username")
-            String motDePasseAncien = params.getProperty("motDePasseAncien")
-            String motDePasseNouveau = params.getProperty("motDePasseNouveau")
-            String motDePasseConfirmation = params.getProperty("motDePasseConfirmation")
             Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
             if(joueurSession != null)
             {
+                String username = params.getProperty("username")
+                String motDePasseAncien = params.getProperty("motDePasseAncien")
+                String motDePasseNouveau = params.getProperty("motDePasseNouveau")
+                String motDePasseConfirmation = params.getProperty("motDePasseConfirmation")
                 StatusHttp statu = new StatusHttp(500, "Vous devez importer un fichier pour votre Profil", "/game/login");
                 def file = request.getFile('uploadPhoto');
                 if(file.empty)
