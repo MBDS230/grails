@@ -139,7 +139,7 @@ class JoueurDao {
 
         if(sql != null){
             sql.executeUpdate("update joueur set login = ?, motdepasse = ?, status = ?, aprouve = ?, photo = ? where idjoueur = ?",
-                    [joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve(),joueur.getPhoto(), joueur.getIdjoueur()])
+                    [joueur.getLogin(),joueur.getMotdepasse(),joueur.getStatus(),joueur.getAprouve(),joueur.getPhoto(), joueur.getIdjoueur()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }
@@ -164,7 +164,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("insert into joueur values(?,?,?,?,?,?)", [joueur.getIdjoueur(),joueur.getLogin(),joueur.getMotdepasse(),joueur.isStatus(),joueur.getAprouve(),joueur.getPhoto()])
+            sql.executeUpdate("insert into joueur values(?,?,?,?,?,?)", [joueur.getIdjoueur(),joueur.getLogin(),joueur.getMotdepasse(),joueur.getStatus(),joueur.getAprouve(),joueur.getPhoto()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }

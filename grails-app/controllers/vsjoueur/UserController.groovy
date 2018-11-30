@@ -123,7 +123,7 @@ class UserController
             String username = params.getProperty("username")
             String motDePasse = params.getProperty("motDePasse")
             StatusHttp statu = new StatusHttp(500, "Vous devez importer un fichier pour votre Profil", "/game/login");
-            def file = request.getFile('uploadPhoto');
+            def file = request.getFile('file');
             if(file.empty)
             {
                 def responseData = [

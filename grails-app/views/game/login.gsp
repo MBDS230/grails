@@ -93,15 +93,15 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
-						<h2>New User Signup!</h2>
-						<form id="formInscription" action="user/inscription" enctype="multipart/form-data" method="POST">
+						<h2>Nouvel Utilisateur!</h2>
+						<form action="/user/inscription" method="POST" enctype="multipart/form-data">
 							<input name="username" type="text" placeholder="Surnom"/>
 							<input name="motDePasse" type="password" placeholder="Mot de passe"/>
 							<input type="file" id="file" name="file"/>
 							<div id="errorInscription" class="red">
 
 							</div>
-							<button id="buttonInscription" type="submit" class="btn btn-default">S'inscrire</button>
+							<input class="btn btn-default" type="submit" value="S'inscrire" />
 						</form>
 					</div><!--/sign up form-->
 				</div>
