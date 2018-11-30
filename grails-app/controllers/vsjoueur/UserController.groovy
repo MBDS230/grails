@@ -141,7 +141,7 @@ class UserController
                 joueur = new UserService().login(username, motDePasse);
                 if(joueur != null)
                 {
-                    File f = new File(new File(CHEMIN_PDP+joueur.getLogin()+Long.toString(currentMillis)+".PNG"));
+                    File f = new File(CHEMIN_PDP+joueur.getLogin()+Long.toString(currentMillis)+".PNG");
                     if(f.exists())
                     {
                         f.delete();
