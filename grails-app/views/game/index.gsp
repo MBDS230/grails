@@ -107,122 +107,16 @@
 								</div>
 							</div>
 						</div>
+						<div class="title title-conversation">
+							<h1>Liste connectés</h1>
+						</div>
 						<div id="search">
 							<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
 							<input type="text" placeholder="Search contacts..." />
 						</div>
 						<div id="contacts">
 							<ul>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status online"></span>
-										<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-										<div class="meta">
-											<p class="name">Louis Litt</p>
-											<button class="btn btn-success boutonJouer" data-id="1">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="1">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact active">
-									<div class="wrap">
-										<span class="contact-status busy"></span>
-										<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-										<div class="meta">
-											<p class="name">Harvey Specter</p>
-											<button class="btn btn-success boutonJouer" data-id="2">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="2">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status away"></span>
-										<img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-										<div class="meta">
-											<p class="name">Rachel Zane</p>
-											<button class="btn btn-success boutonJouer" data-id="3">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="3">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status online"></span>
-										<img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-										<div class="meta">
-											<p class="name">Donna Paulsen</p>
-											<button class="btn btn-success boutonJouer" data-id="4">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="4">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status busy"></span>
-										<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-										<div class="meta">
-											<p class="name">Jessica Pearson</p>
-											<button class="btn btn-success boutonJouer" data-id="5">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="5">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status"></span>
-										<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-										<div class="meta">
-											<p class="name">Harold Gunderson</p>
-											<button class="btn btn-success boutonJouer" data-id="6">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="6">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status"></span>
-										<img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-										<div class="meta">
-											<p class="name">Daniel Hardman</p>
-											<button class="btn btn-success boutonJouer" data-id="7">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="7">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status busy"></span>
-										<img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-										<div class="meta">
-											<p class="name">Katrina Bennett</p>
-											<button class="btn btn-success boutonJouer" data-id="8">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="9">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status"></span>
-										<img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-										<div class="meta">
-											<p class="name">Charles Forstman</p>
-											<button class="btn btn-success boutonJouer" data-id="8">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="9">Message</button>
-										</div>
-									</div>
-								</li>
-								<li class="contact">
-									<div class="wrap">
-										<span class="contact-status"></span>
-										<img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-										<div class="meta">
-											<p class="name">Jonathan Sidwell</p>
-											<button class="btn btn-success boutonJouer" data-id="8">Jouer</button>
-											<button class="btn btn-primary boutonMessage" data-id="9">Message</button>
-										</div>
-									</div>
-								</li>
+
 							</ul>
 						</div>
 						<div id="bottom-bar">
@@ -558,5 +452,6 @@
 <asset:javascript src="front/main.js"/>
 <asset:javascript src="front/custom.js"/>
 <asset:javascript src="front/pen.js"/>
+<asset:javascript src="front/joueurs.js"/>
 </body>
 </html>

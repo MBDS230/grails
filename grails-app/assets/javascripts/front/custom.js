@@ -85,8 +85,8 @@ $(function() {
         });
     });
 
-    $(".boutonJouer").click(function(){
-
+    $(document).on("click",".boutonJouer",function(){
+        alert("jouer");
         $(".contact.active").removeClass("active");
         $(this).parents('.contact').addClass("active");
         var idAdversaire = $(this).attr("data-id");
@@ -99,7 +99,8 @@ $(function() {
 
     });
 
-    $(".boutonMessage").click(function(){
+    $(document).on("click",".boutonMessage",function(){
+        alert("message");
 
         $(".contact.active").removeClass("active");
         $(this).parents('.contact').addClass("active");

@@ -275,5 +275,6 @@
 	<asset:javascript src="front/main.js"/>
 	<asset:javascript src="front/custom.js"/>
 	<asset:javascript src="front/pen.js"/>
+<asset:javascript src="front/dropzone.js"/>
 </body>
 </html>
