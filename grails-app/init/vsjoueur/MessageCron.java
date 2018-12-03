@@ -1,6 +1,10 @@
 package vsjoueur;
 
+import DAO.ParametrecronDao;
+import mapping.Parametrecron;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 public class MessageCron implements Runnable
 {
@@ -9,9 +13,17 @@ public class MessageCron implements Runnable
     {
         try
         {
-            final int HOUR_CRON = 13;
-            final int MINUTE_CRON = 33;
-            final int SECOND_CRON = 0;
+            int HOUR_CRON = 13;
+            int MINUTE_CRON = 33;
+            int SECOND_CRON = 0;
+            List<Parametrecron> lparametre  = new ParametrecronDao().findAllParam();
+            if(lparametre!=null && lparametre.size()>0)
+            {
+                HOUR_CRON = lparametre.get(0).getHeure();
+                MINUTE_CRON = lparametre.get(0).getMinute();
+                SECOND_CRON = lparametre.get(0).getSeconde();
+            }
+
             while (true)
             {
                 Timestamp t = new Timestamp(System.currentTimeMillis());

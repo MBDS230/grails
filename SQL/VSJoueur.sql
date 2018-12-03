@@ -173,6 +173,15 @@ CREATE TABLE cron
   CONSTRAINT fk_cron_recepteur_joueur FOREIGN KEY (idrecepteur) REFERENCES joueur (idjoueur)
 )
 
+CREATE TABLE parametrecron
+(
+  idparametrecron integer NOT NULL,
+  heure integer NOT NULL,
+  minute integer NOT NULL,
+  seconde integer NOT NULL,
+  CONSTRAINT pk_parametrecron PRIMARY KEY (idparametrecron)
+)
+
 alter table ADMIN
    add constraint FK_ADMIN_ROLE_ADMI_ROLE foreign key (IDROLE)
       references ROLE (IDROLE)
