@@ -125,4 +125,79 @@ class MessageController
         render responseData as JSON
         return;
     }
+
+
+    def activeCron()
+    {
+        try
+        {
+            Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
+
+            if(joueurSession != null)
+            {
+                int idRecepteur = Integer.parseInt(params.getProperty("idAutreJoueur"));
+                new MessageService().activeCron(joueurSession.getIdjoueur(), idRecepteur);
+                StatusHttp statu = new StatusHttp(200, null, null);
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+
+        } catch (Exception exc ) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
+        }
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
+    }
+
+    def desactiveCron()
+    {
+        try
+        {
+            Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
+
+            if(joueurSession != null)
+            {
+                int idRecepteur = Integer.parseInt(params.getProperty("idAutreJoueur"));
+                new MessageService().desactiveCron(joueurSession.getIdjoueur(), idRecepteur);
+                StatusHttp statu = new StatusHttp(200, null, null);
+                def responseData = [
+                        'results': null,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+
+        } catch (Exception exc ) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
+        }
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
+    }
 }

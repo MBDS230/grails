@@ -1,9 +1,11 @@
 package vsjoueur
 
 import Connecting.Connecting
+import DAO.CronDao
 import DAO.JoueurDao
 import DAO.MessageDao
 import grails.gorm.transactions.Transactional
+import mapping.Cron
 import mapping.Joueur
 import mapping.Message
 
@@ -108,6 +110,45 @@ class MessageService {
                 MessageDao messageDao = new MessageDao();
                 messageDao.update(messageObj);
             }
+        }
+    }
+
+    def activeCron(int idEnvoyeur, int idRecepteur)
+    {
+        List<Cron> lcron = new CronDao().findByRecepteurAndEnvoyeur(idEnvoyeur, idRecepteur);
+        if(lcron!=null && lcron.size()>0)
+        {
+            Cron cron = lcron.get(0);
+            cron.setActive(true);
+            new CronDao().update(cron);
+        }
+        else
+        {
+            int idCron = Connecting.getMaxId("cron");
+            idCron++;
+            Cron cron = new Cron(idCron, idEnvoyeur, idRecepteur, true);
+            new CronDao().insert(cron);
+        }
+    }
+
+    def desactiveCron(int idEnvoyeur, int idRecepteur)
+    {
+        List<Cron> lcron = new CronDao().findByRecepteurAndEnvoyeur(idEnvoyeur, idRecepteur);
+        if(lcron!=null && lcron.size()>0)
+        {
+            Cron cron = lcron.get(0);
+            cron.setActive(false);
+            new CronDao().update(cron);
+        }
+    }
+
+    def cronMessage()
+    {
+        List<Cron> activeCron = new CronDao().findByActive();
+        int i = 0;
+        for(i=0; i< activeCron.size(); i++)
+        {
+            new MessageDao().cacheMessageByIdEnvoyeurAndRecepteur(activeCron.get(i).getIdenvoyeur(), activeCron.get(i).getIdrecepteur());
         }
     }
 }

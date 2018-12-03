@@ -136,4 +136,19 @@ class MessageDao {
         sql.close()
 
     }
+
+    ///CRON
+    def cacheMessageByIdEnvoyeurAndRecepteur(int idEnvoyeur, int idRecepteur)
+    {
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.executeUpdate("update message set  affichage = ?  WHERE ( idenvoyeur = "+idEnvoyeur+" AND idrecepteur = "+idRecepteur+" ) OR ( idrecepteur = "+idEnvoyeur+" AND idenvoyeur = "+idRecepteur+" ) ",
+                    [false])
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+
+    }
 }

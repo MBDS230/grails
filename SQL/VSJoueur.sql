@@ -161,6 +161,18 @@ create unique index ROLE_PK on ROLE (
 IDROLE
 );
 
+
+CREATE TABLE cron
+(
+  idcron integer NOT NULL,
+  idenvoyeur integer NOT NULL,
+  idrecepteur integer NOT NULL,
+  active boolean NOT NULL,
+  CONSTRAINT pk_cron PRIMARY KEY (idcron),
+  CONSTRAINT fk_cron_envoyeur_joueur FOREIGN KEY (idenvoyeur) REFERENCES joueur (idjoueur) ,
+  CONSTRAINT fk_cron_recepteur_joueur FOREIGN KEY (idrecepteur) REFERENCES joueur (idjoueur)
+)
+
 alter table ADMIN
    add constraint FK_ADMIN_ROLE_ADMI_ROLE foreign key (IDROLE)
       references ROLE (IDROLE)
