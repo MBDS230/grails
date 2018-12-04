@@ -130,7 +130,7 @@
 							<button class="btn btn-success">Jouer</button>
 						</a>
 					</div>
-					<div class="content contentMessage hide">
+					<!--<div class="content contentMessage hide">
 						<div class="contact-profile">
 							<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
 							<p>Harvey Specter</p>
@@ -183,7 +183,7 @@
 								<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 			<div class="col-sm-3">

@@ -12,8 +12,7 @@ $(function() {
             }
             else if(response.status.status === 500)
             {
-                console.log(response.status.messageErreur)
-                alert("mitsofoka 500");
+                console.log(response.status.messageErreur);
             }
         },
         error:function(xhr, textStatus, errorThrown ){

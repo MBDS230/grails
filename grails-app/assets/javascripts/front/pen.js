@@ -37,13 +37,37 @@ function newMessage() {
 	if($.trim(message) == '') {
 		return false;
 	}
-	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+    var apiUrl = "/message/envoyerMessage";
+    var idRecepteur = $(".contentMessage").attr("data-id-recepteur");
+	$.ajax({
+        url: apiUrl,
+        type: 'POST',
+        data:{
+        	message : message,
+            idAutreJoueur : idRecepteur
+        },
+        success:function(response){
+            console.log(response);
+            if(response.status.status === 200)
+            {
+                console.log(response.results);
+                $('.messages ul').append(response.results);
+            }
+            else if(response.status.status === 500)
+            {
+                console.log(response.status.messageErreur);
+            }
+        },
+        error:function(xhr, textStatus, errorThrown ){
+
+            console.log(xhr);
+        }
+    });
 	$('.message-input input').val(null);
-	$('.contact.active .preview').html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 };
 
-$('.submit').click(function() {
+$(document).on("click",".submit",function() {
   newMessage();
 });
 

@@ -10,7 +10,8 @@ import java.security.MessageDigest
 
 class UserController
 {
-    private static String CHEMIN_PDP = "C:\\Users\\hjhonata\\Documents\\Kevine\\MBDS\\Greg\\";
+    //private static String CHEMIN_PDP = "C:\\Users\\hjhonata\\Documents\\Kevine\\MBDS\\Greg\\";
+    private static String CHEMIN_PDP = "C:\\Users\\nrazafin.BBDO\\Documents\\Persos\\Dossiers MBDS\\Docs\\Mr Naina\\Grails\\grails\\grails-app\\assets\\images\\Pdp";
 
     def getPasswordHash(String data) throws  Exception
     {

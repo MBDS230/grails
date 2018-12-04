@@ -1,7 +1,8 @@
 $(function() {
     $("#buttonConnexion").click(function(e){
-
+        $(this).attr('disabled', "disabled");
         e.preventDefault();
+
         var username = $('input[name="usernameConnexion"]').val();
         var motDePasse = $('input[name="motDePasseConnexion"]').val();
         var form = $(this).parents('form:first');
@@ -9,6 +10,8 @@ $(function() {
 
         if((username === null || username === '') || (motDePasse === null || motDePasse === ''))
         {
+
+            $(this).removeAttr("disabled");
             $("#errorConnexion").empty();
             $("#errorConnexion").append("Veuillez remplir les champs");
             alert("error");
@@ -25,17 +28,19 @@ $(function() {
                 console.log(response);
                 if(response.status.status === 200)
                 {
-                    alert("mistofoka 200");
+                    $("#buttonConnexion").removeAttr("disabled");
                     window.location.href = response.status.redirectUrl;
                 }
                 else if(response.status.status === 500)
                 {
-                    alert("mitsofoka 500");
                     $("#errorConnexion").empty();
                     $("#errorConnexion").append(response.status.messageErreur);
+                    $("#buttonConnexion").removeAttr("disabled");
                 }
             },
             error:function(xhr, textStatus, errorThrown ){
+
+                $("#buttonConnexion").removeAttr("disabled");
                 $("#errorConnexion").empty();
                 $("#errorConnexion").append("Error in ajax request");
             }
@@ -45,7 +50,7 @@ $(function() {
 
     $('#formInscription').submit(function(e) {
         e.preventDefault();
-
+        $(this).attr('disabled', "disabled");
         var username = $('input[name="username"]').val();
         var motDePasse = $('input[name="motDePasse"]').val();
         var formAction = $(this).attr("action");
@@ -74,6 +79,7 @@ $(function() {
                 else if(response.status.status === 500)
                 {
                     alert("mitsofoka 500");
+                    $("#buttonInscription").removeAttr("disabled");
                     $("#errorConnexion").empty();
                     $("#errorConnexion").append(response.status.messageErreur);
                 }
@@ -101,6 +107,34 @@ $(function() {
 
     $(document).on("click",".boutonMessage",function(){
         alert("message");
+        $(".contentMessage").remove();
+        var apiUrl = "/message/listeMessage";
+        var idAutreJoueur = $(this).attr("data-id");
+        console.log(idAutreJoueur);
+        $.ajax({
+            url: apiUrl,
+            type: 'POST',
+            data:{
+                idAutreJoueur : idAutreJoueur
+            },
+            success:function(response){
+                console.log(response);
+                if(response.status.status === 200)
+                {
+                    console.log(response.results);
+
+                    $(".frameChat").append(response.results);
+                }
+                else if(response.status.status === 500)
+                {
+                    console.log(response.status.messageErreur);
+                }
+            },
+            error:function(xhr, textStatus, errorThrown ){
+
+                console.log(xhr);
+            }
+        });
 
         $(".contact.active").removeClass("active");
         $(this).parents('.contact').addClass("active");
@@ -110,6 +144,8 @@ $(function() {
 
         $(".contentJouer").removeClass("show");
         $(".contentJouer").addClass("hide");
+
+
 
     });
 });

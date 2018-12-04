@@ -34,7 +34,7 @@ class MessageService {
             MessageDao mDao = new MessageDao();
             ArrayList<Message> val = mDao.findByEnvoyeurAndRecepteur(joueurConnecte, idAutreJoueur);
 
-            htmlVal += "<div class='content contentMessage show'>";
+            htmlVal += "<div class='content contentMessage show' data-id-envoyeur='"+joueurConnecte+"' data-id-recepteur='"+idAutreJoueur+"'>";
             htmlVal +=  "<div class='contact-profile'>";
             htmlVal += "<img src='"+autreJ.getPhoto()+"' alt=''>";
             htmlVal += "<p>"+autreJ.getLogin()+"</p>";
@@ -72,7 +72,7 @@ class MessageService {
             htmlVal += "<div class='wrap'>";
             htmlVal += "<input type='text' placeholder='Write your message...'>";
             htmlVal += "<i class='fa fa-paperclip attachment' aria-hidden='true'></i>";
-            htmlVal += "<button class='submit'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>";
+            htmlVal += "<button class='submit'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
             htmlVal += "</div>";
             htmlVal += "</div>";
             htmlVal += "</div>";
@@ -84,6 +84,7 @@ class MessageService {
 
     def envoyerMessage(String message,int idEnvoyeur, int idAutreJoueur)
     {
+        String htmlVal = "";
         if(message!=null && idEnvoyeur>0 && idAutreJoueur>0)
         {
             String trimMessage = message.trim();
@@ -95,6 +96,10 @@ class MessageService {
                 java.sql.Date jourCourant = new java.sql.Date(System.currentTimeMillis());
                 Message messageObj = new Message(idMessage, idEnvoyeur, idAutreJoueur, message, 2, true,jourCourant, false);
                 messageDao.insert(messageObj);
+                JoueurDao joueurDao = new JoueurDao();
+                Joueur joueur = joueurDao.findByID(idEnvoyeur);
+                htmlVal = "<li class='sent'><img src='"+ joueur.photo +"' alt='' /><p> "+ message +" </p></li>";
+                return htmlVal;
             }
         }
     }

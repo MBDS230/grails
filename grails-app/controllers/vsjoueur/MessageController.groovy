@@ -57,10 +57,10 @@ class MessageController
                 String message = params.getProperty("message");
                 int idEnvoyeur = joueurSession.getIdjoueur();
                 int idAutreJoueur = Integer.parseInt(params.getProperty("idAutreJoueur"));
-                new MessageService().envoyerMessage(message,idEnvoyeur, idAutreJoueur)
+                String html = new MessageService().envoyerMessage(message,idEnvoyeur, idAutreJoueur);
                 StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
-                        'results': null,
+                        'results': html,
                         'status': statu
                 ]
                 render responseData as JSON
