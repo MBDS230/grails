@@ -15,6 +15,7 @@
 	<asset:stylesheet src="front/responsive.css"/>
 	<asset:stylesheet src="front/custom.css"/>
 	<asset:stylesheet src="front/pen.css"/>
+	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css">
 	<!--[if lt IE 9]>
 	<asset:javascript src="admin/html5shiv.js"/>
 	<asset:javascript src="admin/respond.min.js"/>
@@ -81,13 +82,13 @@
 			</div>
 		</g:if>
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-sm-12">
 				<div id="frame" class="frameChat" >
 					<div id="sidepanel">
 						<div id="profile">
 							<div class="wrap">
-								<img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-								<p>Mike Ross</p>
+								<img id="profile-img" src="${joueur.photo}" class="online" alt="" />
+								<p>${joueur.login}</p>
 								<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
 								<div id="status-options">
 									<ul>
@@ -130,153 +131,104 @@
 							<button class="btn btn-success">Jouer</button>
 						</a>
 					</div>
-					<!--<div class="content contentMessage hide">
-						<div class="contact-profile">
-							<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-							<p>Harvey Specter</p>
-							<div class="social-media">
-								<i class="fa fa-facebook" aria-hidden="true"></i>
-								<i class="fa fa-twitter" aria-hidden="true"></i>
-								<i class="fa fa-instagram" aria-hidden="true"></i>
-							</div>
-						</div>
-						<div class="messages">
-							<ul>
-								<li class="sent">
-									<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-									<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-								</li>
-								<li class="replies">
-									<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-									<p>When you're backed against the wall, break the god damn thing down.</p>
-								</li>
-								<li class="replies">
-									<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-									<p>Excuses don't win championships.</p>
-								</li>
-								<li class="sent">
-									<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-									<p>Oh yeah, did Michael Jordan tell you that?</p>
-								</li>
-								<li class="replies">
-									<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-									<p>No, I told him that.</p>
-								</li>
-								<li class="replies">
-									<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-									<p>What are your choices when someone puts a gun to your head?</p>
-								</li>
-								<li class="sent">
-									<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-									<p>What are you talking about? You do what they say or they shoot you.</p>
-								</li>
-								<li class="replies">
-									<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-									<p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-								</li>
-							</ul>
-						</div>
-						<div class="message-input">
-							<div class="wrap">
-								<input type="text" placeholder="Write your message..." />
-								<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-								<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-							</div>
-						</div>
-					</div>-->
 				</div>
 			</div>
-			<div class="col-sm-3">
+		</div>
+		</br>
+		<div class="row">
+			<div class="col-sm-6">
 				<section id="cart_items">
 					<div class="table-responsive cart_info">
+						<h2>Liste des demandes des adversaires</h2>
 						<table class="table table-condensed">
 							<thead>
 							<tr class="cart_menu">
-								<td class="image">Item</td>
-								<td class="description"></td>
-								<td class="price">Price</td>
-								<td class="quantity">Quantity</td>
-								<td class="total">Total</td>
-								<td></td>
+								<th>Id Demande</th>
+								<th>Adversaire</th>
+								<th>Date</th>
+								<th>Acceptation</th>
 							</tr>
 							</thead>
 							<tbody>
 							<tr>
-								<td class="cart_product">
-									<a href=""><img src="images/cart/one.png" alt=""></a>
+								<td>
+									1
 								</td>
-								<td class="cart_description">
-									<h4><a href="">Colorblock Scuba</a></h4>
-									<p>Web ID: 1089772</p>
+								<td>
+									Colorblock Scuba
 								</td>
-								<td class="cart_price">
-									<p>$59</p>
+								<td>
+									22.11.2018
 								</td>
-								<td class="cart_quantity">
-									<div class="cart_quantity_button">
-										<a class="cart_quantity_up" href=""> + </a>
-										<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-										<a class="cart_quantity_down" href=""> - </a>
-									</div>
-								</td>
-								<td class="cart_total">
-									<p class="cart_total_price">$59</p>
-								</td>
-								<td class="cart_delete">
-									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<td>
+									<button class="btn btn-primary">Accepter</button>
 								</td>
 							</tr>
 
 							<tr>
-								<td class="cart_product">
-									<a href=""><img src="images/cart/two.png" alt=""></a>
+								<td>
+									1
 								</td>
-								<td class="cart_description">
-									<h4><a href="">Colorblock Scuba</a></h4>
-									<p>Web ID: 1089772</p>
+								<td>
+									Colorblock Scuba
 								</td>
-								<td class="cart_price">
-									<p>$59</p>
+								<td>
+									22.11.2018
 								</td>
-								<td class="cart_quantity">
-									<div class="cart_quantity_button">
-										<a class="cart_quantity_up" href=""> + </a>
-										<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-										<a class="cart_quantity_down" href=""> - </a>
-									</div>
-								</td>
-								<td class="cart_total">
-									<p class="cart_total_price">$59</p>
-								</td>
-								<td class="cart_delete">
-									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<td>
+									<button class="btn btn-primary">Accepter</button>
 								</td>
 							</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</section>
+			</div>
+			<div class="col-sm-6">
+				<section id="cart_items">
+					<div class="table-responsive cart_info">
+						<h2>Liste de mes demandes</h2>
+						<table class="table table-condensed">
+							<thead>
+							<tr class="cart_menu">
+								<th>Id Demande</th>
+								<th>Adversaire</th>
+								<th>Date</th>
+								<th>Annulation</th>
+							</tr>
+							</thead>
+							<tbody>
 							<tr>
-								<td class="cart_product">
-									<a href=""><img src="images/cart/three.png" alt=""></a>
+								<td>
+									1
 								</td>
-								<td class="cart_description">
-									<h4><a href="">Colorblock Scuba</a></h4>
-									<p>Web ID: 1089772</p>
+								<td>
+									Colorblock Scuba
 								</td>
-								<td class="cart_price">
-									<p>$59</p>
+								<td>
+									22.11.2018
 								</td>
-								<td class="cart_quantity">
-									<div class="cart_quantity_button">
-										<a class="cart_quantity_up" href=""> + </a>
-										<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-										<a class="cart_quantity_down" href=""> - </a>
-									</div>
-								</td>
-								<td class="cart_total">
-									<p class="cart_total_price">$59</p>
-								</td>
-								<td class="cart_delete">
-									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<td>
+									<button class="btn btn-primary">Annuler</button>
 								</td>
 							</tr>
+
+							<tr>
+								<td>
+									1
+								</td>
+								<td>
+									Colorblock Scuba
+								</td>
+								<td>
+									22.11.2018
+								</td>
+								<td>
+									<button class="btn btn-primary">Annuler</button>
+								</td>
+							</tr>
+
 							</tbody>
 						</table>
 					</div>

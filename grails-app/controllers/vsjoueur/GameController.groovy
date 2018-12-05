@@ -1,6 +1,7 @@
 package vsjoueur
 
 import org.springframework.web.servlet.ModelAndView
+import mapping.Joueur
 
 class GameController {
 
@@ -10,13 +11,14 @@ class GameController {
             redirect(controller: "game", action: "login");
             return;
         }
+        Joueur joueur = session.getAttribute("SESSION_JOUEUR");
         String inscription = params.getProperty("inscription");
         boolean inscrit = false;
         if(inscription != null && inscription == 'success')
         {
             inscrit = true;
         }
-        return new ModelAndView("/game/index",[inscrit:inscrit])
+        return new ModelAndView("/game/index",[inscrit:inscrit,joueur:joueur])
     }
 
     def login(){

@@ -602,7 +602,7 @@
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
   float: left;
   border: none;
-  width: calc(100% - 90px);
+  width: calc(100% - 50px);
   padding: 11px 32px 10px 8px;
   font-size: 0.8em;
   color: #32465a;
@@ -660,11 +660,11 @@
 }
 .content{
 
-	background: white;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 .content.show{
     display:block;
-	transform:translateX(0);
+	transform:translateX(0%);
 }
 #sidepanel{
 	z-index:1;
@@ -675,4 +675,3 @@
   transform:translateX(-100%);
   transition:transform 0.5s ease;
 }
-

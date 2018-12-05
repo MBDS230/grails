@@ -70,8 +70,7 @@ class MessageService {
             htmlVal += "</div>";
             htmlVal += "<div class='message-input'>";
             htmlVal += "<div class='wrap'>";
-            htmlVal += "<input type='text' placeholder='Write your message...'>";
-            htmlVal += "<i class='fa fa-paperclip attachment' aria-hidden='true'></i>";
+            htmlVal += "<input type='text' placeholder='Ecrire votre message...'>";
             htmlVal += "<button class='submit'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
             htmlVal += "</div>";
             htmlVal += "</div>";

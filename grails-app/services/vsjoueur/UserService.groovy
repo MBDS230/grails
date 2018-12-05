@@ -116,8 +116,9 @@ class UserService {
             htmlVal += "<img src='"+val.get(i).getPhoto()+"' alt='' />";
             htmlVal += "<div class='meta'>";
             htmlVal += "<p class='name'>"+val.get(i).getLogin()+"</p>";
-            htmlVal += "<button class='btn btn-success boutonJouer' data-id='"+val.get(i).getIdjoueur()+"'>Jouer</button>";
+            htmlVal += "<button class='btn btn-success boutonJouer' data-id='"+val.get(i).getIdjoueur()+"'>Demander</button>";
             htmlVal += "<button class='btn btn-primary boutonMessage' data-id='"+val.get(i).getIdjoueur()+"'>Message</button>";
+            htmlVal += "<button class='btn btn-default boutonScore' data-id='"+val.get(i).getIdjoueur()+"'>Score</button>";
             htmlVal += "</div>";
             htmlVal += "</div>";
             htmlVal += "</li>";
