@@ -3,6 +3,7 @@ package vsjoueur
 import DAO.JoueurDao
 import grails.converters.JSON
 import mapping.Joueur
+import org.springframework.web.servlet.ModelAndView
 import utilitaire.StatusHttp
 
 import java.security.MessageDigest
@@ -127,12 +128,13 @@ class UserController
             def file = request.getFile('file');
             if(file.empty)
             {
-                def responseData = [
+                return new ModelAndView("/game/login",[exceptionMessages:"Vous devez importer un fichier pour votre Profil"])
+                /*def responseData = [
                         'results': null,
                         'status': statu
                 ]
                 render responseData as JSON
-                return;
+                return;*/
             }
             else
             {
@@ -152,29 +154,33 @@ class UserController
                     new JoueurDao().update(joueur);
                     session.setAttribute("SESSION_JOUEUR", joueur);
                 }
-                def responseData = [
+                /*def responseData = [
                         'results': joueur,
                         'status': statu
                 ]
                 render responseData as JSON
-                return;
+                return;*/
+                return new ModelAndView("/game/index",[inscription:"success"])
+
             }
         } catch (Exception exc) {
-            StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
+            return new ModelAndView("/game/login",[exceptionMessages:exc.getMessage()])
+            /*StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
             def responseData = [
                     'results': joueur,
                     'status': statu
             ]
             render responseData as JSON
-            return;
+            return;*/
         }
-        StatusHttp statu = new StatusHttp(500, null, "/game/login");
+        return new ModelAndView("/game/login")
+        /*StatusHttp statu = new StatusHttp(500, null, "/game/login");
         def responseData = [
                 'results': joueur,
                 'status': statu
         ]
         render responseData as JSON
-        return;
+        return;*/
     }
 
     def login()
