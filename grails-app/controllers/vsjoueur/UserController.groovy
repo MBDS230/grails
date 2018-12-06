@@ -164,7 +164,7 @@ class UserController
 
             }
         } catch (Exception exc) {
-            return new ModelAndView("/game/login",[exceptionMessages:exc.getMessage()])
+            return new ModelAndView("/game/login",[exceptionMessages:exc.getMessage()   ])
             /*StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/game/login");
             def responseData = [
                     'results': joueur,

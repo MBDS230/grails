@@ -14,7 +14,7 @@ class JoueurDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query('SELECT * FROM joueur where 1 > 0')
+            sql.query("SELECT * FROM joueur where 1 > 0 ORDER BY idjoueur ASC")
                     { resultSet ->
                         while (resultSet.next()) {
                             Joueur joueur = new Joueur()

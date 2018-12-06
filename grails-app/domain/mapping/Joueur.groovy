@@ -89,26 +89,40 @@ class Joueur {
         switch(aprouve)
         {
             case 0:
-                return "rejeté";
-            case 1:
                 return "approuvé";
+            case 1:
+                return "rejeté";
             case 2:
-                return "en attente";
+                return "approuvé";
             default:
                 return "état non disponible";
         }
     }
+    String getUrl(){
+        switch(aprouve)
+        {
+            case 0:
+                return "/admin/approuve?idJoueur="+this.getIdjoueur();
+            case 1:
+                return "/admin/rejete?idJoueur="+this.getIdjoueur();
+            case 2:
+                return "/admin/approuve?idJoueur="+this.getIdjoueur();
+            default:
+                return "état non disponible";
+        }
+    }
+
     String getAprouveClass(){
         switch(aprouve)
         {
             case 0:
-                return "badge-danger";
+                return "btn btn-warning";
             case 1:
-                return "badge-success";
+                return "btn btn-danger";
             case 2:
-                return "badge-warning";
+                return "btn btn-success";
             default:
-                return "badge-light";
+                return "btn btn-light";
         }
     }
 

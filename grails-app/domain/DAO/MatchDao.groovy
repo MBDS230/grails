@@ -102,7 +102,7 @@ class MatchDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM match where 1 > 0")
+            sql.query("SELECT * FROM match where 1 > 0 ORDER BY match ASC")
             { resultSet ->
                 while (resultSet.next()) {
                     Match match = new Match()

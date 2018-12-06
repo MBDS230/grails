@@ -289,7 +289,7 @@
                                             <span class="badge ${joueur.getStatusClass()}">${joueur.getStatusAffichage()}</span>
                                         </td>
                                         <td>
-                                            <span class="badge ${joueur.getAprouveClass()}">${joueur.getAprouveAffichage()}</span>
+                                            <a href="${joueur.getUrl()}"> <span class="${joueur.getAprouveClass()}">${joueur.getAprouveAffichage()}</span></a>
                                         </td>
                                     </tr>
                                 </g:each>

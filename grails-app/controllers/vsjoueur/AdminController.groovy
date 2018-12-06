@@ -106,17 +106,20 @@ class AdminController
             {
                 int idJoueur = Integer.parseInt(params.getProperty("idJoueur"));
                 new AdminService().approuve(idJoueur);
-                StatusHttp statu = new StatusHttp(200, null, null);
+                redirect(controller: "admin", action: "dashboard");
+                return;
+                /*StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
                         'results': null,
                         'status': statu
                 ]
                 render responseData as JSON
-                return;
+                return;*/
             }
             else
             {
-                redirect(controller: "admin", action: "login")
+                redirect(controller: "admin", action: "login");
+                return;
             }
         } catch (Exception exc ) {
             StatusHttp statu = new StatusHttp(500, exc.getMessage(), "/admin/login");
@@ -145,17 +148,20 @@ class AdminController
             {
                 int idJoueur = Integer.parseInt(params.getProperty("idJoueur"));
                 new AdminService().rejete(idJoueur);
-                StatusHttp statu = new StatusHttp(200, null, null);
+                redirect(controller: "admin", action: "dashboard");
+                return ;
+                /*StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
                         'results': null,
                         'status': statu
                 ]
                 render responseData as JSON
-                return;
+                return;*/
             }
             else
             {
-                redirect(controller: "admin", action: "login")
+                redirect(controller: "admin", action: "login");
+                return ;
             }
 
         } catch (Exception exc ) {
