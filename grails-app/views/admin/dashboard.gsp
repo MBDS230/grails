@@ -308,21 +308,21 @@
                                 <thead>
                                 <tr>
                                     <th class="serial">ID</th>
-                                    <th class="avatar">iddemandematch</th>
-                                    <th>datematch</th>
-                                    <th>scoredemandeur</th>
-                                    <th>scorerecepteur</th>
-                                    <th>datedebut</th>
-                                    <th>datefin</th>
+                                    <th class="avatar">joueur n°1</th>
+                                    <th>score joueur1</th>
+                                    <th>joueur 2</th>
+                                    <th>score joueur n°2</th>
+                                    <th>date debut</th>
+                                    <th>date fin</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <g:each var="match" in="${matchs}">
                                     <tr>
                                         <td>${match.idmatch}.</td>
-                                        <td> <span class="name">${match.iddemandematch}</span> </td>
-                                        <td>  <span class="name">${match.datematch}</span> </td>
+                                        <td> <span class="name">${match.joueur1}</span> </td>
                                         <td>  <span class="name">${match.scoredemandeur}</span> </td>
+                                        <td>  <span class="name">${match.joueur2}</span> </td>
                                         <td>  <span class="name">${match.scorerecepteur}</span> </td>
                                         <td>  <span class="name">${match.datedebut}</span> </td>
                                         <td>  <span class="name">${match.datefin}</span> </td>

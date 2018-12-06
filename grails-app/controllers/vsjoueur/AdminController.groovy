@@ -2,6 +2,7 @@ package vsjoueur
 
 import DAO.JoueurDao
 import DAO.MatchDao
+import association.MatchJoueur
 import grails.converters.JSON
 import mapping.Admin
 import mapping.Joueur
@@ -360,7 +361,7 @@ class AdminController
             redirect(controller: "admin",action: "login");
         }
         ArrayList<Joueur> joueursList = new JoueurDao().findAll();
-        ArrayList<Match> matchList = new MatchDao().findAll();
+        ArrayList<MatchJoueur> matchList = new MatchDao().findAllMatch();
         return new ModelAndView("/admin/dashboard",[joueurs:joueursList, matchs:matchList])
     }
     def login(){

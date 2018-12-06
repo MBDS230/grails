@@ -1,6 +1,9 @@
 package DAO
 
 import Connecting.Connecting
+import association.MatchJoueur
+import mapping.Demandematch
+import mapping.Joueur
 import mapping.Match
 
 class MatchDao {
@@ -82,6 +85,39 @@ class MatchDao {
                     match.setDatedebut(resultSet.getDate("datedebut"))
                     match.setDatefin(resultSet.getDate("datefin"))
                     lmatch.add(match)
+                }
+            }
+        }
+        else
+        {
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return lmatch
+    }
+
+    def findAllMatch(){
+
+        List<MatchJoueur> lmatch = new ArrayList<>();
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query("SELECT * FROM match where 1 > 0")
+            { resultSet ->
+                while (resultSet.next()) {
+                    Match match = new Match()
+                    match.setIdmatch(resultSet.getInt("idmatch"))
+                    match.setIddemandematch(resultSet.getInt('iddemandematch'))
+                    match.setDatematch(resultSet.getDate("datematch"))
+                    match.setScoredemandeur(resultSet.getInt("scoredemandeur"))
+                    match.setScorerecepteur(resultSet.getInt("scorerecepteur"))
+                    match.setDatedebut(resultSet.getDate("datedebut"))
+                    match.setDatefin(resultSet.getDate("datefin"))
+                    Demandematch dem = new DemandematchDao().findByID(match.getIddemandematch());
+                    Joueur joueur1 = new JoueurDao().findByID(dem.getIddemandeur());
+                    Joueur joueur2 = new JoueurDao().findByID(dem.getIdrecepteur());
+                    MatchJoueur matchJoueur = new MatchJoueur(match.getIdmatch(), joueur1.getLogin(), match.getDatematch(), match.getScoredemandeur(), joueur2.getLogin(), match.getScorerecepteur(), match.getDatedebut(), match.getDatefin());
+                    lmatch.add(matchJoueur)
                 }
             }
         }
