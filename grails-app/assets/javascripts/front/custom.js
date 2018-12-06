@@ -1,4 +1,6 @@
 $(function() {
+
+
     $("#buttonConnexion").click(function(e){
         $(this).attr('disabled', "disabled");
         e.preventDefault();
@@ -102,7 +104,72 @@ $(function() {
         $(".contentMessage").removeClass("show");
         $(".contentMessage").addClass("hide");
 
+    });
 
+    $(document).on("click",".checkbox-cron",function(){
+
+        var cronValue = $(".checkbox-cron").val();
+        //activer cron
+        if(cronValue === "0")
+        {
+            alert("activer cron");
+            var formUrl="/message/activeCron";
+            var idAutreJoueur = $(".contentMessage").attr("data-id-recepteur");
+            alert(idAutreJoueur);
+            $.ajax({
+                url: formUrl,
+                type: 'POST',
+                data: {
+                    idAutreJoueur : idAutreJoueur
+                },
+                success:function(response){
+                    console.log(response);
+                    if(response.status.status === 200)
+                    {
+                        $(".checkbox-cron").val("1");
+                        console.log("success");
+                    }
+                    else if(response.status.status === 500)
+                    {
+                        alert("erreur " + response.status.messageErreur);
+                    }
+                },
+                error:function(xhr, textStatus, errorThrown ){
+                    alert("Erreur Ajax");
+                }
+            });
+        }
+        //desactiver cron
+        else
+        {
+            alert("desactiver cron");
+            var formUrl="/message/desactiveCron";
+            var idAutreJoueur = $(".contentMessage").attr("data-id-recepteur");
+            $.ajax({
+                url: formUrl,
+                type: 'POST',
+                data: {
+                    idAutreJoueur : idAutreJoueur
+                },
+                success:function(response){
+                    console.log(response);
+                    if(response.status.status === 200)
+                    {
+
+                        $(".checkbox-cron").val("0");
+                        console.log("success");
+                    }
+                    else if(response.status.status === 500)
+                    {
+                        alert("erreur " + response.status.messageErreur);
+                    }
+                },
+                error:function(xhr, textStatus, errorThrown ){
+                    alert("Erreur Ajax");
+                }
+            });
+        }
+        alert(cronValue);
     });
 
     $(document).on("click",".boutonMessage",function(){
@@ -144,8 +211,6 @@ $(function() {
 
         $(".contentJouer").removeClass("show");
         $(".contentJouer").addClass("hide");
-
-
 
     });
 });

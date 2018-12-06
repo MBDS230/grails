@@ -34,10 +34,13 @@ class MessageService {
             MessageDao mDao = new MessageDao();
             ArrayList<Message> val = mDao.findByEnvoyeurAndRecepteur(joueurConnecte, idAutreJoueur);
 
+            String valueCron = "0";
+
             htmlVal += "<div class='content contentMessage show' data-id-envoyeur='"+joueurConnecte+"' data-id-recepteur='"+idAutreJoueur+"'>";
             htmlVal +=  "<div class='contact-profile'>";
             htmlVal += "<img src='"+autreJ.getPhoto()+"' alt=''>";
             htmlVal += "<p>"+autreJ.getLogin()+"</p>";
+            htmlVal += "<div class='cron'><label class='checkbox-inline'><input value='"+ valueCron +"'class='checkbox-cron' type='checkbox'>Activer cron</label></div>";
             htmlVal += "<div class='social-media'>";
             htmlVal += "<i class='fa fa-facebook' aria-hidden='true'></i>";
             htmlVal += "<i class='fa fa-twitter' aria-hidden='true'></i>";

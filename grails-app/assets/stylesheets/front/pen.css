@@ -675,3 +675,11 @@
   transform:translateX(-100%);
   transition:transform 0.5s ease;
 }
+
+.cron{
+  display: inline-block;
+  margin-left: 150px;
+}
+.cron label input {
+  margin-top: 23px;
+}
