@@ -58,8 +58,10 @@ class MatchController {
             if (joueurSession != null)
             {
                 int idDemandeMatch = Integer.parseInt(params.getProperty("idDemandeMatch"));
-                new MatchService().jouer(idDemandeMatch);
-                StatusHttp statu = new StatusHttp(200, null, "/game/login");
+                MatchService matchService = new MatchService();
+                matchService.aprouverDemandeMatch(idDemandeMatch);
+                matchService.jouer(idDemandeMatch);
+                StatusHttp statu = new StatusHttp(200, null, "/game/index");
                 def responseData = [
                         'results': null,
                         'status': statu
@@ -100,10 +102,10 @@ class MatchController {
                 int idAutreJoueur = Integer.parseInt(params.getProperty("idAutreJoueur"));
                 int duree = Integer.parseInt(params.getProperty("duree"));
                 int joueurConnecte = joueurSession.getIdjoueur();
-                new MatchService().demandeMatch(joueurConnecte, idAutreJoueur, duree);
+                String html = new MatchService().demandeMatch(joueurConnecte, idAutreJoueur, duree);
                 StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
-                        'results': null,
+                        'results': html,
                         'status': statu
                 ]
                 render responseData as JSON

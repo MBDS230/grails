@@ -7,13 +7,13 @@ class DemandematchDao {
 
       def findAll(){
         List<Demandematch> ldemandeMatch = new ArrayList<>()
-        Demandematch demandeMatch = new Demandematch()
 
         def sql = Connecting.getConnection()
         if(sql != null){
             sql.query('SELECT * FROM demandematch where 1 > 0')
                     { resultSet ->
                         while (resultSet.next()) {
+                            Demandematch demandeMatch = new Demandematch()
                             demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
                             demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
                             demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
@@ -33,7 +33,6 @@ class DemandematchDao {
 
     def findByRecepteurAndAprouve(int idRecepteur, int aprouve)    {
         List<Demandematch> ldemandeMatch = new ArrayList<>()
-        Demandematch demandeMatch = new Demandematch()
 
         def sql = Connecting.getConnection()
 
@@ -41,6 +40,7 @@ class DemandematchDao {
             sql.query("SELECT * FROM demandematch where idrecepteur = "+idRecepteur+" and aprouvee = "+aprouve)
                     { resultSet ->
                         while (resultSet.next()) {
+                            Demandematch demandeMatch = new Demandematch()
                             demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
                             demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
                             demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
@@ -60,7 +60,6 @@ class DemandematchDao {
 
     def findByEnvoyeurAndAprouve(int idEnvoyeur, int aprouve)    {
         List<Demandematch> ldemandeMatch = new ArrayList<>()
-        Demandematch demandeMatch = new Demandematch()
 
         def sql = Connecting.getConnection()
 
@@ -68,6 +67,7 @@ class DemandematchDao {
             sql.query("SELECT * FROM demandematch where iddemandeur = "+idEnvoyeur+" and aprouvee = "+aprouve)
                     { resultSet ->
                         while (resultSet.next()) {
+                            Demandematch demandeMatch = new Demandematch()
                             demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
                             demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
                             demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
@@ -117,7 +117,7 @@ class DemandematchDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.executeUpdate("update demandematch set iddemandeur = ? , idrecepteur = ?, duree = ?, datedemande = ?, dateexpiration = ?,aprouvee = ? where iddemandematch = ?", [demandeMatch.getIddemandematch(),demandeMatch.getIddemandeur(),demandeMatch.getIdrecepteur(),demandeMatch.getDuree(),demandeMatch.getDatedemande(),demandeMatch.getDateexpiration(),demandeMatch.getAprouvee()])
+            sql.executeUpdate("update demandematch set iddemandeur = ? , idrecepteur = ?, duree = ?, datedemande = ?, dateexpiration = ?,aprouvee = ? where iddemandematch = ?", [demandeMatch.getIddemandeur(),demandeMatch.getIdrecepteur(),demandeMatch.getDuree(),demandeMatch.getDatedemande(),demandeMatch.getDateexpiration(),demandeMatch.getAprouvee(),demandeMatch.getIddemandematch()])
         }else{
             throw new Exception("Error when trying to connect to the database")
         }

@@ -81,6 +81,9 @@
 				<p class="text-primary">Vous êtes inscrit avec succès ! Vous pouvez jouer tout de suite.</p>
 			</div>
 		</g:if>
+		<div class="row messageErreur text-danger">
+
+		</div>
 		<div class="row">
 			<div class="col-sm-12">
 				<div id="frame" class="frameChat" >
@@ -125,7 +128,7 @@
 							<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
 						</div>
 					</div>
-					<div class="content contentJouer hide">
+					<div class="content contentScore hide">
 						<h1>Jeu avec adversaire</h1>
 						<a href="/user/jouer">
 							<button class="btn btn-success">Jouer</button>
@@ -145,41 +148,25 @@
 							<tr class="cart_menu">
 								<th>Id Demande</th>
 								<th>Adversaire</th>
-								<th>Date</th>
+								<th>Durée</th>
+								<th>Date de demande</th>
+								<th>Date d'expiration</th>
 								<th>Acceptation</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>
-									1
-								</td>
-								<td>
-									Colorblock Scuba
-								</td>
-								<td>
-									22.11.2018
-								</td>
-								<td>
-									<button class="btn btn-primary">Accepter</button>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									1
-								</td>
-								<td>
-									Colorblock Scuba
-								</td>
-								<td>
-									22.11.2018
-								</td>
-								<td>
-									<button class="btn btn-primary">Accepter</button>
-								</td>
-							</tr>
-
+							<g:each var="demande" in="${demandesDesJoueurs}">
+								<tr>
+									<td>${demande.iddemandematch}.</td>
+									<td>${demande.iddemandeur}.</td>
+									<td>${demande.duree}.</td>
+									<td>${demande.datedemande}.</td>
+									<td>${demande.dateexpiration}.</td>
+									<td>
+										<button data-id-demande="${demande.iddemandematch}" class="btn btn-primary boutonJouer">Jouer</button>
+									</td>
+								</tr>
+							</g:each>
 							</tbody>
 						</table>
 					</div>
@@ -189,46 +176,30 @@
 				<section id="cart_items">
 					<div class="table-responsive cart_info">
 						<h2>Liste de mes demandes</h2>
-						<table class="table table-condensed">
+						<table class="table table-condensed mesDemandes">
 							<thead>
 							<tr class="cart_menu">
 								<th>Id Demande</th>
 								<th>Adversaire</th>
-								<th>Date</th>
-								<th>Annulation</th>
+								<th>Durée</th>
+								<th>Date de demande</th>
+								<th>Date d'expiration</th>
+								<th>Acceptation</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>
-									1
-								</td>
-								<td>
-									Colorblock Scuba
-								</td>
-								<td>
-									22.11.2018
-								</td>
-								<td>
-									<button class="btn btn-primary">Annuler</button>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									1
-								</td>
-								<td>
-									Colorblock Scuba
-								</td>
-								<td>
-									22.11.2018
-								</td>
-								<td>
-									<button class="btn btn-primary">Annuler</button>
-								</td>
-							</tr>
-
+							<g:each var="demande" in="${mesDemandes}">
+								<tr>
+									<td>${demande.iddemandematch}.</td>
+									<td>${demande.idrecepteur}.</td>
+									<td>${demande.duree}.</td>
+									<td>${demande.datedemande}.</td>
+									<td>${demande.dateexpiration}.</td>
+									<td>
+										<button class="btn btn-primary">${demande.aprouvee}.</button>
+									</td>
+								</tr>
+							</g:each>
 							</tbody>
 						</table>
 					</div>

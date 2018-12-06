@@ -70,6 +70,7 @@ class MatchService
             JoueurDao jDao = new JoueurDao();
             Joueur demandeur = jDao.findByID(joueurConnecte);
             Joueur autreJoueur = jDao.findByID(idAutreJoueur);
+            String htmlVal = "";
             if(demandeur!= null && autreJoueur!=null)
             {
                 java.sql.Date jourCourant = new java.sql.Date(System.currentTimeMillis());
@@ -77,8 +78,17 @@ class MatchService
                 DemandematchDao dmDao = new DemandematchDao();
                 int iddemande = Connecting.getMaxId("demandematch");
                 iddemande++;
-                Demandematch dem = new Demandematch(iddemande, joueurConnecte, idAutreJoueur, duree, jourCourant, demain, 0);
+                Demandematch dem = new Demandematch(iddemande, joueurConnecte, idAutreJoueur, duree, jourCourant, demain, 2);
                 dmDao.insert(dem);
+                htmlVal += "<tr>"
+                htmlVal += "<td>"+ dem.getIddemandematch() +"</td>"
+                htmlVal += "<td>"+ dem.getIdrecepteur() +"</td>"
+                htmlVal += "<td>"+ dem.getDuree() +"</td>"
+                htmlVal += "<td>"+ dem.getDatedemande()  +"</td>"
+                htmlVal += "<td>"+ dem.getDateexpiration()  +"</td>"
+                htmlVal += 	"<td><button class=\"btn btn-primary\">"+ dem.getAprouvee() +"</button></td>"
+                htmlVal += 	"</tr>"
+                return htmlVal;
             }
             else
             {
@@ -105,6 +115,13 @@ class MatchService
             listDem = new DemandematchDao().findByEnvoyeurAndAprouve(idJoueurConnecte, 2);
         }
         return listDem;
+    }
+
+    def aprouverDemandeMatch(int idDemandeMatch)
+    {
+        Demandematch demande = new DemandematchDao().findByID(idDemandeMatch);
+        demande.setAprouvee(1);
+        new DemandematchDao().update(demande);
     }
 
 }

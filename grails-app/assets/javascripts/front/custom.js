@@ -16,7 +16,6 @@ $(function() {
             $(this).removeAttr("disabled");
             $("#errorConnexion").empty();
             $("#errorConnexion").append("Veuillez remplir les champs");
-            alert("error");
             return;
         }
         $.ajax({
@@ -71,16 +70,13 @@ $(function() {
             cache: false,
             processData: false,
             success: function(response) {
-                alert("200");
                 console.log(response);
                 if(response.status.status === 200)
                 {
-                    alert("mistofoka 200");
                     window.location.href = response.status.redirectUrl;
                 }
                 else if(response.status.status === 500)
                 {
-                    alert("mitsofoka 500");
                     $("#buttonInscription").removeAttr("disabled");
                     $("#errorConnexion").empty();
                     $("#errorConnexion").append(response.status.messageErreur);
@@ -88,23 +84,53 @@ $(function() {
             },
             error:function(error){
                 console.log(error);
-                alert("error");
             }
         });
     });
 
-    $(document).on("click",".boutonJouer",function(){
-        alert("jouer");
+    $(document).on("click",".boutonScore",function(){
+
         $(".contact.active").removeClass("active");
         $(this).parents('.contact').addClass("active");
         var idAdversaire = $(this).attr("data-id");
-        $(".contentJouer").removeClass("hide");
-        $(".contentJouer").addClass("show");
+
+        $(".contentScore").removeClass("hide");
+        $(".contentScore").addClass("show");
 
         $(".contentMessage").removeClass("show");
         $(".contentMessage").addClass("hide");
-
     });
+
+    $(document).on("click",".boutonDemander",function(){
+
+        var formUrl = $(this).attr("data-url-demande");
+        var idAutreJoueur = $(this).attr("data-id");
+        $.ajax({
+            url: formUrl,
+            type: 'POST',
+            data: {
+                idAutreJoueur : idAutreJoueur,
+                duree : 3
+            },
+            success:function(response){
+                console.log(response);
+                if(response.status.status === 200)
+                {
+                    console.log(response.results);
+                    $(".mesDemandes tbody").append(response.results);
+                }
+                else if(response.status.status === 500)
+                {
+                    $(".messageErreur").empty();
+                    $(".messageErreur").append(response.status.messageErreur);
+                }
+            },
+            error:function(xhr, textStatus, errorThrown ){
+                alert("Erreur Ajax");
+            }
+        });
+    });
+
 
     $(document).on("click",".checkbox-cron",function(){
 
@@ -112,10 +138,9 @@ $(function() {
         //activer cron
         if(cronValue === "0")
         {
-            alert("activer cron");
             var formUrl="/message/activeCron";
             var idAutreJoueur = $(".contentMessage").attr("data-id-recepteur");
-            alert(idAutreJoueur);
+
             $.ajax({
                 url: formUrl,
                 type: 'POST',
@@ -131,7 +156,7 @@ $(function() {
                     }
                     else if(response.status.status === 500)
                     {
-                        alert("erreur " + response.status.messageErreur);
+                        $(".messageErreur").append(response.status.messageErreur);
                     }
                 },
                 error:function(xhr, textStatus, errorThrown ){
@@ -142,7 +167,6 @@ $(function() {
         //desactiver cron
         else
         {
-            alert("desactiver cron");
             var formUrl="/message/desactiveCron";
             var idAutreJoueur = $(".contentMessage").attr("data-id-recepteur");
             $.ajax({
@@ -169,11 +193,10 @@ $(function() {
                 }
             });
         }
-        alert(cronValue);
     });
 
     $(document).on("click",".boutonMessage",function(){
-        alert("message");
+
         $(".contentMessage").remove();
         var apiUrl = "/message/listeMessage";
         var idAutreJoueur = $(this).attr("data-id");
@@ -209,8 +232,37 @@ $(function() {
         $(".contentMessage").removeClass("hide");
         $(".contentMessage").addClass("show");
 
-        $(".contentJouer").removeClass("show");
-        $(".contentJouer").addClass("hide");
+        $(".contentScore").removeClass("show");
+        $(".contentScore").addClass("hide");
 
     });
+
+    $(document).on("click",".boutonJouer",function(){
+        var apiUrl = "/match/jouer";
+        var idDemande = $(this).attr("data-id-demande");
+        $.ajax({
+            url: apiUrl,
+            type: 'POST',
+            data:{
+                idDemandeMatch : idDemande
+            },
+            success:function(response){
+                console.log(response);
+                if(response.status.status === 200)
+                {
+                    window.location.href = response.status.redirectUrl;
+                }
+                else if(response.status.status === 500)
+                {
+                    $(".messageErreur").empty();
+                    $(".messageErreur").append(response.status.messageErreur);
+                }
+            },
+            error:function(xhr, textStatus, errorThrown ){
+
+                console.log(xhr);
+            }
+        });
+    });
+
 });
