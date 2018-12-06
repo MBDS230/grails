@@ -58,6 +58,33 @@ class DemandematchDao {
         return ldemandeMatch
     }
 
+    def findByEnvoyeurAndAprouve(int idEnvoyeur, int aprouve)    {
+        List<Demandematch> ldemandeMatch = new ArrayList<>()
+        Demandematch demandeMatch = new Demandematch()
+
+        def sql = Connecting.getConnection()
+
+        if(sql != null){
+            sql.query("SELECT * FROM demandematch where idenvoyeur = "+idEnvoyeur+" and aprouvee = "+aprouve)
+                    { resultSet ->
+                        while (resultSet.next()) {
+                            demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
+                            demandeMatch.setIddemandeur(resultSet.getInt('iddemandeur'))
+                            demandeMatch.setIdrecepteur(resultSet.getInt('idrecepteur'))
+                            demandeMatch.setDuree(resultSet.getInt('duree'))
+                            demandeMatch.setDatedemande(resultSet.getDate("datedemande"))
+                            demandeMatch.setDateexpiration(resultSet.getDate("dateexpiration"))
+                            demandeMatch.setAprouvee(resultSet.getInt('aprouvee'))
+                            ldemandeMatch.add(demandeMatch)
+                        }
+                    }
+        }else{
+            throw new Exception("Error when trying to connect to the database")
+        }
+        sql.close()
+        return ldemandeMatch
+    }
+
     def findByID(int id){
         Demandematch demandeMatch = null
 

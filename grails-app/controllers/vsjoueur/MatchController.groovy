@@ -132,7 +132,7 @@ class MatchController {
 
     }
 
-    def listeDemandeRencontre()
+    def listeDeMesDemandes()
     {
         try
         {
@@ -141,7 +141,43 @@ class MatchController {
             if(joueurSession != null)
             {
                 int idJoueurConnecte = joueurSession.getIdjoueur();
-                listDem = new MatchService().listeDemandeRencontre(idJoueurConnecte);
+                listDem = new MatchService().listeDeMesDemandes(idJoueurConnecte);
+                StatusHttp statu = new StatusHttp(200, null, null);
+                def responseData = [
+                        'results': listDem,
+                        'status': statu
+                ]
+                render responseData as JSON
+                return;
+            }
+        }catch (Exception exc ) {
+            StatusHttp statu = new StatusHttp(500, exc.getMessage(), null);
+            def responseData = [
+                    'results': null,
+                    'status': statu
+            ]
+            render responseData as JSON
+            return;
+        }
+        StatusHttp statu = new StatusHttp(500, null, null);
+        def responseData = [
+                'results': null,
+                'status': statu
+        ]
+        render responseData as JSON
+        return;
+    }
+
+    def listeDemandeAutresJoueurs()
+    {
+        try
+        {
+            ArrayList<Demandematch> listDem = null;
+            Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
+            if(joueurSession != null)
+            {
+                int idJoueurConnecte = joueurSession.getIdjoueur();
+                listDem = new MatchService().listeDemandeAutresJoueurs(idJoueurConnecte);
                 StatusHttp statu = new StatusHttp(200, null, null);
                 def responseData = [
                         'results': listDem,
