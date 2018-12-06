@@ -66,26 +66,27 @@ class MatchDao {
 
     def findAll(){
 
-        List<Match> lmatch = new ArrayList<>()
-        Match match = new Match()
-
+        List<Match> lmatch = new ArrayList<>();
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query('SELECT * FROM match where 1 > 0')
-                    { resultSet ->
-                        while (resultSet.next()) {
-                            match.getIdmatch(resultSet.getInt("idmatch"))
-                            match.getIddemandematch(resultSet.getInt('iddemandematch'))
-                            match.getDatematch(resultSet.getDate("datematch"))
-                            match.getScoredemandeur(resultSet.getInt("scoredemandeur"))
-                            match.getScorerecepteur(resultSet.getInt("scorerecepteur"))
-                            match.getDatedebut(resultSet.getDate("datedebut"))
-                            match.getDatefin(resultSet.getDate("datefin"))
-                            lmatch.add(match)
-                        }
-                    }
-        }else{
+            sql.query("SELECT * FROM match where 1 > 0")
+            { resultSet ->
+                while (resultSet.next()) {
+                    Match match = new Match()
+                    match.setIdmatch(resultSet.getInt("idmatch"))
+                    match.setIddemandematch(resultSet.getInt('iddemandematch'))
+                    match.setDatematch(resultSet.getDate("datematch"))
+                    match.setScoredemandeur(resultSet.getInt("scoredemandeur"))
+                    match.setScorerecepteur(resultSet.getInt("scorerecepteur"))
+                    match.setDatedebut(resultSet.getDate("datedebut"))
+                    match.setDatefin(resultSet.getDate("datefin"))
+                    lmatch.add(match)
+                }
+            }
+        }
+        else
+        {
             throw new Exception("Error when trying to connect to the database")
         }
         sql.close()

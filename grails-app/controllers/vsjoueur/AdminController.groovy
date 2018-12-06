@@ -1,9 +1,11 @@
 package vsjoueur
 
 import DAO.JoueurDao
+import DAO.MatchDao
 import grails.converters.JSON
 import mapping.Admin
 import mapping.Joueur
+import mapping.Match
 import org.springframework.web.servlet.ModelAndView
 import utilitaire.StatusHttp
 
@@ -358,7 +360,8 @@ class AdminController
             redirect(controller: "admin",action: "login");
         }
         ArrayList<Joueur> joueursList = new JoueurDao().findAll();
-        return new ModelAndView("/admin/dashboard",[joueurs:joueursList])
+        ArrayList<Match> matchList = new MatchDao().findAll();
+        return new ModelAndView("/admin/dashboard",[joueurs:joueursList, matchs:matchList])
     }
     def login(){
         if(session.getAttribute("SESSION_ADMIN") != null)

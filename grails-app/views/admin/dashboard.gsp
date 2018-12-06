@@ -308,77 +308,26 @@
                                 <thead>
                                 <tr>
                                     <th class="serial">ID</th>
-                                    <th class="avatar">Photo</th>
-                                    <th>Login</th>
-                                    <th>Status</th>
-                                    <th>Approuvé</th>
-                                    <th>Score</th>
+                                    <th class="avatar">iddemandematch</th>
+                                    <th>datematch</th>
+                                    <th>scoredemandeur</th>
+                                    <th>scorerecepteur</th>
+                                    <th>datedebut</th>
+                                    <th>datefin</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="serial">1.</td>
-                                    <td class="avatar">
-                                        <div class="round-img">
-                                            <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg" alt=""></a>
-                                        </div>
-                                    </td>
-                                    <td>  <span class="name">Louis Stanley</span> </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    </td>
-                                    <td><span class="count">231</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="serial">2.</td>
-                                    <td class="avatar">
-                                        <div class="round-img">
-                                            <a href="#"><img class="rounded-circle" src="images/avatar/2.jpg" alt=""></a>
-                                        </div>
-                                    </td>
-                                    <td>  <span class="name">Gregory Dixon</span> </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    </td>
-                                    <td><span class="count">250</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="serial">3.</td>
-                                    <td class="avatar">
-                                        <div class="round-img">
-                                            <a href="#"><img class="rounded-circle" src="images/avatar/3.jpg" alt=""></a>
-                                        </div>
-                                    </td>
-                                    <td>  <span class="name">Catherine Dixon</span> </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    </td>
-                                    <td><span class="count">250</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="serial">4.</td>
-                                    <td class="avatar">
-                                        <div class="round-img">
-                                            <a href="#"><img class="rounded-circle" src="images/avatar/4.jpg" alt=""></a>
-                                        </div>
-                                    </td>
-                                    <td>  <span class="name">Mary Silva</span> </td>
-                                    <td>
-                                        <span class="badge badge-complete">Complete</span>
-                                    <td>
-                                        <span class="badge badge-pending">Pending</span>
-                                    </td>
-                                    <td><span class="count">250</span></td>
-                                </tr>
+                                <g:each var="match" in="${matchs}">
+                                    <tr>
+                                        <td>${match.idmatch}.</td>
+                                        <td> <span class="name">${match.iddemandematch}</span> </td>
+                                        <td>  <span class="name">${match.datematch}</span> </td>
+                                        <td>  <span class="name">${match.scoredemandeur}</span> </td>
+                                        <td>  <span class="name">${match.scorerecepteur}</span> </td>
+                                        <td>  <span class="name">${match.datedebut}</span> </td>
+                                        <td>  <span class="name">${match.datefin}</span> </td>
+                                    </tr>
+                                </g:each>
                                 </tbody>
                             </table>
                         </div> <!-- /.table-stats -->
