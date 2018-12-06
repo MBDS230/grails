@@ -65,7 +65,7 @@ class DemandematchDao {
         def sql = Connecting.getConnection()
 
         if(sql != null){
-            sql.query("SELECT * FROM demandematch where idenvoyeur = "+idEnvoyeur+" and aprouvee = "+aprouve)
+            sql.query("SELECT * FROM demandematch where iddemandeur = "+idEnvoyeur+" and aprouvee = "+aprouve)
                     { resultSet ->
                         while (resultSet.next()) {
                             demandeMatch.setIddemandematch(resultSet.getInt("iddemandematch"))
