@@ -162,8 +162,8 @@ class UserController
                 ]
                 render responseData as JSON
                 return;*/
-                return redirect(controller: "game", action: "index", [inscrit:true]);
-
+                redirect(controller: "game", action: "index");
+                return;
             }
         } catch (Exception exc) {
             return new ModelAndView("/game/login",[exceptionMessages:exc.getMessage()   ])

@@ -105,6 +105,7 @@ $(function() {
                 if(response.status.status === 200)
                 {
                     console.log(response.results);
+                    $(".contentScore").empty();
                     $(".contentScore").append(response.results);
                 }
                 else if(response.status.status === 500)
