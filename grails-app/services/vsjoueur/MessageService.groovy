@@ -36,6 +36,12 @@ class MessageService {
 
             String valueCron = "0";
 
+            List<Cron> lcron = new CronDao().findByRecepteurAndEnvoyeur(joueurConnecte, idAutreJoueur);
+            if(lcron!=null && lcron.size()>0 && lcron.get(0).getActive())
+            {
+                valueCron = "1";
+            }
+
             htmlVal += "<div class='content contentMessage show' data-id-envoyeur='"+joueurConnecte+"' data-id-recepteur='"+idAutreJoueur+"'>";
             htmlVal +=  "<div class='contact-profile'>";
             htmlVal += "<img src='"+autreJ.getPhoto()+"' alt=''>";
