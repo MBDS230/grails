@@ -46,7 +46,14 @@ class MessageService {
             htmlVal +=  "<div class='contact-profile'>";
             htmlVal += "<img src='"+autreJ.getPhoto()+"' alt=''>";
             htmlVal += "<p>"+autreJ.getLogin()+"</p>";
-            htmlVal += "<div class='cron'><label class='checkbox-inline'><input value='"+ valueCron +"'class='checkbox-cron' type='checkbox'>Activer cron</label></div>";
+            if(lcron!=null && lcron.size()>0 && lcron.get(0).getActive())
+            {
+                htmlVal += "<div class='cron'><label class='checkbox-inline'><input value='"+ valueCron +"'class='checkbox-cron' type='checkbox' checked='checked'>Activer cron</label></div>";
+            }
+            else
+            {
+                htmlVal += "<div class='cron'><label class='checkbox-inline'><input value='"+ valueCron +"'class='checkbox-cron' type='checkbox'>Activer cron</label></div>";
+            }
             htmlVal += "<div class='social-media'>";
             htmlVal += "<i class='fa fa-facebook' aria-hidden='true'></i>";
             htmlVal += "<i class='fa fa-twitter' aria-hidden='true'></i>";
