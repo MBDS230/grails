@@ -9,11 +9,9 @@ jQuery(document).ready(function($) {
         if ((username === null || username === '') || (motDePasse === null || motDePasse === '')) {
             $("#errorFormLogin").empty();
             $("#errorFormLogin").append("Veuillez remplir les champs");
-            alert("error");
             return;
         }
 
-        alert(formAction);
         $.ajax({
             url: formAction,
             type: 'POST',
@@ -25,12 +23,10 @@ jQuery(document).ready(function($) {
                 console.log(response);
                 if(response.status.status === 200)
                 {
-                    alert("mistofoka 200");
                     window.location.href = response.status.redirectUrl;
                 }
                 else if(response.status.status === 500)
                 {
-                    alert("mitsofoka 500");
                     $("#errorFormLogin").empty();
                     $("#errorFormLogin").append(response.status.messageErreur);
                 }
