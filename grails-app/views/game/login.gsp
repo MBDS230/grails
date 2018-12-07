@@ -99,7 +99,9 @@
 							<input name="motDePasse" type="password" placeholder="Mot de passe"/>
 							<input type="file" id="file" name="file"/>
 							<div id="errorInscription" class="red">
-
+								<g:if test="${exceptionMessages != null}">
+									<p class="text-danger">${exceptionMessages}</p>
+								</g:if>
 							</div>
 							<input class="btn btn-default" type="submit" value="S'inscrire" />
 						</form>

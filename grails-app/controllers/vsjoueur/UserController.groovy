@@ -51,7 +51,16 @@ class UserController
     {
         session.setAttribute("SESSION_JOUEUR", joueur);
     }
-
+    def modifierProfil()
+    {
+        if(session.getAttribute("SESSION_JOUEUR") == null)
+        {
+            redirect(controller: "game", action: "login");
+            return;
+        }
+        Joueur val = (Joueur) session.getAttribute("SESSION_JOUEUR");
+        return new ModelAndView("/game/modifierProfil",[joueur:val])
+    }
     def modifJoueur()
     {
         mapping.Joueur joueur = new Joueur();
@@ -68,12 +77,8 @@ class UserController
                 def file = request.getFile('uploadPhoto');
                 if(file.empty)
                 {
-                    def responseData = [
-                            'results': null,
-                            'status': statu
-                    ]
-                    render responseData as JSON
-                    return;
+                    String errorModification = "Pas de fichier selectionné";
+                    return new ModelAndView("/game/modifierProfil",[errorModification:errorModification]);
                 }
                 else
                 {
@@ -88,11 +93,8 @@ class UserController
                         }
                         file.transferTo(f)
                     }
-                    def responseData = [
-                            'results': joueur,
-                            'status': statu
-                    ]
-                    render responseData as JSON
+                    setSessionJoueur(joueur);
+                    redirect(controller: "game", action: "index");
                     return;
                 }
             }
@@ -160,7 +162,7 @@ class UserController
                 ]
                 render responseData as JSON
                 return;*/
-                return new ModelAndView("/game/index",[inscription:"success"])
+                return redirect(controller: "game", action: "index", [inscrit:true]);
 
             }
         } catch (Exception exc) {

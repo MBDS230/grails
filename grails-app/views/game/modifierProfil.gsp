@@ -42,7 +42,7 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-							<li><a href="/user/modifierProfil"><i class="fa fa-user"></i> Modifier profil</a></li>
+							<li><a href=""><i class="fa fa-user"></i> Account</a></li>
 							<li><a href="/user/logout"><i class="fa fa-unlock"></i> Logout</a></li>
 						</ul>
 					</div>
@@ -65,7 +65,7 @@
 					</div>
 					<div class="mainmenu pull-left">
 						<ul class="nav navbar-nav collapse navbar-collapse">
-							<li><a class="active" href="/game/index">Home</a></li>
+							<li><a href="/game/index">Home</a></li>
 						</ul>
 					</div>
 				</div>
@@ -74,137 +74,30 @@
 	</div><!--/header-bottom-->
 </header><!--/header-->
 
-<section>
+<section id="form"><!--form-->
 	<div class="container">
-		<g:if test="${inscrit==true}">
-			<div class="row">
-				<p class="text-primary">Vous êtes inscrit avec succès ! Vous pouvez jouer tout de suite.</p>
-			</div>
-		</g:if>
-		<div class="row messageErreur text-danger">
-
-		</div>
 		<div class="row">
-			<div class="col-sm-12">
-				<div id="frame" class="frameChat" >
-					<div id="sidepanel">
-						<div id="profile">
-							<div class="wrap">
-								<img id="profile-img" src="${joueur.photo}" class="online" alt="" />
-								<p>${joueur.login}</p>
-								<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-								<div id="status-options">
-									<ul>
-										<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-										<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-										<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-										<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-									</ul>
-								</div>
-								<div id="expanded">
-									<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-									<input name="twitter" type="text" value="mikeross" />
-									<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-									<input name="twitter" type="text" value="ross81" />
-									<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-									<input name="twitter" type="text" value="mike.ross" />
-								</div>
-							</div>
+			<div class="col-sm-4 col-sm-offset-1">
+				<div class="login-form"><!--login form-->
+					<h2>Modification de profil</h2>
+					<form action="/user/inscription" method="POST" enctype="multipart/form-data">
+						<input name="username" type="text" value="${joueur.getLogin()}" placeholder="Surnom"/>
+						<input name="motDePasseAncien" type="password" placeholder="Ancien mot de passe"/>
+						<input name="motDePasseNouveau" type="password" placeholder="Nouveau mot de passe"/>
+						<input name="motDePasseConfirmation" type="password" placeholder="Confirmation mot de passe"/>
+						<input type="file" id="uploadPhoto" name="uploadPhoto"/>
+						<div id="errorModification" class="red">
+							<g:if test="${errorModification != null}">
+								<p class="text-danger">${errorModification}</p>
+							</g:if>
 						</div>
-						<div class="title title-conversation">
-							<h1>Liste connectés</h1>
-						</div>
-						<div id="search">
-							<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-							<input type="text" placeholder="Search contacts..." />
-						</div>
-						<div id="contacts">
-							<ul>
-
-							</ul>
-						</div>
-						<div id="bottom-bar">
-							<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-							<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-						</div>
-					</div>
-					<div class="content contentScore hide">
-
-					</div>
-				</div>
-			</div>
-		</div>
-		</br>
-		<div class="row">
-			<div class="col-sm-6">
-				<section id="cart_items">
-					<div class="table-responsive cart_info">
-						<h2>Liste des demandes des adversaires</h2>
-						<table class="table table-condensed">
-							<thead>
-							<tr class="cart_menu">
-								<th>Id Demande</th>
-								<th>Adversaire</th>
-								<th>Durée</th>
-								<th>Date de demande</th>
-								<th>Date d'expiration</th>
-								<th>Acceptation</th>
-							</tr>
-							</thead>
-							<tbody>
-							<g:each var="demande" in="${demandesDesJoueurs}">
-								<tr>
-									<td>${demande.iddemandematch}.</td>
-									<td>${demande.iddemandeur}.</td>
-									<td>${demande.duree}.</td>
-									<td>${demande.datedemande}.</td>
-									<td>${demande.dateexpiration}.</td>
-									<td>
-										<button data-id-demande="${demande.iddemandematch}" class="btn btn-primary boutonJouer">Jouer</button>
-									</td>
-								</tr>
-							</g:each>
-							</tbody>
-						</table>
-					</div>
-				</section>
-			</div>
-			<div class="col-sm-6">
-				<section id="cart_items">
-					<div class="table-responsive cart_info">
-						<h2>Liste de mes demandes</h2>
-						<table class="table table-condensed mesDemandes">
-							<thead>
-							<tr class="cart_menu">
-								<th>Id Demande</th>
-								<th>Adversaire</th>
-								<th>Durée</th>
-								<th>Date de demande</th>
-								<th>Date d'expiration</th>
-								<th>Acceptation</th>
-							</tr>
-							</thead>
-							<tbody>
-							<g:each var="demande" in="${mesDemandes}">
-								<tr>
-									<td>${demande.iddemandematch}.</td>
-									<td>${demande.idrecepteur}.</td>
-									<td>${demande.duree}.</td>
-									<td>${demande.datedemande}.</td>
-									<td>${demande.dateexpiration}.</td>
-									<td>
-										<button class="btn btn-primary">${demande.aprouvee}.</button>
-									</td>
-								</tr>
-							</g:each>
-							</tbody>
-						</table>
-					</div>
-				</section>
+						<input class="btn btn-default" type="submit" value="Modifier" />
+					</form>
+				</div><!--/login form-->
 			</div>
 		</div>
 	</div>
-</section>
+</section><!--/form-->
 
 
 <footer id="footer"><!--Footer-->
