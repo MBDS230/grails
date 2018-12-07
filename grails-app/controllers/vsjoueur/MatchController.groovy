@@ -12,7 +12,7 @@ class MatchController {
     {
         try
         {
-            ArrayList<Joueur> val = null;
+            String val = null;
             Joueur joueurSession = (Joueur) session.getAttribute("SESSION_JOUEUR");
             if (joueurSession != null)
             {

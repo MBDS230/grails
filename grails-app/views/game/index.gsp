@@ -129,10 +129,7 @@
 						</div>
 					</div>
 					<div class="content contentScore hide">
-						<h1>Jeu avec adversaire</h1>
-						<a href="/user/jouer">
-							<button class="btn btn-success">Jouer</button>
-						</a>
+
 					</div>
 				</div>
 			</div>

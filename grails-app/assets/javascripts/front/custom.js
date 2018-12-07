@@ -93,6 +93,30 @@ $(function() {
         $(".contact.active").removeClass("active");
         $(this).parents('.contact').addClass("active");
         var idAdversaire = $(this).attr("data-id");
+        var apiUrl = "/match/resultatMatch"
+        $.ajax({
+            url: apiUrl,
+            type: 'POST',
+            data: {
+                idAutreJoueur : idAdversaire
+            },
+            success:function(response){
+                console.log(response);
+                if(response.status.status === 200)
+                {
+                    console.log(response.results);
+                    $(".contentScore").append(response.results);
+                }
+                else if(response.status.status === 500)
+                {
+                    $(".messageErreur").empty();
+                    $(".messageErreur").append(response.status.messageErreur);
+                }
+            },
+            error:function(xhr, textStatus, errorThrown ){
+                alert("Erreur Ajax");
+            }
+        });
 
         $(".contentScore").removeClass("hide");
         $(".contentScore").addClass("show");

@@ -23,7 +23,41 @@ class MatchService
         {
             val = new MatchDao().findMatchByIdDemandeurAndRecepteur(idJoueurConnecte, idAutreJoueur);
         }
-        return val;
+        Joueur autreJoueur = new JoueurDao().findByID(idAutreJoueur);
+        String htmlVal = "";
+        htmlVal += "<section id=\"cart_items\">";
+        htmlVal += "<div class=\"table-responsive cart_info\">";
+        htmlVal += "<h3>Résultats des matchs avec "+ autreJoueur.getLogin() + "</h3>";
+        htmlVal += "<table class=\"table table-condensed mesDemandes\">";
+        htmlVal += "<thead>\n" +
+                "\t\t\t\t\t\t\t\t\t<tr class=\"cart_menu\">\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Id Match</th>\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Id Demande</th>\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Date Match</th>\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Votre score</th>\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Score adversaire</th>\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Date de debut</th>\n" +
+                "\t\t\t\t\t\t\t\t\t\t<th>Date de fin</th>\n" +
+                "\t\t\t\t\t\t\t\t\t</tr>\n" +
+                "\t\t\t\t\t\t\t\t\t</thead>";
+        for(int i=0; i<val.size(); i++)
+        {
+                htmlVal += "<tbody>";
+                htmlVal += "<tr>";
+                htmlVal += "<td>"+ val.get(i).getIdmatch() +"</td>";
+                htmlVal += "<td>"+ val.get(i).getIddemandematch() +"</td>";
+                htmlVal += "<td>"+ val.get(i).getDatematch() +"</td>";
+                htmlVal += "<td>"+ val.get(i).getScoredemandeur() +"</td>";
+                htmlVal += "<td>"+ val.get(i).getScorerecepteur() +"</td>";
+                htmlVal += "<td>"+ val.get(i).getDatedebut() +"</td>";
+                htmlVal += "<td>"+ val.get(i).getDatefin() +"</td>";
+                htmlVal += "</tr>";
+                htmlVal += "<tbody>";
+        }
+        htmlVal += "</table>\n" +
+                "\t\t\t\t\t\t\t</div>\n" +
+                "\t\t\t\t\t\t</section>";
+        return htmlVal;
     }
 
     def jouer(int idDemandeMatch)
